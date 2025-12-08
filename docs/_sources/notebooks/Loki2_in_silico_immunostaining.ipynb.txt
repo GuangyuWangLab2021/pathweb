@@ -99,7 +99,7 @@
    "id": "d0ed410b",
    "metadata": {},
    "source": [
-    "## One-time prep: generate per-patch JSON and embeddings\n",
+    "### One-time prep: generate per-patch JSON and embeddings\n",
     "\n",
     "Step 1: Split global nuclei + embeddings into per-patch JSON/PT files (one-time prep)\n",
     "\n",
@@ -146,7 +146,7 @@
    "id": "baf7499c",
    "metadata": {},
    "source": [
-    "## Inspect available patches\n",
+    "### Inspect available patches\n",
     "List patches that have both nuclei/embedding JSON and IF patch present."
    ]
   },
@@ -178,7 +178,7 @@
    "id": "a0aa8a32",
    "metadata": {},
    "source": [
-    "## Define train/val/test patch splits\n",
+    "### Define train/val/test patch splits\n",
     "Select a validation patch (held out from train) and optional test patches for final evaluation/visualization."
    ]
   },
@@ -217,7 +217,7 @@
    "id": "f3dce40e",
    "metadata": {},
    "source": [
-    "## Build datasets\n",
+    "### Build datasets\n",
     "\n",
     "Step 2: Build train/val/test cell-level datasets for a chosen IF channel\n",
     "\n",
@@ -285,7 +285,7 @@
    "id": "38aa419e",
    "metadata": {},
    "source": [
-    "## Preprocess features and targets\n",
+    "### Preprocess features and targets\n",
     "Optionally L2-normalize embeddings and log-transform targets (log1p)."
    ]
   },
@@ -324,7 +324,7 @@
    "id": "eb5932ed",
    "metadata": {},
    "source": [
-    "## Train LightGBM with patch-level validation\n",
+    "### Train LightGBM with patch-level validation\n",
     "\n",
     "Step 3: Train a LightGBM regressor with per-patch holdout validation\n",
     "\n",
@@ -387,7 +387,7 @@
    "id": "d73def45",
    "metadata": {},
    "source": [
-    "## Optional: test set evaluation\n",
+    "### Optional: test set evaluation\n",
     "Evaluate on held-out patches (if provided) and collect predictions."
    ]
   },
@@ -461,7 +461,7 @@
    "id": "5f5cd556",
    "metadata": {},
    "source": [
-    "## Save model and predictions\n",
+    "### Save model and predictions\n",
     "\n",
     "Step 4: Save per-cell predictions to JSON and plot diagnostics (pred vs. true, residuals)\n",
     "\n",
@@ -528,7 +528,7 @@
    "id": "dd8338a9",
    "metadata": {},
    "source": [
-    "## Visualize predictions\n",
+    "### Visualize predictions\n",
     "Quick scatter and residual plots on validation predictions (processed scale). For raw-scale plots, invert log1p before plotting."
    ]
   },
@@ -537,7 +537,7 @@
    "id": "82478f57",
    "metadata": {},
    "source": [
-    "## Patch-level GT vs Pred visualization\n",
+    "### Patch-level GT vs Pred visualization\n",
     "Render one patch with per-cell measured IF intensity, predicted intensity, residual heatmap, and scatter. Uses the saved prediction JSON."
    ]
   },
@@ -700,7 +700,7 @@
    "id": "3ed1d703-f44b-4187-94e8-bc75f62ece85",
    "metadata": {},
    "source": [
-    "## One-time prep: generate per-patch JSON and embeddings\n",
+    "### One-time prep: generate per-patch JSON and embeddings\n",
     "\n",
     "Step 1: Split global nuclei + embeddings into per-patch JSON/PT files (one-time prep)\n",
     "\n",
@@ -747,7 +747,7 @@
    "id": "231b604f-6546-4436-a68e-b58802353709",
    "metadata": {},
    "source": [
-    "## Inspect available patches\n",
+    "### Inspect available patches\n",
     "List patches that have both nuclei/embedding JSON and IF patch present."
    ]
   },
@@ -779,7 +779,7 @@
    "id": "fd73855f-10a8-45d7-921f-dd2315088703",
    "metadata": {},
    "source": [
-    "## Define train/val/test patch splits\n",
+    "### Define train/val/test patch splits\n",
     "Select a validation patch (held out from train) and optional test patches for final evaluation/visualization."
    ]
   },
@@ -818,7 +818,7 @@
    "id": "634da8d0-4400-4a4c-9258-d71d2b060cb5",
    "metadata": {},
    "source": [
-    "## Build datasets\n",
+    "### Build datasets\n",
     "\n",
     "Step 2: Build train/val/test cell-level datasets for a chosen IF channel\n",
     "\n",
@@ -886,7 +886,7 @@
    "id": "406c866d-d4b4-4b4a-a74b-d778bb5da578",
    "metadata": {},
    "source": [
-    "## Preprocess features and targets\n",
+    "### Preprocess features and targets\n",
     "Optionally L2-normalize embeddings and log-transform targets (log1p)."
    ]
   },
@@ -925,7 +925,7 @@
    "id": "b7694dcb-90c6-4275-9bc1-612fbc97eb2a",
    "metadata": {},
    "source": [
-    "## Train LightGBM with patch-level validation\n",
+    "### Train LightGBM with patch-level validation\n",
     "\n",
     "Step 3: Train a LightGBM regressor with per-patch holdout validation\n",
     "\n",
@@ -981,7 +981,7 @@
    "id": "9d762f2f-2a86-4375-84e8-bc81fb0d21ff",
    "metadata": {},
    "source": [
-    "## Optional: test set evaluation\n",
+    "### Optional: test set evaluation\n",
     "Evaluate on held-out patches (if provided) and collect predictions."
    ]
   },
@@ -1055,7 +1055,7 @@
    "id": "6e9ac9a1-533f-4d99-ad57-cfb1c106e2e4",
    "metadata": {},
    "source": [
-    "## Save model and predictions\n",
+    "### Save model and predictions\n",
     "\n",
     "Step 4: Save per-cell predictions to JSON and plot diagnostics (pred vs. true, residuals)\n",
     "\n",
@@ -1122,7 +1122,7 @@
    "id": "f9d6e650-af55-41d6-bada-d3526d293add",
    "metadata": {},
    "source": [
-    "## Visualize predictions\n",
+    "### Visualize predictions\n",
     "Quick scatter and residual plots on validation predictions (processed scale). For raw-scale plots, invert log1p before plotting."
    ]
   },
@@ -1131,7 +1131,7 @@
    "id": "b14e3753-e6aa-414f-af8b-c83b45a7c41e",
    "metadata": {},
    "source": [
-    "## Patch-level GT vs Pred visualization\n",
+    "### Patch-level GT vs Pred visualization\n",
     "Render one patch with per-cell measured IF intensity, predicted intensity, residual heatmap, and scatter. Uses the saved prediction JSON."
    ]
   },

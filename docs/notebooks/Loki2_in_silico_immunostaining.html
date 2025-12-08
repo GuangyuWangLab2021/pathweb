@@ -8,7 +8,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
-      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
 
   
   <!--[if lt IE 9]>
@@ -61,32 +61,32 @@
 <li class="toctree-l2"><a class="reference internal" href="#data-requirements">Data Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#examples-of-panck-marker">Examples of PanCK Marker</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#configure-paths-and-parameters">Configure paths and parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#one-time-prep-generate-per-patch-json-and-embeddings">One-time prep: generate per-patch JSON and embeddings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inspect-available-patches">Inspect available patches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#define-train-val-test-patch-splits">Define train/val/test patch splits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-datasets">Build datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preprocess-features-and-targets">Preprocess features and targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#train-lightgbm-with-patch-level-validation">Train LightGBM with patch-level validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optional-test-set-evaluation">Optional: test set evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#save-model-and-predictions">Save model and predictions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#visualize-predictions">Visualize predictions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#patch-level-gt-vs-pred-visualization">Patch-level GT vs Pred visualization</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#one-time-prep-generate-per-patch-json-and-embeddings">One-time prep: generate per-patch JSON and embeddings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#inspect-available-patches">Inspect available patches</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#define-train-val-test-patch-splits">Define train/val/test patch splits</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#build-datasets">Build datasets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#preprocess-features-and-targets">Preprocess features and targets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#train-lightgbm-with-patch-level-validation">Train LightGBM with patch-level validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#optional-test-set-evaluation">Optional: test set evaluation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#save-model-and-predictions">Save model and predictions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#visualize-predictions">Visualize predictions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#patch-level-gt-vs-pred-visualization">Patch-level GT vs Pred visualization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#examples-of-cd45ro-marker">Examples of CD45RO Marker</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">Configure paths and parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">One-time prep: generate per-patch JSON and embeddings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Inspect available patches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Define train/val/test patch splits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Build datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Preprocess features and targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Train LightGBM with patch-level validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Optional: test set evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Save model and predictions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Visualize predictions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Patch-level GT vs Pred visualization</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">One-time prep: generate per-patch JSON and embeddings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">Inspect available patches</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id4">Define train/val/test patch splits</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id5">Build datasets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">Preprocess features and targets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id7">Train LightGBM with patch-level validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id8">Optional: test set evaluation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id9">Save model and predictions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id10">Visualize predictions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id11">Patch-level GT vs Pred visualization</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Loki2_multiple_instance_learning.html">Loki2 Cell-level Multiple Instance Learning</a></li>
@@ -181,9 +181,8 @@
 </div>
 </div>
 </section>
-</section>
 <section id="one-time-prep-generate-per-patch-json-and-embeddings">
-<h2>One-time prep: generate per-patch JSON and embeddings<a class="headerlink" href="#one-time-prep-generate-per-patch-json-and-embeddings" title="Link to this heading"></a></h2>
+<h3>One-time prep: generate per-patch JSON and embeddings<a class="headerlink" href="#one-time-prep-generate-per-patch-json-and-embeddings" title="Link to this heading"></a></h3>
 <p>Step 1: Split global nuclei + embeddings into per-patch JSON/PT files (one-time prep)</p>
 <p>Run this once to split the global nuclei JSON + embeddings into per-patch files. Skip if you already have <code class="docutils literal notranslate"><span class="pre">CRC02_patch_cells_json/</span></code> and <code class="docutils literal notranslate"><span class="pre">CRC02_patch_embeddings/</span></code> populated.</p>
 <div class="cell docutils container">
@@ -217,7 +216,7 @@ Done generating patch-specific JSON + embeddings.
 </div>
 </section>
 <section id="inspect-available-patches">
-<h2>Inspect available patches<a class="headerlink" href="#inspect-available-patches" title="Link to this heading"></a></h2>
+<h3>Inspect available patches<a class="headerlink" href="#inspect-available-patches" title="Link to this heading"></a></h3>
 <p>List patches that have both nuclei/embedding JSON and IF patch present.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -238,7 +237,7 @@ Done generating patch-specific JSON + embeddings.
 </div>
 </section>
 <section id="define-train-val-test-patch-splits">
-<h2>Define train/val/test patch splits<a class="headerlink" href="#define-train-val-test-patch-splits" title="Link to this heading"></a></h2>
+<h3>Define train/val/test patch splits<a class="headerlink" href="#define-train-val-test-patch-splits" title="Link to this heading"></a></h3>
 <p>Select a validation patch (held out from train) and optional test patches for final evaluation/visualization.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -266,7 +265,7 @@ Test patches: [&#39;r003_c006&#39;]
 </div>
 </section>
 <section id="build-datasets">
-<h2>Build datasets<a class="headerlink" href="#build-datasets" title="Link to this heading"></a></h2>
+<h3>Build datasets<a class="headerlink" href="#build-datasets" title="Link to this heading"></a></h3>
 <p>Step 2: Build train/val/test cell-level datasets for a chosen IF channel</p>
 <p>Creates cell-level feature matrix <code class="docutils literal notranslate"><span class="pre">X</span></code>, targets <code class="docutils literal notranslate"><span class="pre">y</span></code>, and metadata for the chosen IF channel.</p>
 <div class="cell docutils container">
@@ -320,7 +319,7 @@ Train shape (32979, 1280) Val shape (15974, 1280)
 </div>
 </section>
 <section id="preprocess-features-and-targets">
-<h2>Preprocess features and targets<a class="headerlink" href="#preprocess-features-and-targets" title="Link to this heading"></a></h2>
+<h3>Preprocess features and targets<a class="headerlink" href="#preprocess-features-and-targets" title="Link to this heading"></a></h3>
 <p>Optionally L2-normalize embeddings and log-transform targets (log1p).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -348,7 +347,7 @@ Train shape (32979, 1280) Val shape (15974, 1280)
 </div>
 </section>
 <section id="train-lightgbm-with-patch-level-validation">
-<h2>Train LightGBM with patch-level validation<a class="headerlink" href="#train-lightgbm-with-patch-level-validation" title="Link to this heading"></a></h2>
+<h3>Train LightGBM with patch-level validation<a class="headerlink" href="#train-lightgbm-with-patch-level-validation" title="Link to this heading"></a></h3>
 <p>Step 3: Train a LightGBM regressor with per-patch holdout validation</p>
 <p>Only the LightGBM model is used to keep the pipeline focused.</p>
 <div class="cell docutils container">
@@ -398,7 +397,7 @@ Validation metrics: {
 </div>
 </section>
 <section id="optional-test-set-evaluation">
-<h2>Optional: test set evaluation<a class="headerlink" href="#optional-test-set-evaluation" title="Link to this heading"></a></h2>
+<h3>Optional: test set evaluation<a class="headerlink" href="#optional-test-set-evaluation" title="Link to this heading"></a></h3>
 <p>Evaluate on held-out patches (if provided) and collect predictions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -460,7 +459,7 @@ Test metrics (original scale): {
 </div>
 </section>
 <section id="save-model-and-predictions">
-<h2>Save model and predictions<a class="headerlink" href="#save-model-and-predictions" title="Link to this heading"></a></h2>
+<h3>Save model and predictions<a class="headerlink" href="#save-model-and-predictions" title="Link to this heading"></a></h3>
 <p>Step 4: Save per-cell predictions to JSON and plot diagnostics (pred vs. true, residuals)</p>
 <p>Persist the trained model plus per-cell prediction JSON for train/val/test splits.</p>
 <div class="cell docutils container">
@@ -514,11 +513,11 @@ Per-cell predictions saved to: ../outputs/imm_stain/predictions/CRC02_channel4_t
 </div>
 </section>
 <section id="visualize-predictions">
-<h2>Visualize predictions<a class="headerlink" href="#visualize-predictions" title="Link to this heading"></a></h2>
+<h3>Visualize predictions<a class="headerlink" href="#visualize-predictions" title="Link to this heading"></a></h3>
 <p>Quick scatter and residual plots on validation predictions (processed scale). For raw-scale plots, invert log1p before plotting.</p>
 </section>
 <section id="patch-level-gt-vs-pred-visualization">
-<h2>Patch-level GT vs Pred visualization<a class="headerlink" href="#patch-level-gt-vs-pred-visualization" title="Link to this heading"></a></h2>
+<h3>Patch-level GT vs Pred visualization<a class="headerlink" href="#patch-level-gt-vs-pred-visualization" title="Link to this heading"></a></h3>
 <p>Render one patch with per-cell measured IF intensity, predicted intensity, residual heatmap, and scatter. Uses the saved prediction JSON.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -587,6 +586,7 @@ Per-cell predictions saved to: ../outputs/imm_stain/predictions/CRC02_channel4_t
 </div>
 </div>
 </section>
+</section>
 <section id="examples-of-cd45ro-marker">
 <h2>Examples of CD45RO Marker<a class="headerlink" href="#examples-of-cd45ro-marker" title="Link to this heading"></a></h2>
 <section id="id1">
@@ -623,9 +623,8 @@ Per-cell predictions saved to: ../outputs/imm_stain/predictions/CRC02_channel4_t
 </div>
 </div>
 </section>
-</section>
 <section id="id2">
-<h2>One-time prep: generate per-patch JSON and embeddings<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<h3>One-time prep: generate per-patch JSON and embeddings<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
 <p>Step 1: Split global nuclei + embeddings into per-patch JSON/PT files (one-time prep)</p>
 <p>Run this once to split the global nuclei JSON + embeddings into per-patch files. Skip if you already have <code class="docutils literal notranslate"><span class="pre">CRC02_patch_cells_json/</span></code> and <code class="docutils literal notranslate"><span class="pre">CRC02_patch_embeddings/</span></code> populated.</p>
 <div class="cell docutils container">
@@ -659,7 +658,7 @@ Done generating patch-specific JSON + embeddings.
 </div>
 </section>
 <section id="id3">
-<h2>Inspect available patches<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<h3>Inspect available patches<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <p>List patches that have both nuclei/embedding JSON and IF patch present.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -680,7 +679,7 @@ Done generating patch-specific JSON + embeddings.
 </div>
 </section>
 <section id="id4">
-<h2>Define train/val/test patch splits<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<h3>Define train/val/test patch splits<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <p>Select a validation patch (held out from train) and optional test patches for final evaluation/visualization.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -708,7 +707,7 @@ Test patches: [&#39;r003_c006&#39;]
 </div>
 </section>
 <section id="id5">
-<h2>Build datasets<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<h3>Build datasets<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
 <p>Step 2: Build train/val/test cell-level datasets for a chosen IF channel</p>
 <p>Creates cell-level feature matrix <code class="docutils literal notranslate"><span class="pre">X</span></code>, targets <code class="docutils literal notranslate"><span class="pre">y</span></code>, and metadata for the chosen IF channel.</p>
 <div class="cell docutils container">
@@ -762,7 +761,7 @@ Train shape (32979, 1280) Val shape (15974, 1280)
 </div>
 </section>
 <section id="id6">
-<h2>Preprocess features and targets<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<h3>Preprocess features and targets<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <p>Optionally L2-normalize embeddings and log-transform targets (log1p).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -790,7 +789,7 @@ Train shape (32979, 1280) Val shape (15974, 1280)
 </div>
 </section>
 <section id="id7">
-<h2>Train LightGBM with patch-level validation<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<h3>Train LightGBM with patch-level validation<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
 <p>Step 3: Train a LightGBM regressor with per-patch holdout validation</p>
 <p>Only the LightGBM model is used to keep the pipeline focused.</p>
 <div class="cell docutils container">
@@ -833,7 +832,7 @@ Validation metrics: {
 </div>
 </section>
 <section id="id8">
-<h2>Optional: test set evaluation<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<h3>Optional: test set evaluation<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
 <p>Evaluate on held-out patches (if provided) and collect predictions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -895,7 +894,7 @@ Test metrics (original scale): {
 </div>
 </section>
 <section id="id9">
-<h2>Save model and predictions<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<h3>Save model and predictions<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
 <p>Step 4: Save per-cell predictions to JSON and plot diagnostics (pred vs. true, residuals)</p>
 <p>Persist the trained model plus per-cell prediction JSON for train/val/test splits.</p>
 <div class="cell docutils container">
@@ -949,11 +948,11 @@ Per-cell predictions saved to: ../outputs/imm_stain/predictions/CRC02_channel2_t
 </div>
 </section>
 <section id="id10">
-<h2>Visualize predictions<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<h3>Visualize predictions<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
 <p>Quick scatter and residual plots on validation predictions (processed scale). For raw-scale plots, invert log1p before plotting.</p>
 </section>
 <section id="id11">
-<h2>Patch-level GT vs Pred visualization<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<h3>Patch-level GT vs Pred visualization<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
 <p>Render one patch with per-cell measured IF intensity, predicted intensity, residual heatmap, and scatter. Uses the saved prediction JSON.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1021,6 +1020,7 @@ Per-cell predictions saved to: ../outputs/imm_stain/predictions/CRC02_channel2_t
 </div>
 </div>
 </div>
+</section>
 </section>
 </section>
 
