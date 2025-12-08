@@ -6,7 +6,7 @@ The pre-train weights and source code will be released on GitHub and Hugging Fac
 
 
 ## User Manual and Notebooks
-You can view the Loki2 website and notebooks [here](https://guangyuwanglab2021.github.io/Loki2/).
+You can view the Loki2 website and notebooks [here](https://guangyuwanglab2021.github.io/pathweb/).
 This README provides a quick overview of how to set up and use Loki2.
 
 
