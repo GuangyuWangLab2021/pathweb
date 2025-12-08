@@ -1,0 +1,162 @@
+loki2.retrieve_from_sc
+======================
+
+.. py:module:: loki2.retrieve_from_sc
+
+.. autoapi-nested-parse::
+
+   Retrieval from single-cell reference data for Loki2.
+
+   This module provides functionality for retrieving morphological embeddings
+   from single-cell transcriptomic reference data using contrastive learning.
+
+
+
+
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:data:: NormalizeT
+
+.. py:data:: NumericReductionT
+
+.. py:class:: RetrievalResult
+
+   Result of a retrieval operation containing scores and indices.
+
+   :param scores: Similarity scores tensor of shape (M, K) where M is the number
+                  of queries and K is the number of neighbors.
+   :param indices: Indices tensor of shape (M, K) pointing to neighbors in the
+                   reference pool.
+
+
+   .. py:attribute:: scores
+      :type:  torch.Tensor
+
+
+   .. py:attribute:: indices
+      :type:  torch.Tensor
+
+
+   .. py:method:: to_tuple() -> Tuple[torch.Tensor, torch.Tensor]
+
+
+   .. py:method:: save(path: Union[str, pathlib.Path]) -> None
+
+      Persist scores/indices to disk via torch.save.
+
+      :param path: Path where to save the retrieval result.
+
+
+
+   .. py:method:: load(path: Union[str, pathlib.Path]) -> RetrievalResult
+      :classmethod:
+
+
+      Restore a RetrievalResult saved by `save`.
+
+      :param path: Path to the saved retrieval result file.
+
+      :returns: Loaded retrieval result.
+      :rtype: RetrievalResult
+
+
+
+   .. py:method:: majority_vote(source_labels: Union[Sequence, numpy.ndarray, torch.Tensor], *, weighted: Optional[bool] = False, scores: Optional[torch.Tensor] = None, temperature: Optional[float] = None, return_counts: bool = False) -> Tuple[numpy.ndarray, Optional[torch.Tensor]]
+
+      Run k-NN majority voting using stored indices and optional scores.
+
+      :param source_labels: Labels for the reference pool.
+      :param weighted: Whether to weight votes by similarity scores. Defaults to False.
+      :param scores: Optional custom scores to use for weighting. Defaults to None.
+      :param temperature: Optional temperature for softmax weighting. Defaults to None.
+      :param return_counts: Whether to return vote counts. Defaults to False.
+
+      :returns:     - Predicted labels
+                    - Vote counts if return_counts=True, otherwise None
+      :rtype: Tuple[np.ndarray, Optional[torch.Tensor]]
+
+
+
+   .. py:method:: numeric_pool(source_values: Union[Sequence, numpy.ndarray, torch.Tensor], *, weighted: Optional[bool] = False, scores: Optional[torch.Tensor] = None, temperature: Optional[float] = None, reduction: NumericReductionT = 'mean', eps: float = 1e-12, return_weights: bool = False) -> Union[torch.Tensor, Tuple[torch.Tensor, Optional[torch.Tensor]]]
+
+      Pool neighbor-associated numeric values with optional weighting.
+
+      :param source_values: Numeric values associated with reference pool.
+      :param weighted: Whether to weight by similarity scores. Defaults to False.
+      :param scores: Optional custom scores for weighting. Defaults to None.
+      :param temperature: Optional temperature for softmax weighting. Defaults to None.
+      :param reduction: Reduction method ('mean', 'weighted_mean', 'median', 'sum',
+                        'max', 'min'). Defaults to 'mean'.
+      :param eps: Numerical stability constant. Defaults to 1e-12.
+      :param return_weights: Whether to return applied weights. Defaults to False.
+
+      :returns:     Pooled values, and optionally the weights used.
+      :rtype: Union[torch.Tensor, Tuple[torch.Tensor, Optional[torch.Tensor]]]
+
+
+
+.. py:function:: retrieve_with_celltype_filter(query_embeddings: torch.Tensor, embedding_pool: torch.Tensor, pool_labels: Union[Sequence[Any], numpy.ndarray, torch.Tensor], topk: int = 20, *, normalize_centroids: bool = True, return_assignments: bool = True) -> Union[RetrievalResult, Tuple[RetrievalResult, numpy.ndarray, torch.Tensor]]
+
+   Assign queries to cell types via centroid similarity and retrieve neighbors
+   only from matching cell types.
+
+   :param query_embeddings: (M, D) tensor of query embeddings.
+   :param embedding_pool: (N, D) tensor of reference embeddings.
+   :param pool_labels: Iterable of length N with cell type labels.
+   :param topk: Number of neighbors to retrieve per query.
+   :param normalize_centroids: Whether to L2-normalize cell type centroids.
+   :param return_assignments: If True, also return predicted labels and scores.
+
+   :returns: RetrievalResult if return_assignments is False, otherwise a tuple of
+             (RetrievalResult, predicted_labels, centroid_similarities).
+
+
+.. py:function:: usage() -> None
+
+   Print usage information for the retrieval script.
+
+
+.. py:data:: sam
+
+.. py:data:: sample
+
+.. py:data:: epoch
+
+.. py:data:: output_dir
+
+.. py:data:: proj_path
+
+.. py:data:: sc_proj_path
+
+.. py:data:: sc_meta_path
+
+.. py:data:: output_dir
+
+.. py:data:: data_morph
+
+.. py:data:: sc_data_trans
+
+.. py:data:: adata_sc
+
+.. py:data:: query_embedding
+
+.. py:data:: embedding_pool
+
+.. py:data:: cell_ids_pool
+
+.. py:data:: pool_labels
+
+.. py:data:: retrieval_path
+
+.. py:data:: pred_scores_np
+
+.. py:data:: assign_df
+
+.. py:data:: assign_path
+

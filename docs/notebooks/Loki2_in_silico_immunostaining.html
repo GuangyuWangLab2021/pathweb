@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loki2 in silico immunostaining &mdash; Loki2  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Loki2 Cell-level Multiple Instance Learning" href="Loki2_multiple_instance_learning.html" />
+    <link rel="prev" title="Loki2 Morphological Pseudotime Inference - Prostate Cancer Sample" href="Loki2_morph_psdtime_PRAD.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Loki2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki2_cell_type_inference.html">Loki2 Cell Type Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki2_morph_retrieve.html">Loki2 Morphology-to-Transcriptome Retrieval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki2_morph_psdtime_COAD.html">Loki2 Morphological Pseudotime Inference - Colon Cancer Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki2_morph_psdtime_PRAD.html">Loki2 Morphological Pseudotime Inference - Prostate Cancer Sample</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Loki2 <em>in silico</em> immunostaining</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data-requirements">Data Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples-of-panck-marker">Examples of PanCK Marker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configure-paths-and-parameters">Configure paths and parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#one-time-prep-generate-per-patch-json-and-embeddings">One-time prep: generate per-patch JSON and embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inspect-available-patches">Inspect available patches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#define-train-val-test-patch-splits">Define train/val/test patch splits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-datasets">Build datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#preprocess-features-and-targets">Preprocess features and targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#train-lightgbm-with-patch-level-validation">Train LightGBM with patch-level validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optional-test-set-evaluation">Optional: test set evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#save-model-and-predictions">Save model and predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualize-predictions">Visualize predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#patch-level-gt-vs-pred-visualization">Patch-level GT vs Pred visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples-of-cd45ro-marker">Examples of CD45RO Marker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Configure paths and parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">One-time prep: generate per-patch JSON and embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">Inspect available patches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">Define train/val/test patch splits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">Build datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">Preprocess features and targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">Train LightGBM with patch-level validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">Optional: test set evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">Save model and predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">Visualize predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">Patch-level GT vs Pred visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Loki2_multiple_instance_learning.html">Loki2 Cell-level Multiple Instance Learning</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Loki2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Loki2 <em>in silico</em> immunostaining</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/Loki2_in_silico_immunostaining.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="loki2-in-silico-immunostaining">
+<h1>Loki2 <em>in silico</em> immunostaining<a class="headerlink" href="#loki2-in-silico-immunostaining" title="Link to this heading"></a></h1>
+<p>This notebook demonstrates how to prepare CRC02 patch-level data, train a LightGBM regressor on HE embeddings to predict IF channel intensity, and visualize predictions.</p>
+<section id="data-requirements">
+<h2>Data Requirements<a class="headerlink" href="#data-requirements" title="Link to this heading"></a></h2>
+<p>The example data is stored in the directory <code class="docutils literal notranslate"><span class="pre">../data/imm_stain</span></code>, which can be donwloaded from <a class="reference external" href="https://drive.google.com/drive/folders/19qzd8jTZBQ57a3N5xbiZFSGZJNpIz8NQ?usp=sharing">Google Drive</a>.</p>
+<p>You will need:</p>
+<ul class="simple">
+<li><p>Loki2 cell inference results</p></li>
+<li><p>Paired HE and IF patches</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">loki2.immstain</span>
+
+<span class="c1"># Display inline plots</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="examples-of-panck-marker">
+<h2>Examples of PanCK Marker<a class="headerlink" href="#examples-of-panck-marker" title="Link to this heading"></a></h2>
+<section id="configure-paths-and-parameters">
+<h3>Configure paths and parameters<a class="headerlink" href="#configure-paths-and-parameters" title="Link to this heading"></a></h3>
+<p>Set your dataset locations and model options. Update these to match your filesystem.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">TutorialConfig</span><span class="p">(</span>
+    <span class="n">he_ome_path</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/imm_stain/CRC02-HE.ome.tif&quot;</span><span class="p">),</span>
+    <span class="n">global_nuclei_json</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/imm_stain/CRC02-HE_PYRAMIDAL_cells.json&quot;</span><span class="p">),</span>
+    <span class="n">global_embedding_pt</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/imm_stain/CRC02-HE_PYRAMIDAL_cells.pt&quot;</span><span class="p">),</span>
+    <span class="n">if_patch_dir</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/imm_stain/patches_IF_lvl0_2048_sel&quot;</span><span class="p">),</span>
+    <span class="n">if_patch_pattern</span><span class="o">=</span><span class="s2">&quot;IF_sel_r</span><span class="si">{row:03d}</span><span class="s2">_c</span><span class="si">{col:03d}</span><span class="s2">.tif&quot;</span><span class="p">,</span>
+    <span class="n">patch_json_dir</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../outputs/imm_stain/CRC02_patch_cells_json&quot;</span><span class="p">),</span>
+    <span class="n">patch_emb_dir</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../outputs/imm_stain/CRC02_patch_embeddings&quot;</span><span class="p">),</span>
+    <span class="n">level0_idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">level1_idx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">patch_size</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Training choices</span>
+<span class="n">target_channel</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># example: Pan-CK channel (0-based index in IF stack)</span>
+<span class="n">use_log</span> <span class="o">=</span> <span class="kc">True</span>      <span class="c1"># log1p on targets</span>
+<span class="n">normalize_embeddings</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">extend_nuclei</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># watershed grow nuclei to cell boundaries</span>
+<span class="n">expansion_distance</span> <span class="o">=</span> <span class="mi">5</span>   <span class="c1"># pixels for watershed limit</span>
+
+<span class="c1"># Paths to save outputs</span>
+<span class="n">model_out_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../outputs/imm_stain/models/CRC02_lightgbm_channel</span><span class="si">{</span><span class="n">target_channel</span><span class="si">}</span><span class="s2">.pt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ch</span><span class="o">=</span><span class="n">target_channel</span><span class="p">))</span>
+<span class="n">train_pred_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../outputs/imm_stain/predictions/CRC02_channel</span><span class="si">{</span><span class="n">target_channel</span><span class="si">}</span><span class="s2">_train_predictions.json&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ch</span><span class="o">=</span><span class="n">target_channel</span><span class="p">))</span>
+<span class="n">test_pred_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../outputs/imm_stain/predictions/CRC02_channel</span><span class="si">{</span><span class="n">target_channel</span><span class="si">}</span><span class="s2">_test_predictions.json&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ch</span><span class="o">=</span><span class="n">target_channel</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="one-time-prep-generate-per-patch-json-and-embeddings">
+<h2>One-time prep: generate per-patch JSON and embeddings<a class="headerlink" href="#one-time-prep-generate-per-patch-json-and-embeddings" title="Link to this heading"></a></h2>
+<p>Step 1: Split global nuclei + embeddings into per-patch JSON/PT files (one-time prep)</p>
+<p>Run this once to split the global nuclei JSON + embeddings into per-patch files. Skip if you already have <code class="docutils literal notranslate"><span class="pre">CRC02_patch_cells_json/</span></code> and <code class="docutils literal notranslate"><span class="pre">CRC02_patch_embeddings/</span></code> populated.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">do_generate</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># set True for first run</span>
+
+<span class="k">if</span> <span class="n">do_generate</span><span class="p">:</span>
+    <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">generate_patch_json_and_embeddings</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Skipping generation; set do_generate=True to run.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading global embeddings...
+Global embeddings: 1038158 cells, dim=1280
+Loading global nucleus JSON...
+../data/imm_stain/CRC02-HE.ome.tif level 0 zarr shape: (3, 54363, 82230)
+../data/imm_stain/CRC02-HE.ome.tif level 1 zarr shape: (3, 27182, 41115)
+Level0: H0=54363, W0=82230
+Level1: H1=27182, W1=41115
+Scale factors: scale_y=0.500009, scale_x=0.500000
+Patch grid (level1): 14 rows x 21 cols
+Assigning global cells to patches (level1 grid)...
+Non-empty patches: 188
+Saving patch JSON + embedding files...
+Done generating patch-specific JSON + embeddings.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="inspect-available-patches">
+<h2>Inspect available patches<a class="headerlink" href="#inspect-available-patches" title="Link to this heading"></a></h2>
+<p>List patches that have both nuclei/embedding JSON and IF patch present.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">available_patches</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">list_available_patches</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">available_patches</span><span class="p">)</span><span class="si">}</span><span class="s2"> patches with both JSON/emb and IF:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">available_patches</span><span class="p">)</span>  <span class="c1"># show a sample</span>
+<span class="c1"># use those patches for quick testing</span>
+<span class="n">available_patches</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r004_c006&#39;</span><span class="p">,</span><span class="s1">&#39;r004_c005&#39;</span><span class="p">,</span><span class="s1">&#39;r004_c007&#39;</span><span class="p">,</span><span class="s1">&#39;r003_c006&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 4 patches with both JSON/emb and IF:
+[&#39;r003_c006&#39;, &#39;r004_c005&#39;, &#39;r004_c006&#39;, &#39;r004_c007&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="define-train-val-test-patch-splits">
+<h2>Define train/val/test patch splits<a class="headerlink" href="#define-train-val-test-patch-splits" title="Link to this heading"></a></h2>
+<p>Select a validation patch (held out from train) and optional test patches for final evaluation/visualization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simple deterministic split example (edit as needed)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">available_patches</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Need at least 3 patches to run train/val/test example.&quot;</span><span class="p">)</span>
+
+<span class="n">val_patch</span> <span class="o">=</span> <span class="n">available_patches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">train_patches</span> <span class="o">=</span> <span class="n">available_patches</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">test_patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">available_patches</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Validation patch:&quot;</span><span class="p">,</span> <span class="n">val_patch</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train patches (count):&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_patches</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test patches:&quot;</span><span class="p">,</span> <span class="n">test_patches</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Validation patch: r004_c006
+Train patches (count): 2
+Test patches: [&#39;r003_c006&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="build-datasets">
+<h2>Build datasets<a class="headerlink" href="#build-datasets" title="Link to this heading"></a></h2>
+<p>Step 2: Build train/val/test cell-level datasets for a chosen IF channel</p>
+<p>Creates cell-level feature matrix <code class="docutils literal notranslate"><span class="pre">X</span></code>, targets <code class="docutils literal notranslate"><span class="pre">y</span></code>, and metadata for the chosen IF channel.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">timed_section</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;build train dataset (channel </span><span class="si">{</span><span class="n">target_channel</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">):</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">meta_train</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">build_dataset_for_patches</span><span class="p">(</span>
+        <span class="n">cfg</span><span class="p">,</span>
+        <span class="n">train_patches</span><span class="p">,</span>
+        <span class="n">channel_idx</span><span class="o">=</span><span class="n">target_channel</span><span class="p">,</span>
+        <span class="n">guide_channel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">expansion_distance</span><span class="o">=</span><span class="n">expansion_distance</span><span class="p">,</span>
+        <span class="n">extend_nuclei</span><span class="o">=</span><span class="n">extend_nuclei</span>
+    <span class="p">)</span>
+
+<span class="k">with</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">timed_section</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;build val dataset (channel </span><span class="si">{</span><span class="n">target_channel</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">):</span>
+    <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">meta_val</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">build_dataset_for_patches</span><span class="p">(</span>
+        <span class="n">cfg</span><span class="p">,</span>
+        <span class="p">[</span><span class="n">val_patch</span><span class="p">],</span>
+        <span class="n">channel_idx</span><span class="o">=</span><span class="n">target_channel</span><span class="p">,</span>
+        <span class="n">guide_channel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">expansion_distance</span><span class="o">=</span><span class="n">expansion_distance</span><span class="p">,</span>
+        <span class="n">extend_nuclei</span><span class="o">=</span><span class="n">extend_nuclei</span>
+    <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train shape&quot;</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">&quot;Val shape&quot;</span><span class="p">,</span> <span class="n">X_val</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing patch r004_c005...
+  N nuclei in patch JSON: 16911
+  Patch embeddings shape: (16911, 1280)
+
+Processing patch r004_c007...
+  N nuclei in patch JSON: 16068
+  Patch embeddings shape: (16068, 1280)
+
+Total cells across all patches: 32979, embedding dim=1280
+[timer] build train dataset (channel 4): 146.89s
+
+Processing patch r004_c006...
+  N nuclei in patch JSON: 15974
+  Patch embeddings shape: (15974, 1280)
+
+Total cells across all patches: 15974, embedding dim=1280
+[timer] build val dataset (channel 4): 48.28s
+Train shape (32979, 1280) Val shape (15974, 1280)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preprocess-features-and-targets">
+<h2>Preprocess features and targets<a class="headerlink" href="#preprocess-features-and-targets" title="Link to this heading"></a></h2>
+<p>Optionally L2-normalize embeddings and log-transform targets (log1p).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prep_features</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">normalize_embeddings</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">l2_normalize_embeddings</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+<span class="n">prep_target</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span> <span class="k">if</span> <span class="n">use_log</span> <span class="k">else</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()))</span>
+
+<span class="n">X_train_proc</span> <span class="o">=</span> <span class="n">prep_features</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_val_proc</span> <span class="o">=</span> <span class="n">prep_features</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
+<span class="n">y_train_proc</span> <span class="o">=</span> <span class="n">prep_target</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_val_proc</span> <span class="o">=</span> <span class="n">prep_target</span><span class="p">(</span><span class="n">y_val</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Preprocessed shapes:&quot;</span><span class="p">,</span> <span class="n">X_train_proc</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_val_proc</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Preprocessed shapes: (32979, 1280) (15974, 1280)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="train-lightgbm-with-patch-level-validation">
+<h2>Train LightGBM with patch-level validation<a class="headerlink" href="#train-lightgbm-with-patch-level-validation" title="Link to this heading"></a></h2>
+<p>Step 3: Train a LightGBM regressor with per-patch holdout validation</p>
+<p>Only the LightGBM model is used to keep the pipeline focused.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">timed_section</span><span class="p">(</span><span class="s2">&quot;train lightgbm&quot;</span><span class="p">):</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">val_metrics</span><span class="p">,</span> <span class="n">y_val_pred</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">train_lightgbm_regressor</span><span class="p">(</span>
+        <span class="n">X_train_proc</span><span class="p">,</span>
+        <span class="n">y_train_proc</span><span class="p">,</span>
+        <span class="n">X_val_proc</span><span class="p">,</span>
+        <span class="n">y_val_proc</span><span class="p">,</span>
+        <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+        <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+        <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Validation metrics:&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">val_metrics</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Train predictions (for diagnostics on processed scale)</span>
+<span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">predict_with_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train_proc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training until validation scores don&#39;t improve for 100 rounds
+[100]	train&#39;s rmse: 0.603496	valid&#39;s rmse: 0.829716
+[200]	train&#39;s rmse: 0.48877	valid&#39;s rmse: 0.821889
+[300]	train&#39;s rmse: 0.405244	valid&#39;s rmse: 0.819101
+[400]	train&#39;s rmse: 0.340861	valid&#39;s rmse: 0.817872
+[500]	train&#39;s rmse: 0.289398	valid&#39;s rmse: 0.817132
+[600]	train&#39;s rmse: 0.247122	valid&#39;s rmse: 0.816637
+[700]	train&#39;s rmse: 0.211582	valid&#39;s rmse: 0.816496
+[800]	train&#39;s rmse: 0.182258	valid&#39;s rmse: 0.816471
+Early stopping, best iteration is:
+[720]	train&#39;s rmse: 0.205237	valid&#39;s rmse: 0.81629
+[timer] train lightgbm: 2431.94s
+Validation metrics: {
+  &quot;mse&quot;: 0.6663286154146737,
+  &quot;mae&quot;: 0.6359814654748486,
+  &quot;r2&quot;: 0.3973233849316552,
+  &quot;pearson_r&quot;: 0.6339607099617551,
+  &quot;ssim&quot;: 0.3455918097967648,
+  &quot;model_type&quot;: &quot;lightgbm&quot;
+}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="optional-test-set-evaluation">
+<h2>Optional: test set evaluation<a class="headerlink" href="#optional-test-set-evaluation" title="Link to this heading"></a></h2>
+<p>Evaluate on held-out patches (if provided) and collect predictions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_results</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">if</span> <span class="n">test_patches</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">timed_section</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;build test dataset (channel </span><span class="si">{</span><span class="n">target_channel</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">):</span>
+        <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">meta_test</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">build_dataset_for_patches</span><span class="p">(</span>
+            <span class="n">cfg</span><span class="p">,</span>
+            <span class="n">test_patches</span><span class="p">,</span>
+            <span class="n">channel_idx</span><span class="o">=</span><span class="n">target_channel</span><span class="p">,</span>
+            <span class="n">guide_channel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">expansion_distance</span><span class="o">=</span><span class="n">expansion_distance</span><span class="p">,</span>
+            <span class="n">extend_nuclei</span><span class="o">=</span><span class="n">extend_nuclei</span>
+        <span class="p">)</span>
+    <span class="n">X_test_proc</span> <span class="o">=</span> <span class="n">prep_features</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="n">y_test_proc</span> <span class="o">=</span> <span class="n">prep_target</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">timed_section</span><span class="p">(</span><span class="s2">&quot;predict test&quot;</span><span class="p">):</span>
+        <span class="n">y_test_pred</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">predict_with_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_test_proc</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">use_log</span><span class="p">:</span>
+        <span class="n">y_test_eval</span> <span class="o">=</span> <span class="n">y_test</span>
+        <span class="n">y_test_pred_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expm1</span><span class="p">(</span><span class="n">y_test_pred</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">y_test_eval</span> <span class="o">=</span> <span class="n">y_test</span>
+        <span class="n">y_test_pred_eval</span> <span class="o">=</span> <span class="n">y_test_pred</span>
+    <span class="n">test_metrics</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">compute_regression_metrics</span><span class="p">(</span><span class="n">y_test_eval</span><span class="p">,</span> <span class="n">y_test_pred_eval</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test metrics (original scale):&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">test_metrics</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">test_results</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">X_test_proc</span><span class="p">,</span>
+        <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="n">y_test_proc</span><span class="p">,</span>
+        <span class="s2">&quot;y_pred&quot;</span><span class="p">:</span> <span class="n">y_test_pred</span><span class="p">,</span>
+        <span class="s2">&quot;meta&quot;</span><span class="p">:</span> <span class="n">meta_test</span><span class="p">,</span>
+        <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="n">test_metrics</span><span class="p">,</span>
+        <span class="s2">&quot;y_true_raw&quot;</span><span class="p">:</span> <span class="n">y_test_eval</span><span class="p">,</span>
+        <span class="s2">&quot;y_pred_raw&quot;</span><span class="p">:</span> <span class="n">y_test_pred_eval</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No test patches provided; skip test evaluation.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing patch r003_c006...
+  N nuclei in patch JSON: 14871
+  Patch embeddings shape: (14871, 1280)
+
+Total cells across all patches: 14871, embedding dim=1280
+[timer] build test dataset (channel 4): 59.56s
+[timer] predict test: 0.08s
+Test metrics (original scale): {
+  &quot;mse&quot;: 8509761.026050935,
+  &quot;mae&quot;: 1978.1806053469938,
+  &quot;r2&quot;: 0.059515598904488654,
+  &quot;pearson_r&quot;: 0.39398436519666197,
+  &quot;ssim&quot;: 0.30092517473176844
+}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="save-model-and-predictions">
+<h2>Save model and predictions<a class="headerlink" href="#save-model-and-predictions" title="Link to this heading"></a></h2>
+<p>Step 4: Save per-cell predictions to JSON and plot diagnostics (pred vs. true, residuals)</p>
+<p>Persist the trained model plus per-cell prediction JSON for train/val/test splits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save model bundle</span>
+<span class="n">model_out_path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+        <span class="s2">&quot;normalize_embeddings&quot;</span><span class="p">:</span> <span class="n">normalize_embeddings</span><span class="p">,</span>
+        <span class="s2">&quot;use_log&quot;</span><span class="p">:</span> <span class="n">use_log</span><span class="p">,</span>
+        <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="n">val_metrics</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">model_out_path</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved model to </span><span class="si">{</span><span class="n">model_out_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Save train predictions (processed scale)</span>
+<span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">save_prediction_json</span><span class="p">(</span>
+    <span class="n">train_pred_path</span><span class="p">,</span>
+    <span class="n">channel_idx</span><span class="o">=</span><span class="n">target_channel</span><span class="p">,</span>
+    <span class="n">extend_nuclei</span><span class="o">=</span><span class="n">extend_nuclei</span><span class="p">,</span>
+    <span class="n">normalize_embeddings</span><span class="o">=</span><span class="n">normalize_embeddings</span><span class="p">,</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="n">val_metrics</span><span class="p">,</span>
+    <span class="n">meta</span><span class="o">=</span><span class="n">meta_train</span><span class="p">,</span>
+    <span class="n">y_true</span><span class="o">=</span><span class="n">y_train_proc</span><span class="p">,</span>
+    <span class="n">y_pred</span><span class="o">=</span><span class="n">y_train_pred</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Save test predictions if available</span>
+<span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">save_prediction_json</span><span class="p">(</span>
+    <span class="n">test_pred_path</span><span class="p">,</span>
+    <span class="n">channel_idx</span><span class="o">=</span><span class="n">target_channel</span><span class="p">,</span>
+    <span class="n">extend_nuclei</span><span class="o">=</span><span class="n">extend_nuclei</span><span class="p">,</span>
+    <span class="n">normalize_embeddings</span><span class="o">=</span><span class="n">normalize_embeddings</span><span class="p">,</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="p">(</span><span class="n">test_results</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;metrics&quot;</span><span class="p">,</span> <span class="n">val_metrics</span><span class="p">),</span>
+    <span class="n">meta</span><span class="o">=</span><span class="p">(</span><span class="n">test_results</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;meta&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+    <span class="n">y_true</span><span class="o">=</span><span class="p">(</span><span class="n">test_results</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;y_true&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+    <span class="n">y_pred</span><span class="o">=</span><span class="p">(</span><span class="n">test_results</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;y_pred&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saved model to ../outputs/imm_stain/models/CRC02_lightgbm_channel4.pt
+Per-cell predictions saved to: ../outputs/imm_stain/predictions/CRC02_channel4_train_predictions.json
+Per-cell predictions saved to: ../outputs/imm_stain/predictions/CRC02_channel4_test_predictions.json
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualize-predictions">
+<h2>Visualize predictions<a class="headerlink" href="#visualize-predictions" title="Link to this heading"></a></h2>
+<p>Quick scatter and residual plots on validation predictions (processed scale). For raw-scale plots, invert log1p before plotting.</p>
+</section>
+<section id="patch-level-gt-vs-pred-visualization">
+<h2>Patch-level GT vs Pred visualization<a class="headerlink" href="#patch-level-gt-vs-pred-visualization" title="Link to this heading"></a></h2>
+<p>Render one patch with per-cell measured IF intensity, predicted intensity, residual heatmap, and scatter. Uses the saved prediction JSON.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">patch_for_viz</span> <span class="o">=</span> <span class="s1">&#39;r004_c007&#39;</span>
+<span class="n">pred_json_for_viz</span> <span class="o">=</span> <span class="n">train_pred_path</span>
+<span class="n">out_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../outputs/imm_stain&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;figures_viz_only&quot;</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;patch_</span><span class="si">{</span><span class="n">patch_for_viz</span><span class="si">}</span><span class="s2">_ch</span><span class="si">{</span><span class="n">target_channel</span><span class="si">}</span><span class="s2">_tutorial.png&quot;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">visualize_patch_prediction</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="p">,</span>
+    <span class="n">patch_name</span><span class="o">=</span><span class="n">patch_for_viz</span><span class="p">,</span>
+    <span class="n">prediction_json_path</span><span class="o">=</span><span class="n">pred_json_for_viz</span><span class="p">,</span>
+    <span class="n">channel_idx</span><span class="o">=</span><span class="n">target_channel</span><span class="p">,</span>
+    <span class="n">guide_channel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">expansion_distance</span><span class="o">=</span><span class="n">expansion_distance</span><span class="p">,</span>
+    <span class="n">extend_nuclei</span><span class="o">=</span><span class="n">extend_nuclei</span><span class="p">,</span>
+    <span class="n">predictions_are_log</span><span class="o">=</span><span class="n">use_log</span><span class="p">,</span>
+    <span class="n">colorbar_range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">save_path</span><span class="o">=</span><span class="n">out_path</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved patch viz to </span><span class="si">{</span><span class="n">out_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saved patch visualization to ../outputs/imm_stain/figures_viz_only/patch_r004_c007_ch4_tutorial.png
+</pre></div>
+</div>
+<img alt="../_images/1b141b1d550e88dddede7667b6bb6cd7dd02e62020d3db9513a128c9c919a1f5.png" src="../_images/1b141b1d550e88dddede7667b6bb6cd7dd02e62020d3db9513a128c9c919a1f5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saved patch viz to ../outputs/imm_stain/figures_viz_only/patch_r004_c007_ch4_tutorial.png
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">patch_for_viz</span> <span class="o">=</span> <span class="n">test_patches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">test_patches</span> <span class="k">else</span> <span class="n">val_patch</span>
+<span class="n">pred_json_for_viz</span> <span class="o">=</span> <span class="n">test_pred_path</span> <span class="k">if</span> <span class="n">test_patches</span> <span class="k">else</span> <span class="n">train_pred_path</span>
+<span class="n">out_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../outputs/imm_stain&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;figures_viz_only&quot;</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;patch_</span><span class="si">{</span><span class="n">patch_for_viz</span><span class="si">}</span><span class="s2">_ch</span><span class="si">{</span><span class="n">target_channel</span><span class="si">}</span><span class="s2">_tutorial.png&quot;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">visualize_patch_prediction</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="p">,</span>
+    <span class="n">patch_name</span><span class="o">=</span><span class="n">patch_for_viz</span><span class="p">,</span>
+    <span class="n">prediction_json_path</span><span class="o">=</span><span class="n">pred_json_for_viz</span><span class="p">,</span>
+    <span class="n">channel_idx</span><span class="o">=</span><span class="n">target_channel</span><span class="p">,</span>
+    <span class="n">guide_channel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">expansion_distance</span><span class="o">=</span><span class="n">expansion_distance</span><span class="p">,</span>
+    <span class="n">extend_nuclei</span><span class="o">=</span><span class="n">extend_nuclei</span><span class="p">,</span>
+    <span class="n">predictions_are_log</span><span class="o">=</span><span class="n">use_log</span><span class="p">,</span>
+    <span class="n">colorbar_range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">save_path</span><span class="o">=</span><span class="n">out_path</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved patch viz to </span><span class="si">{</span><span class="n">out_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saved patch visualization to ../outputs/imm_stain/figures_viz_only/patch_r003_c006_ch4_tutorial.png
+</pre></div>
+</div>
+<img alt="../_images/f2eb87b0fdf370a0e6a1c3661f7284857795208e61fc74d9705bb2447c2e468b.png" src="../_images/f2eb87b0fdf370a0e6a1c3661f7284857795208e61fc74d9705bb2447c2e468b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saved patch viz to ../outputs/imm_stain/figures_viz_only/patch_r003_c006_ch4_tutorial.png
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="examples-of-cd45ro-marker">
+<h2>Examples of CD45RO Marker<a class="headerlink" href="#examples-of-cd45ro-marker" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3>Configure paths and parameters<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>Set your dataset locations and model options. Update these to match your filesystem.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">TutorialConfig</span><span class="p">(</span>
+    <span class="n">he_ome_path</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/imm_stain/CRC02-HE.ome.tif&quot;</span><span class="p">),</span>
+    <span class="n">global_nuclei_json</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/imm_stain/CRC02-HE_PYRAMIDAL_cells.json&quot;</span><span class="p">),</span>
+    <span class="n">global_embedding_pt</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/imm_stain/CRC02-HE_PYRAMIDAL_cells.pt&quot;</span><span class="p">),</span>
+    <span class="n">if_patch_dir</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/imm_stain/patches_IF_lvl0_2048_sel&quot;</span><span class="p">),</span>
+    <span class="n">if_patch_pattern</span><span class="o">=</span><span class="s2">&quot;IF_sel_r</span><span class="si">{row:03d}</span><span class="s2">_c</span><span class="si">{col:03d}</span><span class="s2">.tif&quot;</span><span class="p">,</span>
+    <span class="n">patch_json_dir</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../outputs/imm_stain/CRC02_patch_cells_json&quot;</span><span class="p">),</span>
+    <span class="n">patch_emb_dir</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../outputs/imm_stain/CRC02_patch_embeddings&quot;</span><span class="p">),</span>
+    <span class="n">level0_idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">level1_idx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">patch_size</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Training choices</span>
+<span class="n">target_channel</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">use_log</span> <span class="o">=</span> <span class="kc">True</span>      <span class="c1"># log1p on targets</span>
+<span class="n">normalize_embeddings</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">extend_nuclei</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># watershed grow nuclei to cell boundaries</span>
+<span class="n">expansion_distance</span> <span class="o">=</span> <span class="mi">5</span>   <span class="c1"># pixels for watershed limit</span>
+
+<span class="c1"># Paths to save outputs</span>
+<span class="n">model_out_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../outputs/imm_stain/models/CRC02_lightgbm_channel</span><span class="si">{</span><span class="n">target_channel</span><span class="si">}</span><span class="s2">.pt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ch</span><span class="o">=</span><span class="n">target_channel</span><span class="p">))</span>
+<span class="n">train_pred_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../outputs/imm_stain/predictions/CRC02_channel</span><span class="si">{</span><span class="n">target_channel</span><span class="si">}</span><span class="s2">_train_predictions.json&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ch</span><span class="o">=</span><span class="n">target_channel</span><span class="p">))</span>
+<span class="n">test_pred_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../outputs/imm_stain/predictions/CRC02_channel</span><span class="si">{</span><span class="n">target_channel</span><span class="si">}</span><span class="s2">_test_predictions.json&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ch</span><span class="o">=</span><span class="n">target_channel</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id2">
+<h2>One-time prep: generate per-patch JSON and embeddings<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>Step 1: Split global nuclei + embeddings into per-patch JSON/PT files (one-time prep)</p>
+<p>Run this once to split the global nuclei JSON + embeddings into per-patch files. Skip if you already have <code class="docutils literal notranslate"><span class="pre">CRC02_patch_cells_json/</span></code> and <code class="docutils literal notranslate"><span class="pre">CRC02_patch_embeddings/</span></code> populated.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">do_generate</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># set True for first run</span>
+
+<span class="k">if</span> <span class="n">do_generate</span><span class="p">:</span>
+    <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">generate_patch_json_and_embeddings</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Skipping generation; set do_generate=True to run.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading global embeddings...
+Global embeddings: 1038158 cells, dim=1280
+Loading global nucleus JSON...
+../data/imm_stain/CRC02-HE.ome.tif level 0 zarr shape: (3, 54363, 82230)
+../data/imm_stain/CRC02-HE.ome.tif level 1 zarr shape: (3, 27182, 41115)
+Level0: H0=54363, W0=82230
+Level1: H1=27182, W1=41115
+Scale factors: scale_y=0.500009, scale_x=0.500000
+Patch grid (level1): 14 rows x 21 cols
+Assigning global cells to patches (level1 grid)...
+Non-empty patches: 188
+Saving patch JSON + embedding files...
+Done generating patch-specific JSON + embeddings.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h2>Inspect available patches<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>List patches that have both nuclei/embedding JSON and IF patch present.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">available_patches</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">list_available_patches</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">available_patches</span><span class="p">)</span><span class="si">}</span><span class="s2"> patches with both JSON/emb and IF:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">available_patches</span><span class="p">)</span>  <span class="c1"># show a sample</span>
+<span class="c1"># use those patches for quick testing</span>
+<span class="n">available_patches</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r004_c006&#39;</span><span class="p">,</span><span class="s1">&#39;r004_c005&#39;</span><span class="p">,</span><span class="s1">&#39;r004_c007&#39;</span><span class="p">,</span><span class="s1">&#39;r003_c006&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 4 patches with both JSON/emb and IF:
+[&#39;r003_c006&#39;, &#39;r004_c005&#39;, &#39;r004_c006&#39;, &#39;r004_c007&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h2>Define train/val/test patch splits<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>Select a validation patch (held out from train) and optional test patches for final evaluation/visualization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simple deterministic split example (edit as needed)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">available_patches</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Need at least 3 patches to run train/val/test example.&quot;</span><span class="p">)</span>
+
+<span class="n">val_patch</span> <span class="o">=</span> <span class="n">available_patches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">train_patches</span> <span class="o">=</span> <span class="n">available_patches</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">test_patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">available_patches</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Validation patch:&quot;</span><span class="p">,</span> <span class="n">val_patch</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train patches (count):&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_patches</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test patches:&quot;</span><span class="p">,</span> <span class="n">test_patches</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Validation patch: r004_c006
+Train patches (count): 2
+Test patches: [&#39;r003_c006&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h2>Build datasets<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>Step 2: Build train/val/test cell-level datasets for a chosen IF channel</p>
+<p>Creates cell-level feature matrix <code class="docutils literal notranslate"><span class="pre">X</span></code>, targets <code class="docutils literal notranslate"><span class="pre">y</span></code>, and metadata for the chosen IF channel.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">timed_section</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;build train dataset (channel </span><span class="si">{</span><span class="n">target_channel</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">):</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">meta_train</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">build_dataset_for_patches</span><span class="p">(</span>
+        <span class="n">cfg</span><span class="p">,</span>
+        <span class="n">train_patches</span><span class="p">,</span>
+        <span class="n">channel_idx</span><span class="o">=</span><span class="n">target_channel</span><span class="p">,</span>
+        <span class="n">guide_channel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">expansion_distance</span><span class="o">=</span><span class="n">expansion_distance</span><span class="p">,</span>
+        <span class="n">extend_nuclei</span><span class="o">=</span><span class="n">extend_nuclei</span>
+    <span class="p">)</span>
+
+<span class="k">with</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">timed_section</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;build val dataset (channel </span><span class="si">{</span><span class="n">target_channel</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">):</span>
+    <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">meta_val</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">build_dataset_for_patches</span><span class="p">(</span>
+        <span class="n">cfg</span><span class="p">,</span>
+        <span class="p">[</span><span class="n">val_patch</span><span class="p">],</span>
+        <span class="n">channel_idx</span><span class="o">=</span><span class="n">target_channel</span><span class="p">,</span>
+        <span class="n">guide_channel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">expansion_distance</span><span class="o">=</span><span class="n">expansion_distance</span><span class="p">,</span>
+        <span class="n">extend_nuclei</span><span class="o">=</span><span class="n">extend_nuclei</span>
+    <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train shape&quot;</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">&quot;Val shape&quot;</span><span class="p">,</span> <span class="n">X_val</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing patch r004_c005...
+  N nuclei in patch JSON: 16911
+  Patch embeddings shape: (16911, 1280)
+
+Processing patch r004_c007...
+  N nuclei in patch JSON: 16068
+  Patch embeddings shape: (16068, 1280)
+
+Total cells across all patches: 32979, embedding dim=1280
+[timer] build train dataset (channel 2): 122.62s
+
+Processing patch r004_c006...
+  N nuclei in patch JSON: 15974
+  Patch embeddings shape: (15974, 1280)
+
+Total cells across all patches: 15974, embedding dim=1280
+[timer] build val dataset (channel 2): 49.36s
+Train shape (32979, 1280) Val shape (15974, 1280)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h2>Preprocess features and targets<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>Optionally L2-normalize embeddings and log-transform targets (log1p).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prep_features</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">normalize_embeddings</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">l2_normalize_embeddings</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+<span class="n">prep_target</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span> <span class="k">if</span> <span class="n">use_log</span> <span class="k">else</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()))</span>
+
+<span class="n">X_train_proc</span> <span class="o">=</span> <span class="n">prep_features</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_val_proc</span> <span class="o">=</span> <span class="n">prep_features</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
+<span class="n">y_train_proc</span> <span class="o">=</span> <span class="n">prep_target</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_val_proc</span> <span class="o">=</span> <span class="n">prep_target</span><span class="p">(</span><span class="n">y_val</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Preprocessed shapes:&quot;</span><span class="p">,</span> <span class="n">X_train_proc</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_val_proc</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Preprocessed shapes: (32979, 1280) (15974, 1280)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h2>Train LightGBM with patch-level validation<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>Step 3: Train a LightGBM regressor with per-patch holdout validation</p>
+<p>Only the LightGBM model is used to keep the pipeline focused.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">timed_section</span><span class="p">(</span><span class="s2">&quot;train lightgbm&quot;</span><span class="p">):</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">val_metrics</span><span class="p">,</span> <span class="n">y_val_pred</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">train_lightgbm_regressor</span><span class="p">(</span>
+        <span class="n">X_train_proc</span><span class="p">,</span>
+        <span class="n">y_train_proc</span><span class="p">,</span>
+        <span class="n">X_val_proc</span><span class="p">,</span>
+        <span class="n">y_val_proc</span><span class="p">,</span>
+        <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+        <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+        <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Validation metrics:&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">val_metrics</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Train predictions (for diagnostics on processed scale)</span>
+<span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">predict_with_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train_proc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training until validation scores don&#39;t improve for 100 rounds
+[100]	train&#39;s rmse: 0.463894	valid&#39;s rmse: 0.642342
+Early stopping, best iteration is:
+[69]	train&#39;s rmse: 0.496389	valid&#39;s rmse: 0.642156
+[timer] train lightgbm: 653.69s
+Validation metrics: {
+  &quot;mse&quot;: 0.41236442882565294,
+  &quot;mae&quot;: 0.5030152276674281,
+  &quot;r2&quot;: 0.11654008841836616,
+  &quot;pearson_r&quot;: 0.3525812000093537,
+  &quot;ssim&quot;: 0.1934759306385396,
+  &quot;model_type&quot;: &quot;lightgbm&quot;
+}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id8">
+<h2>Optional: test set evaluation<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>Evaluate on held-out patches (if provided) and collect predictions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_results</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">if</span> <span class="n">test_patches</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">timed_section</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;build test dataset (channel </span><span class="si">{</span><span class="n">target_channel</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">):</span>
+        <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">meta_test</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">build_dataset_for_patches</span><span class="p">(</span>
+            <span class="n">cfg</span><span class="p">,</span>
+            <span class="n">test_patches</span><span class="p">,</span>
+            <span class="n">channel_idx</span><span class="o">=</span><span class="n">target_channel</span><span class="p">,</span>
+            <span class="n">guide_channel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">expansion_distance</span><span class="o">=</span><span class="n">expansion_distance</span><span class="p">,</span>
+            <span class="n">extend_nuclei</span><span class="o">=</span><span class="n">extend_nuclei</span>
+        <span class="p">)</span>
+    <span class="n">X_test_proc</span> <span class="o">=</span> <span class="n">prep_features</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="n">y_test_proc</span> <span class="o">=</span> <span class="n">prep_target</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">timed_section</span><span class="p">(</span><span class="s2">&quot;predict test&quot;</span><span class="p">):</span>
+        <span class="n">y_test_pred</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">predict_with_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_test_proc</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">use_log</span><span class="p">:</span>
+        <span class="n">y_test_eval</span> <span class="o">=</span> <span class="n">y_test</span>
+        <span class="n">y_test_pred_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expm1</span><span class="p">(</span><span class="n">y_test_pred</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">y_test_eval</span> <span class="o">=</span> <span class="n">y_test</span>
+        <span class="n">y_test_pred_eval</span> <span class="o">=</span> <span class="n">y_test_pred</span>
+    <span class="n">test_metrics</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">compute_regression_metrics</span><span class="p">(</span><span class="n">y_test_eval</span><span class="p">,</span> <span class="n">y_test_pred_eval</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test metrics (original scale):&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">test_metrics</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">test_results</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">X_test_proc</span><span class="p">,</span>
+        <span class="s2">&quot;y_true&quot;</span><span class="p">:</span> <span class="n">y_test_proc</span><span class="p">,</span>
+        <span class="s2">&quot;y_pred&quot;</span><span class="p">:</span> <span class="n">y_test_pred</span><span class="p">,</span>
+        <span class="s2">&quot;meta&quot;</span><span class="p">:</span> <span class="n">meta_test</span><span class="p">,</span>
+        <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="n">test_metrics</span><span class="p">,</span>
+        <span class="s2">&quot;y_true_raw&quot;</span><span class="p">:</span> <span class="n">y_test_eval</span><span class="p">,</span>
+        <span class="s2">&quot;y_pred_raw&quot;</span><span class="p">:</span> <span class="n">y_test_pred_eval</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No test patches provided; skip test evaluation.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing patch r003_c006...
+  N nuclei in patch JSON: 14871
+  Patch embeddings shape: (14871, 1280)
+
+Total cells across all patches: 14871, embedding dim=1280
+[timer] build test dataset (channel 2): 45.82s
+[timer] predict test: 0.03s
+Test metrics (original scale): {
+  &quot;mse&quot;: 9694314.333038595,
+  &quot;mae&quot;: 1913.4060172446673,
+  &quot;r2&quot;: 0.13078191878753087,
+  &quot;pearson_r&quot;: 0.4336573916030431,
+  &quot;ssim&quot;: 0.37258682884705424
+}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id9">
+<h2>Save model and predictions<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>Step 4: Save per-cell predictions to JSON and plot diagnostics (pred vs. true, residuals)</p>
+<p>Persist the trained model plus per-cell prediction JSON for train/val/test splits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save model bundle</span>
+<span class="n">model_out_path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+        <span class="s2">&quot;normalize_embeddings&quot;</span><span class="p">:</span> <span class="n">normalize_embeddings</span><span class="p">,</span>
+        <span class="s2">&quot;use_log&quot;</span><span class="p">:</span> <span class="n">use_log</span><span class="p">,</span>
+        <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="n">val_metrics</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">model_out_path</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved model to </span><span class="si">{</span><span class="n">model_out_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Save train predictions (processed scale)</span>
+<span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">save_prediction_json</span><span class="p">(</span>
+    <span class="n">train_pred_path</span><span class="p">,</span>
+    <span class="n">channel_idx</span><span class="o">=</span><span class="n">target_channel</span><span class="p">,</span>
+    <span class="n">extend_nuclei</span><span class="o">=</span><span class="n">extend_nuclei</span><span class="p">,</span>
+    <span class="n">normalize_embeddings</span><span class="o">=</span><span class="n">normalize_embeddings</span><span class="p">,</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="n">val_metrics</span><span class="p">,</span>
+    <span class="n">meta</span><span class="o">=</span><span class="n">meta_train</span><span class="p">,</span>
+    <span class="n">y_true</span><span class="o">=</span><span class="n">y_train_proc</span><span class="p">,</span>
+    <span class="n">y_pred</span><span class="o">=</span><span class="n">y_train_pred</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Save test predictions if available</span>
+<span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">save_prediction_json</span><span class="p">(</span>
+    <span class="n">test_pred_path</span><span class="p">,</span>
+    <span class="n">channel_idx</span><span class="o">=</span><span class="n">target_channel</span><span class="p">,</span>
+    <span class="n">extend_nuclei</span><span class="o">=</span><span class="n">extend_nuclei</span><span class="p">,</span>
+    <span class="n">normalize_embeddings</span><span class="o">=</span><span class="n">normalize_embeddings</span><span class="p">,</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="p">(</span><span class="n">test_results</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;metrics&quot;</span><span class="p">,</span> <span class="n">val_metrics</span><span class="p">),</span>
+    <span class="n">meta</span><span class="o">=</span><span class="p">(</span><span class="n">test_results</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;meta&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+    <span class="n">y_true</span><span class="o">=</span><span class="p">(</span><span class="n">test_results</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;y_true&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+    <span class="n">y_pred</span><span class="o">=</span><span class="p">(</span><span class="n">test_results</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;y_pred&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saved model to ../outputs/imm_stain/models/CRC02_lightgbm_channel2.pt
+Per-cell predictions saved to: ../outputs/imm_stain/predictions/CRC02_channel2_train_predictions.json
+Per-cell predictions saved to: ../outputs/imm_stain/predictions/CRC02_channel2_test_predictions.json
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id10">
+<h2>Visualize predictions<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>Quick scatter and residual plots on validation predictions (processed scale). For raw-scale plots, invert log1p before plotting.</p>
+</section>
+<section id="id11">
+<h2>Patch-level GT vs Pred visualization<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<p>Render one patch with per-cell measured IF intensity, predicted intensity, residual heatmap, and scatter. Uses the saved prediction JSON.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">patch_for_viz</span> <span class="o">=</span> <span class="s1">&#39;r004_c007&#39;</span>
+<span class="n">pred_json_for_viz</span> <span class="o">=</span> <span class="n">train_pred_path</span>
+<span class="n">out_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../outputs/imm_stain&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;figures_viz_only&quot;</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;patch_</span><span class="si">{</span><span class="n">patch_for_viz</span><span class="si">}</span><span class="s2">_ch</span><span class="si">{</span><span class="n">target_channel</span><span class="si">}</span><span class="s2">_tutorial.png&quot;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">visualize_patch_prediction</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="p">,</span>
+    <span class="n">patch_name</span><span class="o">=</span><span class="n">patch_for_viz</span><span class="p">,</span>
+    <span class="n">prediction_json_path</span><span class="o">=</span><span class="n">pred_json_for_viz</span><span class="p">,</span>
+    <span class="n">channel_idx</span><span class="o">=</span><span class="n">target_channel</span><span class="p">,</span>
+    <span class="n">guide_channel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">expansion_distance</span><span class="o">=</span><span class="n">expansion_distance</span><span class="p">,</span>
+    <span class="n">extend_nuclei</span><span class="o">=</span><span class="n">extend_nuclei</span><span class="p">,</span>
+    <span class="n">predictions_are_log</span><span class="o">=</span><span class="n">use_log</span><span class="p">,</span>
+    <span class="n">colorbar_range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">save_path</span><span class="o">=</span><span class="n">out_path</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved patch viz to </span><span class="si">{</span><span class="n">out_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saved patch visualization to ../outputs/imm_stain/figures_viz_only/patch_r004_c007_ch2_tutorial.png
+</pre></div>
+</div>
+<img alt="../_images/b47c9fabd39e93e6c619f1e0a7a41dbe427dec6a8f7ae9fc425c3d2c26876d35.png" src="../_images/b47c9fabd39e93e6c619f1e0a7a41dbe427dec6a8f7ae9fc425c3d2c26876d35.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saved patch viz to ../outputs/imm_stain/figures_viz_only/patch_r004_c007_ch2_tutorial.png
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">patch_for_viz</span> <span class="o">=</span> <span class="n">test_patches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">test_patches</span> <span class="k">else</span> <span class="n">val_patch</span>
+<span class="n">pred_json_for_viz</span> <span class="o">=</span> <span class="n">test_pred_path</span> <span class="k">if</span> <span class="n">test_patches</span> <span class="k">else</span> <span class="n">train_pred_path</span>
+<span class="n">out_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../outputs/imm_stain&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;figures_viz_only&quot;</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;patch_</span><span class="si">{</span><span class="n">patch_for_viz</span><span class="si">}</span><span class="s2">_ch</span><span class="si">{</span><span class="n">target_channel</span><span class="si">}</span><span class="s2">_tutorial.png&quot;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">immstain</span><span class="o">.</span><span class="n">visualize_patch_prediction</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="p">,</span>
+    <span class="n">patch_name</span><span class="o">=</span><span class="n">patch_for_viz</span><span class="p">,</span>
+    <span class="n">prediction_json_path</span><span class="o">=</span><span class="n">pred_json_for_viz</span><span class="p">,</span>
+    <span class="n">channel_idx</span><span class="o">=</span><span class="n">target_channel</span><span class="p">,</span>
+    <span class="n">guide_channel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">expansion_distance</span><span class="o">=</span><span class="n">expansion_distance</span><span class="p">,</span>
+    <span class="n">extend_nuclei</span><span class="o">=</span><span class="n">extend_nuclei</span><span class="p">,</span>
+    <span class="n">predictions_are_log</span><span class="o">=</span><span class="n">use_log</span><span class="p">,</span>
+    <span class="n">colorbar_range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">save_path</span><span class="o">=</span><span class="n">out_path</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved patch viz to </span><span class="si">{</span><span class="n">out_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saved patch visualization to ../outputs/imm_stain/figures_viz_only/patch_r003_c006_ch2_tutorial.png
+</pre></div>
+</div>
+<img alt="../_images/ce956431036c6451f6c54b86c2bfea79039a4f16eb471946b81b253ae61f3861.png" src="../_images/ce956431036c6451f6c54b86c2bfea79039a4f16eb471946b81b253ae61f3861.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saved patch viz to ../outputs/imm_stain/figures_viz_only/patch_r003_c006_ch2_tutorial.png
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Loki2_morph_psdtime_PRAD.html" class="btn btn-neutral float-left" title="Loki2 Morphological Pseudotime Inference - Prostate Cancer Sample" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Loki2_multiple_instance_learning.html" class="btn btn-neutral float-right" title="Loki2 Cell-level Multiple Instance Learning" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

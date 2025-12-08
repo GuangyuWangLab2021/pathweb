@@ -1,0 +1,57 @@
+loki2.models.utils.blocks
+=========================
+
+.. py:module:: loki2.models.utils.blocks
+
+.. autoapi-nested-parse::
+
+   Building blocks for neural network architectures.
+
+   This module provides reusable convolutional and deconvolutional blocks
+   for use in segmentation networks.
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:class:: Conv2DBlock(in_channels: int, out_channels: int, kernel_size: int = 3, dropout: float = 0)
+
+   Bases: :py:obj:`torch.nn.Module`
+
+
+   Conv2D block with convolution, batch normalization, ReLU, and dropout.
+
+   :param in_channels: Number of input channels for convolution.
+   :param out_channels: Number of output channels for convolution.
+   :param kernel_size: Kernel size for convolution. Defaults to 3.
+   :param dropout: Dropout rate. Defaults to 0.
+
+
+   .. py:attribute:: block
+
+
+   .. py:method:: forward(x)
+
+
+.. py:class:: Deconv2DBlock(in_channels: int, out_channels: int, kernel_size: int = 3, dropout: float = 0)
+
+   Bases: :py:obj:`torch.nn.Module`
+
+
+   Deconvolution block with ConvTranspose2d, Conv2d, batch normalization, ReLU, and dropout.
+
+   :param in_channels: Number of input channels for deconv block.
+   :param out_channels: Number of output channels for deconv and convolution.
+   :param kernel_size: Kernel size for convolution. Defaults to 3.
+   :param dropout: Dropout rate. Defaults to 0.
+
+
+   .. py:attribute:: block
+
+
+   .. py:method:: forward(x)
+
+

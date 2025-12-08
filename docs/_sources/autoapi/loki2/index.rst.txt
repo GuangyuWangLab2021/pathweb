@@ -1,0 +1,48 @@
+loki2
+=====
+
+.. py:module:: loki2
+
+.. autoapi-nested-parse::
+
+   Loki2: A single-cell pathology foundation model for:
+
+   (1) cell type annotation, which infers cell type solely from morphological features;
+   (2) single-cell morphology-to-transcriptome retrieval, a cross-modality search engine that maps H&E-segmented cells to reference scRNA-seq atlases;
+   (3) morphological pseudotime inference, which leverages the continuous nature of the embedding space to infer dynamic developmental or pathological states;
+   (4) cell-level multiple instance learning (MIL), which aggregates individual cellular risk scores for patient-level prognostication;
+   (5) in silico staining, which generates virtual protein-level biomarker maps.
+
+
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/cl/index
+   /autoapi/loki2/config/index
+   /autoapi/loki2/data/index
+   /autoapi/loki2/inference/index
+   /autoapi/loki2/mil/index
+   /autoapi/loki2/models/index
+   /autoapi/loki2/utils/index
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/detect_cells/index
+   /autoapi/loki2/encode_trans/index
+   /autoapi/loki2/immstain/index
+   /autoapi/loki2/plot/index
+   /autoapi/loki2/preprocess/index
+   /autoapi/loki2/psdtime/index
+   /autoapi/loki2/retrieve/index
+   /autoapi/loki2/retrieve_from_sc/index
+
+

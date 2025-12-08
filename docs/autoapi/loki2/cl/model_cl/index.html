@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>loki2.cl.model_cl &mdash; Loki2  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="loki2.cl.prepare_training" href="../prepare_training/index.html" />
+    <link rel="prev" title="loki2.cl" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Loki2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">loki2</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">loki2.cl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../config/index.html">loki2.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data/index.html">loki2.data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../inference/index.html">loki2.inference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../mil/index.html">loki2.mil</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../models/index.html">loki2.models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">loki2.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/Loki2_cell_type_inference.html">Loki2 Cell Type Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/Loki2_morph_retrieve.html">Loki2 Morphology-to-Transcriptome Retrieval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/Loki2_morph_psdtime_COAD.html">Loki2 Morphological Pseudotime Inference - Colon Cancer Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/Loki2_morph_psdtime_PRAD.html">Loki2 Morphological Pseudotime Inference - Prostate Cancer Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/Loki2_in_silico_immunostaining.html">Loki2 <em>in silico</em> immunostaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/Loki2_multiple_instance_learning.html">Loki2 Cell-level Multiple Instance Learning</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Loki2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">loki2</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">loki2.cl</a></li>
+      <li class="breadcrumb-item active">loki2.cl.model_cl</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/loki2/cl/model_cl/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-loki2.cl.model_cl">
+<span id="loki2-cl-model-cl"></span><h1>loki2.cl.model_cl<a class="headerlink" href="#module-loki2.cl.model_cl" title="Link to this heading"></a></h1>
+<p>Minimal projection-only alignment module.</p>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="loki2.cl.model_cl.ProjectionCL">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">loki2.cl.model_cl.</span></span><span class="sig-name descname"><span class="pre">ProjectionCL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">embed_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">512</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modality_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1280,</span> <span class="pre">768)</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_scale_init</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_logit_scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_logit_scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki2.cl.model_cl.ProjectionCL" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
+<p>CLIP-style symmetric contrastive projector for paired embeddings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>embed_dim</strong> – Shared embedding dimensionality after projection. Defaults to 512.</p></li>
+<li><p><strong>modality_dims</strong> – Tuple containing input dimensions for the two modalities.
+Defaults to (1280, 768).</p></li>
+<li><p><strong>bias</strong> – Whether to enable bias terms in the projection layers. Defaults to False.</p></li>
+<li><p><strong>logit_scale_init</strong> – Initial value (not log-space) of the logit scale multiplier <code class="docutils literal notranslate"><span class="pre">s</span></code>.
+Defaults to 1.0.</p></li>
+<li><p><strong>num_layers</strong> – Number of layers in each projection head. Defaults to 1.</p></li>
+<li><p><strong>hidden_dim</strong> – Hidden dimension for intermediate projection layers (defaults to embed dim).
+Defaults to None.</p></li>
+<li><p><strong>dropout</strong> – Dropout rate for hidden layers. Defaults to 0.0.</p></li>
+<li><p><strong>max_logit_scale</strong> – Upper bound for <code class="docutils literal notranslate"><span class="pre">s</span></code> (enforces a minimum temperature <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">s</span></code>).
+Defaults to 10.0.</p></li>
+<li><p><strong>min_logit_scale</strong> – Optional lower bound for <code class="docutils literal notranslate"><span class="pre">s</span></code>. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If modality_dims does not contain exactly two dimensions, num_layers is less
+than 1, dropout is not in [0, 1], logit_scale_init is not positive, max_logit_scale
+is not positive, or min_logit_scale is not in (0, max_logit_scale].</p></li>
+<li><p><strong>RuntimeError</strong> – If a projection head does not contain at least one linear layer.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.cl.model_cl.ProjectionCL.hidden_dim">
+<span class="sig-name descname"><span class="pre">hidden_dim</span></span><a class="headerlink" href="#loki2.cl.model_cl.ProjectionCL.hidden_dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.cl.model_cl.ProjectionCL.proj_a">
+<span class="sig-name descname"><span class="pre">proj_a</span></span><a class="headerlink" href="#loki2.cl.model_cl.ProjectionCL.proj_a" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.cl.model_cl.ProjectionCL.proj_b">
+<span class="sig-name descname"><span class="pre">proj_b</span></span><a class="headerlink" href="#loki2.cl.model_cl.ProjectionCL.proj_b" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.cl.model_cl.ProjectionCL.init_value">
+<span class="sig-name descname"><span class="pre">init_value</span></span><a class="headerlink" href="#loki2.cl.model_cl.ProjectionCL.init_value" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.cl.model_cl.ProjectionCL.logit_scale">
+<span class="sig-name descname"><span class="pre">logit_scale</span></span><a class="headerlink" href="#loki2.cl.model_cl.ProjectionCL.logit_scale" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="loki2.cl.model_cl.ProjectionCL.encode_a">
+<span class="sig-name descname"><span class="pre">encode_a</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="headerlink" href="#loki2.cl.model_cl.ProjectionCL.encode_a" title="Link to this definition"></a></dt>
+<dd><p>Encode features from modality A through its projection head.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>features</strong> – Input features for modality A.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Projected features for modality A.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="loki2.cl.model_cl.ProjectionCL.encode_b">
+<span class="sig-name descname"><span class="pre">encode_b</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="headerlink" href="#loki2.cl.model_cl.ProjectionCL.encode_b" title="Link to this definition"></a></dt>
+<dd><p>Encode features from modality B through its projection head.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>features</strong> – Input features for modality B.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Projected features for modality B.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="loki2.cl.model_cl.ProjectionCL.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features_a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_loss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.cl.model_cl.ProjectionCL.forward" title="Link to this definition"></a></dt>
+<dd><p>Project both modalities, compute scaled cosine similarities, and optionally return the CLIP-style contrastive loss.</p>
+<p>Let <code class="docutils literal notranslate"><span class="pre">f_i</span></code> and <code class="docutils literal notranslate"><span class="pre">g_i</span></code> denote the raw embeddings for sample <code class="docutils literal notranslate"><span class="pre">i</span></code> from modalities <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>.
+After the projection heads and L2 normalisation we obtain unit vectors <code class="docutils literal notranslate"><span class="pre">\hat</span> <span class="pre">f_i</span></code> and
+<code class="docutils literal notranslate"><span class="pre">\hat</span> <span class="pre">g_i</span></code>.  The learnable logit-scale parameter <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">\exp(\text{logit\_scale})</span></code> plays the
+role of the inverse temperature <code class="docutils literal notranslate"><span class="pre">1/\tau</span></code>.  The logits matrix we feed to the cross-entropy loss is</p>
+<div class="math notranslate nohighlight">
+\[L_{ij} = \min(s, s_{\text{max}})\; \hat f_i^\top \hat g_j,\]</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">s_{max}</span></code> is the configured maximum scale.  When <code class="docutils literal notranslate"><span class="pre">return_loss</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> we minimise the
+symmetric InfoNCE objective</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L} = \tfrac{1}{2} \bigl[ \operatorname{CE}(L, I) + \operatorname{CE}(L^\top, I) \bigr],\]</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">CE</span></code> is the cross-entropy and <code class="docutils literal notranslate"><span class="pre">I</span></code> indexes the matching pairs along the diagonal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>features_a</strong> – Input features for modality A.</p></li>
+<li><p><strong>features_b</strong> – Input features for modality B.</p></li>
+<li><p><strong>return_loss</strong> – If True, also return the contrastive loss. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>Tuple[torch.Tensor, torch.Tensor]: Logits for A-B and B-A similarity if return_loss=False.</p></li>
+<li><p>Tuple[torch.Tensor, torch.Tensor, torch.Tensor]: Logits and loss if return_loss=True.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[Tuple[torch.Tensor, torch.Tensor], Tuple[torch.Tensor, torch.Tensor, torch.Tensor]]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If return_loss=True and batch sizes for both modalities are not equal.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="loki2.cl.model_cl.ProjectionCL.current_logit_scale">
+<span class="sig-name descname"><span class="pre">current_logit_scale</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#loki2.cl.model_cl.ProjectionCL.current_logit_scale" title="Link to this definition"></a></dt>
+<dd><p>Return the effective logit scale as a Python float for logging.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="loki2.cl" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../prepare_training/index.html" class="btn btn-neutral float-right" title="loki2.cl.prepare_training" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

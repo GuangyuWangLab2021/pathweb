@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loki2 Cell Type Inference &mdash; Loki2  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Loki2 Morphology-to-Transcriptome Retrieval" href="Loki2_morph_retrieve.html" />
+    <link rel="prev" title="Installation" href="Installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Loki2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Loki2 Cell Type Inference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data-requirements">Data Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cell-detection">Cell Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#load-sample">Load Sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plot-image">Plot Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plot-cell-types">Plot Cell Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plot-umap">Plot UMAP</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Loki2_morph_retrieve.html">Loki2 Morphology-to-Transcriptome Retrieval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki2_morph_psdtime_COAD.html">Loki2 Morphological Pseudotime Inference - Colon Cancer Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki2_morph_psdtime_PRAD.html">Loki2 Morphological Pseudotime Inference - Prostate Cancer Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki2_in_silico_immunostaining.html">Loki2 <em>in silico</em> immunostaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki2_multiple_instance_learning.html">Loki2 Cell-level Multiple Instance Learning</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Loki2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Loki2 Cell Type Inference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/Loki2_cell_type_inference.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="loki2-cell-type-inference">
+<h1>Loki2 Cell Type Inference<a class="headerlink" href="#loki2-cell-type-inference" title="Link to this heading"></a></h1>
+<p>This notebook demonstrates how to perform cell type inference using Loki2 on whole slide images (WSI).</p>
+<section id="data-requirements">
+<h2>Data Requirements<a class="headerlink" href="#data-requirements" title="Link to this heading"></a></h2>
+<p>The Loki2 model checkpoint is stored in the directory <code class="docutils literal notranslate"><span class="pre">../model_ckpt/</span></code>, which will be released on GitHub and Hugging Face after the manuscript is accepted. <br />
+The example data is stored in the directory <code class="docutils literal notranslate"><span class="pre">../data/cell_infer</span></code>, which can be donwloaded from <a class="reference external" href="https://drive.google.com/drive/folders/19qzd8jTZBQ57a3N5xbiZFSGZJNpIz8NQ?usp=sharing">Google Drive</a>.</p>
+<p>You will need:</p>
+<ul class="simple">
+<li><p>Loki2 model checkpoint</p></li>
+<li><p>Example WSI data</p></li>
+</ul>
+</section>
+<section id="cell-detection">
+<h2>Cell Detection<a class="headerlink" href="#cell-detection" title="Link to this heading"></a></h2>
+<p>This section runs Loki2 to detect and segment cells from whole slide images. The model performs automatic cell segmentation and detection from high-resolution WSIs, generating morphological embeddings that capture cell characteristics.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">MODEL</span><span class="o">=</span><span class="s2">&quot;../model_ckpt/loki2_checkpoint.pth&quot;</span>
+<span class="nv">OUTDIR</span><span class="o">=</span><span class="s2">&quot;../outputs/cell_infer&quot;</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTDIR</span><span class="s2">&quot;</span>
+
+<span class="nv">FILE</span><span class="o">=</span><span class="s2">&quot;../data/cell_infer/colon_cancer_sample.tif&quot;</span>
+<span class="nv">WSI_PROPERTIES</span><span class="o">=</span><span class="s1">&#39;{&quot;slide_mpp&quot;: 0.25, &quot;magnification&quot;: 40}&#39;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing </span><span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="s2">&quot;</span>
+python<span class="w"> </span>../src/loki2/detect_cells.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--model<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$MODEL</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--outdir<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTDIR</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--geojson<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--graph<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>process_wsi<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--wsi_path<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--wsi_properties<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WSI_PROPERTIES</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
+
+<span class="kn">import</span> <span class="nn">loki2.preprocess</span>
+<span class="kn">import</span> <span class="nn">loki2.plot</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-sample">
+<h2>Load Sample<a class="headerlink" href="#load-sample" title="Link to this heading"></a></h2>
+<p>After cell detection, we load the sample data including cell embeddings, spatial positions, and cell type annotations. The embeddings capture morphological features of each detected cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">base</span> <span class="o">=</span> <span class="s1">&#39;../outputs/cell_infer&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_name</span> <span class="o">=</span> <span class="s1">&#39;colon_cancer_sample&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="o">.</span><span class="n">MAX_IMAGE_PIXELS</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># &lt;-- allow very large WSIs</span>
+<span class="c1"># Load the image</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../data/cell_infer/</span><span class="si">{</span><span class="n">sample_name</span><span class="si">}</span><span class="s2">.tif&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">emb</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">cells</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">preprocess</span><span class="o">.</span><span class="n">load_sample</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">sample_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-image">
+<h2>Plot Image<a class="headerlink" href="#plot-image" title="Link to this heading"></a></h2>
+<p>Visualize the original whole slide image to see the tissue structure before analyzing cell type distributions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0a8e90e7815687d4683f0b035d29c968447f04ed9cf7046f59bc888bac0aefe1.png" src="../_images/0a8e90e7815687d4683f0b035d29c968447f04ed9cf7046f59bc888bac0aefe1.png" />
+</div>
+</div>
+</section>
+<section id="plot-cell-types">
+<h2>Plot Cell Types<a class="headerlink" href="#plot-cell-types" title="Link to this heading"></a></h2>
+<p>Visualize the inferred cell types mapped onto the spatial tissue coordinates. This spatial visualization shows the distribution of different cell types across the tissue, revealing the spatial organization of cellular populations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki2</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_cell_types</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">cells</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total cells: 321549
+</pre></div>
+</div>
+<img alt="../_images/6ce3e2af0afc62ec07082c97d2ffe11d5db059233af46e2655990a05c36db788.png" src="../_images/6ce3e2af0afc62ec07082c97d2ffe11d5db059233af46e2655990a05c36db788.png" />
+</div>
+</div>
+</section>
+<section id="plot-umap">
+<h2>Plot UMAP<a class="headerlink" href="#plot-umap" title="Link to this heading"></a></h2>
+<p>Apply dimensionality reduction using UMAP to visualize cell embeddings in a 2D space. The UMAP visualization reveals the similarity structure of cells based on their morphological embeddings, with similar cells clustering together. The colors are then mapped back to the spatial coordinates to show how morphological similarity relates to spatial organization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">umap_hex</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">embeddings_to_hex</span><span class="p">(</span><span class="n">emb</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;umap&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pos</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">umap_hex</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;UMAP of Cell Embeddings&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a2e63510c0dcd82724f46c09609278b6b84b31c405bc8fbdf70b16661bb7922d.png" src="../_images/a2e63510c0dcd82724f46c09609278b6b84b31c405bc8fbdf70b16661bb7922d.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Loki2_morph_retrieve.html" class="btn btn-neutral float-right" title="Loki2 Morphology-to-Transcriptome Retrieval" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

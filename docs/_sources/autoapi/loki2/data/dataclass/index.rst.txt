@@ -1,0 +1,24 @@
+loki2.data.dataclass
+====================
+
+.. py:module:: loki2.data.dataclass
+
+.. autoapi-nested-parse::
+
+   Data class models for Loki2.
+
+   This module provides dataclasses for representing Whole Slide Images (WSIs),
+   cell graphs, and related data structures used throughout the Loki2 framework.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/data/dataclass/cell_graph/index
+   /autoapi/loki2/data/dataclass/wsi/index
+
+

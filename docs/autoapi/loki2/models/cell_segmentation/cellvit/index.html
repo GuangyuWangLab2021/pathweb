@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>loki2.models.cell_segmentation.cellvit &mdash; Loki2  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="loki2.models.cell_segmentation.loki2_sam" href="../loki2_sam/index.html" />
+    <link rel="prev" title="loki2.models.cell_segmentation.backbones" href="../backbones/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            Loki2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html">loki2</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../../index.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../../cl/index.html">loki2.cl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../config/index.html">loki2.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data/index.html">loki2.data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../inference/index.html">loki2.inference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../mil/index.html">loki2.mil</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../../index.html">loki2.models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../utils/index.html">loki2.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../index.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/Loki2_cell_type_inference.html">Loki2 Cell Type Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/Loki2_morph_retrieve.html">Loki2 Morphology-to-Transcriptome Retrieval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/Loki2_morph_psdtime_COAD.html">Loki2 Morphological Pseudotime Inference - Colon Cancer Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/Loki2_morph_psdtime_PRAD.html">Loki2 Morphological Pseudotime Inference - Prostate Cancer Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/Loki2_in_silico_immunostaining.html">Loki2 <em>in silico</em> immunostaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/Loki2_multiple_instance_learning.html">Loki2 Cell-level Multiple Instance Learning</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Loki2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">loki2</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">loki2.models</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">loki2.models.cell_segmentation</a></li>
+      <li class="breadcrumb-item active">loki2.models.cell_segmentation.cellvit</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../_sources/autoapi/loki2/models/cell_segmentation/cellvit/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-loki2.models.cell_segmentation.cellvit">
+<span id="loki2-models-cell-segmentation-cellvit"></span><h1>loki2.models.cell_segmentation.cellvit<a class="headerlink" href="#module-loki2.models.cell_segmentation.cellvit" title="Link to this heading"></a></h1>
+<p>CellViT networks and adaptations for cell segmentation.</p>
+<p>UNETR paper and code: <a class="reference external" href="https://github.com/tamasino52/UNETR">https://github.com/tamasino52/UNETR</a>
+SAM paper and code: <a class="reference external" href="https://segment-anything.com/">https://segment-anything.com/</a></p>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">loki2.models.cell_segmentation.cellvit.</span></span><span class="sig-name descname"><span class="pre">CellViT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nuclei_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_tissue_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embed_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_heads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extract_layers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlp_ratio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qkv_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attn_drop_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_path_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regression_loss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
+<p>CellViT Model for cell segmentation.</p>
+<p>U-Net-like network with vision transformer as backbone encoder.
+Skip connections are shared between branches, but each network has a distinct encoder.</p>
+<dl class="simple">
+<dt>The model has multiple branches:</dt><dd><ul class="simple">
+<li><p>tissue_types: Tissue prediction based on global class token</p></li>
+<li><p>nuclei_binary_map: Binary nuclei prediction</p></li>
+<li><p>hv_map: HV-prediction to separate isolated instances</p></li>
+<li><p>nuclei_type_map: Nuclei instance-prediction</p></li>
+<li><p>[Optional, if regression loss]: regression_map: Regression map for binary prediction</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_nuclei_classes</strong> – Number of nuclei classes (including background).</p></li>
+<li><p><strong>num_tissue_classes</strong> – Number of tissue classes.</p></li>
+<li><p><strong>embed_dim</strong> – Embedding dimension of backbone ViT.</p></li>
+<li><p><strong>input_channels</strong> – Number of input channels.</p></li>
+<li><p><strong>depth</strong> – Depth of the backbone ViT.</p></li>
+<li><p><strong>num_heads</strong> – Number of heads of the backbone ViT.</p></li>
+<li><p><strong>extract_layers</strong> – List of Transformer Blocks whose outputs should be returned
+in addition to the tokens. First block starts with 1, maximum is N=depth.
+Is used for skip connections. At least 4 skip connections need to be returned.</p></li>
+<li><p><strong>mlp_ratio</strong> – MLP ratio for hidden MLP dimension of backbone ViT. Defaults to 4.</p></li>
+<li><p><strong>qkv_bias</strong> – If bias should be used for query (q), key (k), and value (v)
+in backbone ViT. Defaults to True.</p></li>
+<li><p><strong>drop_rate</strong> – Dropout in MLP. Defaults to 0.</p></li>
+<li><p><strong>attn_drop_rate</strong> – Dropout for attention layer in backbone ViT. Defaults to 0.</p></li>
+<li><p><strong>drop_path_rate</strong> – Dropout for skip connection. Defaults to 0.</p></li>
+<li><p><strong>regression_loss</strong> – Use regressive loss for predicting vector components.
+Adds two additional channels to the binary decoder, but returns it as
+own entry in dict. Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.patch_size">
+<span class="sig-name descname"><span class="pre">patch_size</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.patch_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.num_tissue_classes">
+<span class="sig-name descname"><span class="pre">num_tissue_classes</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.num_tissue_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.num_nuclei_classes">
+<span class="sig-name descname"><span class="pre">num_nuclei_classes</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.num_nuclei_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.embed_dim">
+<span class="sig-name descname"><span class="pre">embed_dim</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.embed_dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.input_channels">
+<span class="sig-name descname"><span class="pre">input_channels</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.input_channels" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.depth">
+<span class="sig-name descname"><span class="pre">depth</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.depth" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.num_heads">
+<span class="sig-name descname"><span class="pre">num_heads</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.num_heads" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.mlp_ratio">
+<span class="sig-name descname"><span class="pre">mlp_ratio</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.mlp_ratio" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.qkv_bias">
+<span class="sig-name descname"><span class="pre">qkv_bias</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.qkv_bias" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.extract_layers">
+<span class="sig-name descname"><span class="pre">extract_layers</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.extract_layers" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.drop_rate">
+<span class="sig-name descname"><span class="pre">drop_rate</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.drop_rate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.attn_drop_rate">
+<span class="sig-name descname"><span class="pre">attn_drop_rate</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.attn_drop_rate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.drop_path_rate">
+<span class="sig-name descname"><span class="pre">drop_path_rate</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.drop_path_rate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.encoder">
+<span class="sig-name descname"><span class="pre">encoder</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.encoder" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.decoder0">
+<span class="sig-name descname"><span class="pre">decoder0</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.decoder0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.decoder1">
+<span class="sig-name descname"><span class="pre">decoder1</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.decoder1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.decoder2">
+<span class="sig-name descname"><span class="pre">decoder2</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.decoder2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.decoder3">
+<span class="sig-name descname"><span class="pre">decoder3</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.decoder3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.regression_loss">
+<span class="sig-name descname"><span class="pre">regression_loss</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.regression_loss" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.offset_branches">
+<span class="sig-name descname"><span class="pre">offset_branches</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.offset_branches" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.branches_output">
+<span class="sig-name descname"><span class="pre">branches_output</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.branches_output" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.nuclei_binary_map_decoder">
+<span class="sig-name descname"><span class="pre">nuclei_binary_map_decoder</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.nuclei_binary_map_decoder" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.hv_map_decoder">
+<span class="sig-name descname"><span class="pre">hv_map_decoder</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.hv_map_decoder" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.nuclei_type_maps_decoder">
+<span class="sig-name descname"><span class="pre">nuclei_type_maps_decoder</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.nuclei_type_maps_decoder" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retrieve_tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.forward" title="Link to this definition"></a></dt>
+<dd><p>Forward pass</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – Images in BCHW style</p></li>
+<li><p><strong>retrieve_tokens</strong> (<em>bool</em><em>, </em><em>optional</em>) – If tokens of ViT should be returned as well. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Output for all branches:</dt><dd><ul class="simple">
+<li><p>tissue_types: Raw tissue type prediction. Shape: (B, num_tissue_classes)</p></li>
+<li><p>nuclei_binary_map: Raw binary cell segmentation predictions. Shape: (B, 2, H, W)</p></li>
+<li><p>hv_map: Binary HV Map predictions. Shape: (B, 2, H, W)</p></li>
+<li><p>nuclei_type_map: Raw binary nuclei type preditcions. Shape: (B, num_nuclei_classes, H, W)</p></li>
+<li><p>[Optional, if retrieve tokens]: tokens</p></li>
+<li><p>[Optional, if regression loss]:</p></li>
+<li><p>regression_map: Regression map for binary prediction. Shape: (B, 2, H, W)</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.create_upsampling_branch">
+<span class="sig-name descname"><span class="pre">create_upsampling_branch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.nn.Module</span></span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.create_upsampling_branch" title="Link to this definition"></a></dt>
+<dd><p>Create Upsampling branch</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>num_classes</strong> (<em>int</em>) – Number of output classes</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Upsampling path</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>nn.Module</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.calculate_instance_map">
+<span class="sig-name descname"><span class="pre">calculate_instance_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predictions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.OrderedDict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">magnification</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">20</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">40</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">40</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.calculate_instance_map" title="Link to this definition"></a></dt>
+<dd><p>Calculate Instance Map from network predictions (after Softmax output)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predictions</strong> (<em>dict</em>) – Dictionary with the following required keys:
+* nuclei_binary_map: Binary Nucleus Predictions. Shape: (B, 2, H, W)
+* nuclei_type_map: Type prediction of nuclei. Shape: (B, self.num_nuclei_classes, H, W)
+* hv_map: Horizontal-Vertical nuclei mapping. Shape: (B, 2, H, W)</p></li>
+<li><p><strong>magnification</strong> (<em>Literal</em><em>[</em><em>20</em><em>, </em><em>40</em><em>]</em><em>, </em><em>optional</em>) – Which magnification the data has. Defaults to 40.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>torch.Tensor: Instance map. Each Instance has own integer. Shape: (B, H, W)</p></li>
+<li><dl class="simple">
+<dt>List of dictionaries. Each List entry is one image. Each dict contains another dict for each detected nucleus.</dt><dd><p>For each nucleus, the following information are returned: “bbox”, “centroid”, “contour”, “type_prob”, “type”</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[torch.Tensor, List[dict]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.generate_instance_nuclei_map">
+<span class="sig-name descname"><span class="pre">generate_instance_nuclei_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance_maps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.generate_instance_nuclei_map" title="Link to this definition"></a></dt>
+<dd><p>Convert instance map (binary) to nuclei type instance map</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>instance_maps</strong> (<em>torch.Tensor</em>) – Binary instance map, each instance has own integer. Shape: (B, H, W)</p></li>
+<li><p><strong>type_preds</strong> (<em>List</em><em>[</em><em>dict</em><em>]</em>) – List (len=B) of dictionary with instance type information (compare post_process_hovernet function for more details)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nuclei type instance map. Shape: (B, self.num_nuclei_classes, H, W)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.freeze_encoder">
+<span class="sig-name descname"><span class="pre">freeze_encoder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.freeze_encoder" title="Link to this definition"></a></dt>
+<dd><p>Freeze encoder to not train it</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.CellViT.unfreeze_encoder">
+<span class="sig-name descname"><span class="pre">unfreeze_encoder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.CellViT.unfreeze_encoder" title="Link to this definition"></a></dt>
+<dd><p>Unfreeze encoder to train the whole model</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.DataclassHVStorage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">loki2.models.cell_segmentation.cellvit.</span></span><span class="sig-name descname"><span class="pre">DataclassHVStorage</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.DataclassHVStorage" title="Link to this definition"></a></dt>
+<dd><p>Storing UniSeg Prediction/GT objects for calculating loss, metrics etc. with HoverNet networks</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nuclei_binary_map</strong> (<em>torch.Tensor</em>) – Softmax output for binary nuclei branch. Shape: (batch_size, 2, H, W)</p></li>
+<li><p><strong>hv_map</strong> (<em>torch.Tensor</em>) – Logit output for HV-Map. Shape: (batch_size, 2, H, W)</p></li>
+<li><p><strong>nuclei_type_map</strong> (<em>torch.Tensor</em>) – Softmax output for nuclei type-prediction. Shape: (batch_size, num_tissue_classes, H, W)</p></li>
+<li><p><strong>tissue_types</strong> (<em>torch.Tensor</em>) – Logit tissue prediction output. Shape: (batch_size, num_tissue_classes)</p></li>
+<li><p><strong>instance_map</strong> (<em>torch.Tensor</em>) – Pixel-wise nuclear instance segmentation.
+Each instance has its own integer, starting from 1. Shape: (batch_size, H, W)</p></li>
+<li><p><strong>instance_types_nuclei</strong> – Pixel-wise nuclear instance segmentation predictions, for each nuclei type.
+Each instance has its own integer, starting from 1.
+Shape: (batch_size, num_nuclei_classes, H, W)</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – Batch size of the experiment</p></li>
+<li><p><strong>instance_types</strong> (<em>list</em><em>, </em><em>optional</em>) – Instance type prediction list.
+Each list entry stands for one image. Each list entry is a dictionary with the following structure:
+Main Key is the nuclei instance number (int), with a dict as value.
+For each instance, the dictionary contains the keys: bbox (bounding box), centroid (centroid coordinates),
+contour, type_prob (probability), type (nuclei type)
+Defaults to None.</p></li>
+<li><p><strong>regression_map</strong> (<em>torch.Tensor</em><em>, </em><em>optional</em>) – Regression map for binary prediction map.
+Shape: (batch_size, 2, H, W). Defaults to None.</p></li>
+<li><p><strong>regression_loss</strong> (<em>bool</em><em>, </em><em>optional</em>) – Indicating if regression map is present. Defaults to False.</p></li>
+<li><p><strong>h</strong> (<em>int</em><em>, </em><em>optional</em>) – Height of used input images. Defaults to 256.</p></li>
+<li><p><strong>w</strong> (<em>int</em><em>, </em><em>optional</em>) – Width of used input images. Defaults to 256.</p></li>
+<li><p><strong>num_tissue_classes</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of tissue classes in the data. Defaults to 19.</p></li>
+<li><p><strong>num_nuclei_classes</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of nuclei types in the data (including background). Defaults to 6.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.DataclassHVStorage.nuclei_binary_map">
+<span class="sig-name descname"><span class="pre">nuclei_binary_map</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">torch.Tensor</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.DataclassHVStorage.nuclei_binary_map" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.DataclassHVStorage.hv_map">
+<span class="sig-name descname"><span class="pre">hv_map</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">torch.Tensor</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.DataclassHVStorage.hv_map" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.DataclassHVStorage.tissue_types">
+<span class="sig-name descname"><span class="pre">tissue_types</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">torch.Tensor</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.DataclassHVStorage.tissue_types" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.DataclassHVStorage.nuclei_type_map">
+<span class="sig-name descname"><span class="pre">nuclei_type_map</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">torch.Tensor</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.DataclassHVStorage.nuclei_type_map" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.DataclassHVStorage.instance_map">
+<span class="sig-name descname"><span class="pre">instance_map</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">torch.Tensor</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.DataclassHVStorage.instance_map" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.DataclassHVStorage.instance_types_nuclei">
+<span class="sig-name descname"><span class="pre">instance_types_nuclei</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">torch.Tensor</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.DataclassHVStorage.instance_types_nuclei" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.DataclassHVStorage.batch_size">
+<span class="sig-name descname"><span class="pre">batch_size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.DataclassHVStorage.batch_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.DataclassHVStorage.instance_types">
+<span class="sig-name descname"><span class="pre">instance_types</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.DataclassHVStorage.instance_types" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.DataclassHVStorage.regression_map">
+<span class="sig-name descname"><span class="pre">regression_map</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">torch.Tensor</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.DataclassHVStorage.regression_map" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.DataclassHVStorage.regression_loss">
+<span class="sig-name descname"><span class="pre">regression_loss</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.DataclassHVStorage.regression_loss" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.DataclassHVStorage.h">
+<span class="sig-name descname"><span class="pre">h</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">256</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.DataclassHVStorage.h" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.DataclassHVStorage.w">
+<span class="sig-name descname"><span class="pre">w</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">256</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.DataclassHVStorage.w" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.DataclassHVStorage.num_tissue_classes">
+<span class="sig-name descname"><span class="pre">num_tissue_classes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">19</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.DataclassHVStorage.num_tissue_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.DataclassHVStorage.num_nuclei_classes">
+<span class="sig-name descname"><span class="pre">num_nuclei_classes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.DataclassHVStorage.num_nuclei_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.cellvit.DataclassHVStorage.get_dict">
+<span class="sig-name descname"><span class="pre">get_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#loki2.models.cell_segmentation.cellvit.DataclassHVStorage.get_dict" title="Link to this definition"></a></dt>
+<dd><p>Return dictionary of entries</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../backbones/index.html" class="btn btn-neutral float-left" title="loki2.models.cell_segmentation.backbones" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../loki2_sam/index.html" class="btn btn-neutral float-right" title="loki2.models.cell_segmentation.loki2_sam" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

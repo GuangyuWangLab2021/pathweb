@@ -1,0 +1,26 @@
+loki2.models.cell_segmentation
+==============================
+
+.. py:module:: loki2.models.cell_segmentation
+
+.. autoapi-nested-parse::
+
+   Cell segmentation models for Loki2.
+
+   This module provides various cell segmentation architectures including
+   CellViT, Loki2 variants, and post-processing utilities.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/models/cell_segmentation/backbones/index
+   /autoapi/loki2/models/cell_segmentation/cellvit/index
+   /autoapi/loki2/models/cell_segmentation/loki2_sam/index
+   /autoapi/loki2/models/cell_segmentation/postprocessing/index
+
+

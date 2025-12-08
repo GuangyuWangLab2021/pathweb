@@ -1,0 +1,58 @@
+loki2.models.classifier.linear_classifier
+=========================================
+
+.. py:module:: loki2.models.classifier.linear_classifier
+
+.. autoapi-nested-parse::
+
+   Cell Classification Module for Loki2.
+
+   This module provides a linear classifier for cell type classification
+   based on cell embeddings.
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:class:: LinearClassifier(embed_dim: int, hidden_dim: int = 100, num_classes: int = 2, drop_rate: float = 0)
+
+   Bases: :py:obj:`torch.nn.Module`
+
+
+   Linear Classifier for cell type classification.
+
+   A two-layer fully connected network with ReLU activation and optional
+   dropout for classifying cells based on their embeddings.
+
+   :param embed_dim: Embedding dimension (input dimension).
+   :param hidden_dim: Hidden layer dimension. Defaults to 100.
+   :param num_classes: Number of output classes. Defaults to 2.
+   :param drop_rate: Dropout rate. Defaults to 0.
+
+
+   .. py:attribute:: fc1
+
+
+   .. py:attribute:: fc2
+
+
+   .. py:attribute:: activation
+
+
+   .. py:attribute:: dropout
+
+
+   .. py:method:: forward(x: torch.Tensor) -> torch.Tensor
+
+      Forward pass through the classifier.
+
+      :param x: Input tensor of shape (batch_size, embed_dim).
+
+      :returns: Output logits of shape (batch_size, num_classes).
+      :rtype: torch.Tensor
+
+
+

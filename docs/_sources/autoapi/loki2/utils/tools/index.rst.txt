@@ -1,0 +1,100 @@
+loki2.utils.tools
+=================
+
+.. py:module:: loki2.utils.tools
+
+.. autoapi-nested-parse::
+
+   Utility functions for Loki2.
+
+   This module provides various helper functions for image processing,
+   dictionary manipulation, file handling, and other common operations
+   used throughout the Loki2 framework.
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:function:: get_bounding_box(img: numpy.ndarray) -> List[int]
+
+   Get bounding box coordinate information.
+
+   :param img: Binary or labeled image array.
+
+   :returns: Bounding box coordinates as [rmin, rmax, cmin, cmax].
+   :rtype: List[int]
+
+
+.. py:function:: remove_small_objects_cp(pred: cupy.ndarray, min_size: int = 64, connectivity: int = 1) -> cupy.ndarray
+
+   Remove connected components smaller than the specified size.
+
+   This function is taken from skimage.morphology.remove_small_objects, but the warning
+   is removed when a single label is provided. Uses CuPy for GPU acceleration.
+
+   :param pred: Input labelled array (CuPy array).
+   :param min_size: Minimum size of instance in output array. Defaults to 64.
+   :param connectivity: The connectivity defining the neighborhood of a pixel.
+                        Defaults to 1.
+
+   :returns: Output array with instances removed under min_size.
+   :rtype: cp.ndarray
+
+   :raises ValueError: If negative value labels are found in the input.
+
+
+.. py:function:: remove_small_objects(pred: numpy.ndarray, min_size: int = 64, connectivity: int = 1) -> numpy.ndarray
+
+   Remove connected components smaller than the specified size.
+
+   This function is taken from skimage.morphology.remove_small_objects, but the warning
+   is removed when a single label is provided. Uses NumPy/ SciPy for CPU processing.
+
+   :param pred: Input labelled array (NumPy array).
+   :param min_size: Minimum size of instance in output array. Defaults to 64.
+   :param connectivity: The connectivity defining the neighborhood of a pixel.
+                        Defaults to 1.
+
+   :returns: Output array with instances removed under min_size.
+   :rtype: np.ndarray
+
+   :raises ValueError: If negative value labels are found in the input.
+
+
+.. py:function:: unflatten_dict(d: dict, sep: str = '.') -> dict
+
+   Unflatten a flattened dictionary (create a nested dictionary).
+
+   :param d: Dictionary to be nested (with keys separated by separator).
+   :param sep: Separator used in flattened keys. Defaults to '.'.
+
+   :returns: Nested dictionary reconstructed from flattened keys.
+   :rtype: dict
+
+   .. rubric:: Example
+
+   >>> d = {'a.b': 1, 'a.c': 2}
+   >>> unflatten_dict(d)
+   {'a': {'b': 1, 'c': 2}}
+
+
+.. py:function:: remap_label(pred: numpy.ndarray, by_size: bool = False) -> numpy.ndarray
+
+   Rename all instance IDs so that IDs are contiguous (e.g., [0, 1, 2, 3]).
+
+   The ordering of instances (which one comes first) is preserved unless
+   by_size=True, in which case instances will be reordered so that larger
+   nuclei have smaller IDs.
+
+   :param pred: The 2D array containing instances where each instance is marked
+                by a non-zero integer.
+   :param by_size: If True, reorder instances so that larger nuclei have smaller
+                   IDs. Defaults to False.
+
+   :returns: Array with remapped contiguous instance IDs.
+   :rtype: np.ndarray
+
+

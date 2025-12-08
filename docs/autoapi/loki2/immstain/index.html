@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>loki2.immstain &mdash; Loki2  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="loki2.plot" href="../plot/index.html" />
+    <link rel="prev" title="loki2.encode_trans" href="../encode_trans/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Loki2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">loki2</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../index.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../detect_cells/index.html">loki2.detect_cells</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../encode_trans/index.html">loki2.encode_trans</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">loki2.immstain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../plot/index.html">loki2.plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/index.html">loki2.preprocess</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../psdtime/index.html">loki2.psdtime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../retrieve/index.html">loki2.retrieve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../retrieve_from_sc/index.html">loki2.retrieve_from_sc</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/Loki2_cell_type_inference.html">Loki2 Cell Type Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/Loki2_morph_retrieve.html">Loki2 Morphology-to-Transcriptome Retrieval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/Loki2_morph_psdtime_COAD.html">Loki2 Morphological Pseudotime Inference - Colon Cancer Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/Loki2_morph_psdtime_PRAD.html">Loki2 Morphological Pseudotime Inference - Prostate Cancer Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/Loki2_in_silico_immunostaining.html">Loki2 <em>in silico</em> immunostaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/Loki2_multiple_instance_learning.html">Loki2 Cell-level Multiple Instance Learning</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Loki2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">loki2</a></li>
+      <li class="breadcrumb-item active">loki2.immstain</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/loki2/immstain/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-loki2.immstain">
+<span id="loki2-immstain"></span><h1>loki2.immstain<a class="headerlink" href="#module-loki2.immstain" title="Link to this heading"></a></h1>
+<p>in silico immunostaing using LightGBM for HE-&gt;IF protein prediction.</p>
+<ol class="arabic simple">
+<li><p>Split global nuclei JSON + embeddings into per-patch files.</p></li>
+<li><p>Build patch datasets with optional watershed-based cell expansion.</p></li>
+<li><p>Train a LightGBM regressor and evaluate on held-out patches.</p></li>
+<li><p>Save per-cell predictions and make simple diagnostic plots.</p></li>
+</ol>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="loki2.immstain.TutorialConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">TutorialConfig</span></span><a class="headerlink" href="#loki2.immstain.TutorialConfig" title="Link to this definition"></a></dt>
+<dd><p>Configuration dataclass for LightGBM tutorial pipeline.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.immstain.TutorialConfig.he_ome_path">
+<span class="sig-name descname"><span class="pre">he_ome_path</span></span><a class="headerlink" href="#loki2.immstain.TutorialConfig.he_ome_path" title="Link to this definition"></a></dt>
+<dd><p>Path to H&amp;E OME-TIFF file.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.immstain.TutorialConfig.global_nuclei_json">
+<span class="sig-name descname"><span class="pre">global_nuclei_json</span></span><a class="headerlink" href="#loki2.immstain.TutorialConfig.global_nuclei_json" title="Link to this definition"></a></dt>
+<dd><p>Path to global nuclei JSON file.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.immstain.TutorialConfig.global_embedding_pt">
+<span class="sig-name descname"><span class="pre">global_embedding_pt</span></span><a class="headerlink" href="#loki2.immstain.TutorialConfig.global_embedding_pt" title="Link to this definition"></a></dt>
+<dd><p>Path to global cell embeddings .pt file.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.immstain.TutorialConfig.patch_json_dir">
+<span class="sig-name descname"><span class="pre">patch_json_dir</span></span><a class="headerlink" href="#loki2.immstain.TutorialConfig.patch_json_dir" title="Link to this definition"></a></dt>
+<dd><p>Directory to save patch-specific JSON files.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.immstain.TutorialConfig.patch_emb_dir">
+<span class="sig-name descname"><span class="pre">patch_emb_dir</span></span><a class="headerlink" href="#loki2.immstain.TutorialConfig.patch_emb_dir" title="Link to this definition"></a></dt>
+<dd><p>Directory to save patch-specific embedding files.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.immstain.TutorialConfig.if_patch_dir">
+<span class="sig-name descname"><span class="pre">if_patch_dir</span></span><a class="headerlink" href="#loki2.immstain.TutorialConfig.if_patch_dir" title="Link to this definition"></a></dt>
+<dd><p>Directory containing IF (immunofluorescence) patch images.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.immstain.TutorialConfig.if_patch_pattern">
+<span class="sig-name descname"><span class="pre">if_patch_pattern</span></span><a class="headerlink" href="#loki2.immstain.TutorialConfig.if_patch_pattern" title="Link to this definition"></a></dt>
+<dd><p>Pattern string for IF patch filenames with {row:03d}
+and {col:03d} placeholders. Defaults to
+“IF_sel_r{row:03d}_c{col:03d}.tif”.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.immstain.TutorialConfig.level0_idx">
+<span class="sig-name descname"><span class="pre">level0_idx</span></span><a class="headerlink" href="#loki2.immstain.TutorialConfig.level0_idx" title="Link to this definition"></a></dt>
+<dd><p>Index of level 0 in OME-TIFF pyramid. Defaults to 0.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.immstain.TutorialConfig.level1_idx">
+<span class="sig-name descname"><span class="pre">level1_idx</span></span><a class="headerlink" href="#loki2.immstain.TutorialConfig.level1_idx" title="Link to this definition"></a></dt>
+<dd><p>Index of level 1 in OME-TIFF pyramid. Defaults to 1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.immstain.TutorialConfig.patch_size">
+<span class="sig-name descname"><span class="pre">patch_size</span></span><a class="headerlink" href="#loki2.immstain.TutorialConfig.patch_size" title="Link to this definition"></a></dt>
+<dd><p>Size of patches in pixels. Defaults to 2048.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">he_ome_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></em><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">global_nuclei_json</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></em><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">global_embedding_pt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></em><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">patch_json_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></em><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">patch_emb_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></em><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">if_patch_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></em><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">if_patch_pattern</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'IF_sel_r{row:03d}_c{col:03d}.tif'</span></em><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">level0_idx</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">level1_idx</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#id8" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">patch_size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2048</span></em><a class="headerlink" href="#id9" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.timed_section">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">timed_section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Generator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.immstain.timed_section" title="Link to this definition"></a></dt>
+<dd><p>Context manager to time a code section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>label</strong> – Label string to display with the timing output.</p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>None</em> – Context manager yields control to the code block.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">timed_section</span><span class="p">(</span><span class="s2">&quot;Processing data&quot;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">process_data</span><span class="p">()</span>
+<span class="go">[timer] Processing data: 1.23s</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.parse_patch_index">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">parse_patch_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.immstain.parse_patch_index" title="Link to this definition"></a></dt>
+<dd><p>Parse row and column indices from patch filename.</p>
+<p>Extracts row and column indices from filenames matching pattern
+“r{row}_c{col}”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Filename or path containing patch indices.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing (row, col) indices.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[int, int]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the pattern cannot be found in the filename.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.normalize_patch_name">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">normalize_patch_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#loki2.immstain.normalize_patch_name" title="Link to this definition"></a></dt>
+<dd><p>Normalize patch name to standard format.</p>
+<p>Converts a patch filename to a normalized format “r{row:03d}_c{col:03d}”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Filename or path containing patch indices.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Normalized patch name string (e.g., “r001_c002”).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If patch indices cannot be parsed from the name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.compute_ssim_1d">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">compute_ssim_1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#loki2.immstain.compute_ssim_1d" title="Link to this definition"></a></dt>
+<dd><p>Compute 1D Structural Similarity Index (SSIM) between true and predicted values.</p>
+<p>Computes SSIM by reshaping 1D arrays into 2D and using structural similarity
+metric. Returns NaN if arrays are too small or have zero range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> – True values as 1D numpy array.</p></li>
+<li><p><strong>y_pred</strong> – Predicted values as 1D numpy array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>SSIM value between -1 and 1, or NaN if computation is not possible.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.compute_regression_metrics">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">compute_regression_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.immstain.compute_regression_metrics" title="Link to this definition"></a></dt>
+<dd><p>Compute regression metrics for model evaluation.</p>
+<p>Calculates multiple regression metrics including MSE, MAE, R², Pearson
+correlation, and SSIM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> – True target values as numpy array.</p></li>
+<li><p><strong>y_pred</strong> – Predicted values as numpy array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Dictionary containing:</dt><dd><ul class="simple">
+<li><p>mse: Mean squared error.</p></li>
+<li><p>mae: Mean absolute error.</p></li>
+<li><p>r2: R² score.</p></li>
+<li><p>pearson_r: Pearson correlation coefficient.</p></li>
+<li><p>ssim: Structural similarity index.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.setup_dummy_cellvit_modules">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">setup_dummy_cellvit_modules</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span></span><a class="headerlink" href="#loki2.immstain.setup_dummy_cellvit_modules" title="Link to this definition"></a></dt>
+<dd><p>Set up dummy modules for ‘cellvit’ and its submodules.</p>
+<p>This is required to simulate the module structure that the torch model
+expects when loading .pt files that reference cellvit classes. Creates
+dummy modules in sys.modules to handle unpickling of objects that reference
+cellvit.data.dataclass.cell_graph classes.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.load_global_embeddings">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">load_global_embeddings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pt_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#loki2.immstain.load_global_embeddings" title="Link to this definition"></a></dt>
+<dd><p>Load global cell embeddings from a .pt file.</p>
+<p>Sets up dummy cellvit modules and loads embeddings from a PyTorch .pt file.
+The loaded object must have an ‘x’ attribute containing the embeddings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pt_path</strong> – Path to the .pt file containing embeddings.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cell embeddings as a numpy array of shape (n_cells, emb_dim).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If the loaded object does not have an ‘x’ attribute.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.open_level_chw">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">open_level_chw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">zarr.Array</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.immstain.open_level_chw" title="Link to this definition"></a></dt>
+<dd><p>Open a specific pyramid level from an OME-TIFF file as CHW format.</p>
+<p>Opens the specified pyramid level from an OME-TIFF file and returns it
+as a zarr array in channel-first format (C, H, W).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Path to the OME-TIFF file.</p></li>
+<li><p><strong>level</strong> – Pyramid level index to open.</p></li>
+<li><p><strong>n_channels</strong> – Expected number of channels. Defaults to 3.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>arr: Zarr array in CHW format (channels, height, width).</p></li>
+<li><p>tf: TiffFile object (should be closed after use).</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[zarr.Array, Any]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If no zarr.Array is found or the array shape is unsupported.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.compute_level_scale">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">compute_level_scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#loki2.immstain.TutorialConfig" title="loki2.immstain.TutorialConfig"><span class="pre">TutorialConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.immstain.compute_level_scale" title="Link to this definition"></a></dt>
+<dd><p>Compute scale factors between pyramid levels and patch grid dimensions.</p>
+<p>Opens level0 and level1 from the OME-TIFF, computes scale factors, and
+calculates the number of patches needed to cover level1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cfg</strong> – TutorialConfig instance with OME-TIFF path and patch settings.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>H0: Height of level 0.</p></li>
+<li><p>W0: Width of level 0.</p></li>
+<li><p>H1: Height of level 1.</p></li>
+<li><p>W1: Width of level 1.</p></li>
+<li><p>scale_y: Vertical scale factor (H1 / H0).</p></li>
+<li><p>scale_x: Horizontal scale factor (W1 / W0).</p></li>
+<li><p>n_rows: Number of patch rows needed.</p></li>
+<li><p>n_cols: Number of patch columns needed.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[int, int, int, int, float, float, int, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.generate_patch_json_and_embeddings">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">generate_patch_json_and_embeddings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#loki2.immstain.TutorialConfig" title="loki2.immstain.TutorialConfig"><span class="pre">TutorialConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span></span><a class="headerlink" href="#loki2.immstain.generate_patch_json_and_embeddings" title="Link to this definition"></a></dt>
+<dd><p>Generate patch-specific JSON and embedding files from global data.</p>
+<p>Splits global nuclei JSON and embeddings into per-patch files based on
+the patch grid computed from level1. Each patch gets a JSON file with
+cell contours and an embedding .pt file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cfg</strong> – TutorialConfig instance with paths and settings.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If there’s a mismatch between JSON cells and embeddings.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.list_available_patches">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">list_available_patches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#loki2.immstain.TutorialConfig" title="loki2.immstain.TutorialConfig"><span class="pre">TutorialConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.immstain.list_available_patches" title="Link to this definition"></a></dt>
+<dd><p>List patch names that have both JSON and IF image files.</p>
+<p>Finds patches that have corresponding files in both patch_json_dir and
+if_patch_dir, matching the IF patch pattern.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cfg</strong> – TutorialConfig instance with directory paths and IF pattern.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of normalized patch names (e.g., [“r001_c002”, …]).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.expand_nuclei_watershed_multichannel">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">expand_nuclei_watershed_multichannel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nuclear_polys_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">if_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guide_channel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expansion_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extend_nuclei</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#loki2.immstain.expand_nuclei_watershed_multichannel" title="Link to this definition"></a></dt>
+<dd><p>Expand nuclear polygons using watershed segmentation.</p>
+<p>Creates a cell mask by expanding nuclear contours using watershed
+segmentation. Can use IF image intensity as a guide for expansion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nuclear_polys_list</strong> – List of nuclear polygon contours as numpy arrays.</p></li>
+<li><p><strong>image_shape</strong> – Shape of the image (height, width) or (height, width, channels).</p></li>
+<li><p><strong>if_img</strong> – Optional IF image to guide expansion. If provided, uses intensity
+to guide watershed. Defaults to None.</p></li>
+<li><p><strong>guide_channel</strong> – Optional channel index to use as guide. If None and if_img
+is provided, uses mean across channels. Defaults to None.</p></li>
+<li><p><strong>expansion_distance</strong> – Maximum distance for expansion in pixels. Defaults to 20.</p></li>
+<li><p><strong>extend_nuclei</strong> – Whether to extend nuclei using watershed. If False, returns
+only the nuclear mask. Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cell mask as uint16 array with cell IDs as pixel values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.calculate_protein_expression_single_channel">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">calculate_protein_expression_single_channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell_mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">if_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nuclear_polys_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.immstain.calculate_protein_expression_single_channel" title="Link to this definition"></a></dt>
+<dd><p>Calculate protein expression per cell for a single IF channel.</p>
+<p>Computes mean and total expression values for each cell in the cell mask
+from the specified IF channel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cell_mask</strong> – Cell mask array with cell IDs as pixel values.</p></li>
+<li><p><strong>if_img</strong> – IF image as HxWxC numpy array.</p></li>
+<li><p><strong>nuclear_polys_list</strong> – List of nuclear polygon contours.</p></li>
+<li><p><strong>channel_idx</strong> – Index of the IF channel to analyze.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>expr_mean: Array of mean expression values per cell.</p></li>
+<li><dl class="simple">
+<dt>cell_info: List of dictionaries with cell information:</dt><dd><ul>
+<li><p>cell_id: Cell ID in the mask.</p></li>
+<li><p>channel_idx: Channel index.</p></li>
+<li><p>mean: Mean expression value.</p></li>
+<li><p>total: Total expression value.</p></li>
+<li><p>cell_area: Cell area in pixels.</p></li>
+<li><p>nuclear_area: Nuclear area in pixels.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[np.ndarray, List[Dict[str, Union[int, float]]]]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If if_img is not 3D or channel_idx is out of range.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.load_predictions_for_patch">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">load_predictions_for_patch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prediction_json_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patch_base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.immstain.load_predictions_for_patch" title="Link to this definition"></a></dt>
+<dd><p>Load per-cell predictions for a specific patch and channel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prediction_json_path</strong> – Path to the prediction JSON file.</p></li>
+<li><p><strong>patch_base</strong> – Patch name in format “r{row:03d}_c{col:03d}”.</p></li>
+<li><p><strong>channel_idx</strong> – Channel index to filter predictions.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>local_idxs: Array of local cell indices.</p></li>
+<li><p>y_true: Array of true values.</p></li>
+<li><p>y_pred: Array of predicted values.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[np.ndarray, np.ndarray, np.ndarray]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If the prediction JSON file does not exist.</p></li>
+<li><p><strong>RuntimeError</strong> – If no prediction records are found for the patch and channel.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.load_patch_json_and_embeddings">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">load_patch_json_and_embeddings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#loki2.immstain.TutorialConfig" title="loki2.immstain.TutorialConfig"><span class="pre">TutorialConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.immstain.load_patch_json_and_embeddings" title="Link to this definition"></a></dt>
+<dd><p>Load patch JSON and embeddings for a specific patch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cfg</strong> – TutorialConfig instance with directory paths.</p></li>
+<li><p><strong>row</strong> – Patch row index.</p></li>
+<li><p><strong>col</strong> – Patch column index.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>nuclear_polys_list: List of nuclear polygon contours.</p></li>
+<li><p>emb: Cell embeddings as numpy array.</p></li>
+<li><p>json_path: Path to the loaded JSON file.</p></li>
+<li><p>emb_path: Path to the loaded embedding file.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[List[np.ndarray], np.ndarray, Path, Path]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If patch JSON or embedding file does not exist.</p></li>
+<li><p><strong>RuntimeError</strong> – If embedding format is unsupported.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.load_patch_if_image">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">load_patch_if_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#loki2.immstain.TutorialConfig" title="loki2.immstain.TutorialConfig"><span class="pre">TutorialConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.immstain.load_patch_if_image" title="Link to this definition"></a></dt>
+<dd><p>Load IF patch image for a specific patch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cfg</strong> – TutorialConfig instance with IF patch directory and pattern.</p></li>
+<li><p><strong>row</strong> – Patch row index.</p></li>
+<li><p><strong>col</strong> – Patch column index.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>if_img: IF image as numpy array (H, W, C). If input is 2D,
+adds a channel dimension.</p></li>
+<li><p>path: Path to the loaded IF image file.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[np.ndarray, Path]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>FileNotFoundError</strong> – If the IF patch file does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.build_dataset_for_patches">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">build_dataset_for_patches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#loki2.immstain.TutorialConfig" title="loki2.immstain.TutorialConfig"><span class="pre">TutorialConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">patch_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guide_channel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expansion_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extend_nuclei</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_enrich</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbor_k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.immstain.build_dataset_for_patches" title="Link to this definition"></a></dt>
+<dd><p>Build training dataset from multiple patches.</p>
+<p>Processes patches to extract embeddings and protein expression values,
+optionally enriching embeddings with spatial and morphological features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cfg</strong> – TutorialConfig instance with paths and settings.</p></li>
+<li><p><strong>patch_names</strong> – Iterable of patch names to process.</p></li>
+<li><p><strong>channel_idx</strong> – IF channel index to extract expression from.</p></li>
+<li><p><strong>guide_channel</strong> – Optional channel index for watershed expansion guide.
+Defaults to None.</p></li>
+<li><p><strong>expansion_distance</strong> – Maximum distance for watershed expansion. Defaults to 20.</p></li>
+<li><p><strong>extend_nuclei</strong> – Whether to extend nuclei using watershed. Defaults to True.</p></li>
+<li><p><strong>is_enrich</strong> – Whether to enrich embeddings with additional features.
+Defaults to False.</p></li>
+<li><p><strong>neighbor_k</strong> – Number of neighbors for enrichment features. Defaults to 5.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl>
+<dt>A tuple</dt><dd><p>containing:
+- X: Feature matrix of shape (n_cells, n_features).
+- y: Target values array of shape (n_cells,).
+- meta: List of metadata dictionaries with keys:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>patch: Patch name.</p></li>
+<li><p>local_cell_idx: Local cell index within patch.</p></li>
+<li><p>channel_idx: Channel index.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[np.ndarray, np.ndarray, List[Dict[str, Union[int, str]]]]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If patch_names is empty or no valid patches are found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.build_enrichment_features">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">build_enrichment_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nuclear_polys_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embeddings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_neighbors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#loki2.immstain.build_enrichment_features" title="Link to this definition"></a></dt>
+<dd><p>Build enrichment features from spatial and morphological information.</p>
+<p>Creates additional features including nuclear area, cell area, mean distance
+to neighbors, and mean neighbor embeddings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nuclear_polys_list</strong> – List of nuclear polygon contours.</p></li>
+<li><p><strong>cell_info</strong> – List of cell information dictionaries with keys:
+nuclear_area, cell_area.</p></li>
+<li><p><strong>embeddings</strong> – Cell embeddings array of shape (n_cells, emb_dim).</p></li>
+<li><p><strong>k_neighbors</strong> – Number of nearest neighbors to consider. Defaults to 5.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Enrichment features array of shape (n_cells, n_enrich_features).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.compute_neighbor_statistics">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">compute_neighbor_statistics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">centroids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embeddings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.immstain.compute_neighbor_statistics" title="Link to this definition"></a></dt>
+<dd><p>Compute neighbor statistics for enrichment features.</p>
+<p>Calculates mean distance to k nearest neighbors and mean embeddings of
+those neighbors for each cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>centroids</strong> – Cell centroids array of shape (n_cells, 2).</p></li>
+<li><p><strong>embeddings</strong> – Cell embeddings array of shape (n_cells, emb_dim).</p></li>
+<li><p><strong>k</strong> – Number of nearest neighbors to consider. Defaults to 5.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>mean_dist: Mean distance to k nearest neighbors per cell.</p></li>
+<li><p>mean_emb: Mean embeddings of k nearest neighbors per cell.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[np.ndarray, np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.l2_normalize_embeddings">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">l2_normalize_embeddings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#loki2.immstain.l2_normalize_embeddings" title="Link to this definition"></a></dt>
+<dd><p>L2-normalize embeddings row-wise.</p>
+<p>Normalizes each row (embedding vector) to unit length. Rows with zero
+norm are set to have norm 1.0 to avoid division by zero.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> – Embedding matrix of shape (n_samples, n_features).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>L2-normalized embedding matrix with same shape as input.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.train_lightgbm_regressor">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">train_lightgbm_regressor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">42</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_boost_round</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">early_stopping_rounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.immstain.train_lightgbm_regressor" title="Link to this definition"></a></dt>
+<dd><p>Train a LightGBM regressor model.</p>
+<p>Trains a LightGBM regression model with early stopping and returns the
+trained model, validation metrics, and predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_train</strong> – Training feature matrix of shape (n_train, n_features).</p></li>
+<li><p><strong>y_train</strong> – Training target values of shape (n_train,).</p></li>
+<li><p><strong>X_val</strong> – Validation feature matrix of shape (n_val, n_features).</p></li>
+<li><p><strong>y_val</strong> – Validation target values of shape (n_val,).</p></li>
+<li><p><strong>random_state</strong> – Random seed for reproducibility. Defaults to 42.</p></li>
+<li><p><strong>num_boost_round</strong> – Maximum number of boosting rounds. Defaults to 2000.</p></li>
+<li><p><strong>early_stopping_rounds</strong> – Number of rounds to wait for improvement before
+stopping. Defaults to 100.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>model: Trained LightGBM model.</p></li>
+<li><p>metrics: Dictionary of validation metrics (mse, mae, r2, etc.).</p></li>
+<li><p>y_val_pred: Validation predictions array.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[Any, Dict[str, float], np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.predict_with_model">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">predict_with_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#loki2.immstain.predict_with_model" title="Link to this definition"></a></dt>
+<dd><p>Make predictions using a trained LightGBM model.</p>
+<p>Uses the best iteration if available, otherwise uses all iterations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – Trained LightGBM model.</p></li>
+<li><p><strong>X</strong> – Feature matrix of shape (n_samples, n_features).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Predictions array of shape (n_samples,).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.save_prediction_json">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">save_prediction_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extend_nuclei</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enrich_embeddings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize_embeddings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span></span><a class="headerlink" href="#loki2.immstain.save_prediction_json" title="Link to this definition"></a></dt>
+<dd><p>Save per-cell predictions to a JSON file.</p>
+<p>Saves predictions along with metadata and metrics to a JSON file for
+later analysis and visualization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Path to save the JSON file.</p></li>
+<li><p><strong>channel_idx</strong> – IF channel index.</p></li>
+<li><p><strong>extend_nuclei</strong> – Whether nuclei were extended using watershed.</p></li>
+<li><p><strong>enrich_embeddings</strong> – Whether embeddings were enriched with features.</p></li>
+<li><p><strong>normalize_embeddings</strong> – Whether embeddings were normalized.</p></li>
+<li><p><strong>metrics</strong> – Dictionary of evaluation metrics.</p></li>
+<li><p><strong>meta</strong> – List of metadata dictionaries with patch and cell information.</p></li>
+<li><p><strong>y_true</strong> – True target values array.</p></li>
+<li><p><strong>y_pred</strong> – Predicted values array.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.plot_pred_vs_true">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">plot_pred_vs_true</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Pred</span> <span class="pre">vs</span> <span class="pre">True'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">matplotlib.pyplot.Figure</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">matplotlib.pyplot.Axes</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.immstain.plot_pred_vs_true" title="Link to this definition"></a></dt>
+<dd><p>Plot predicted vs true values scatter plot.</p>
+<p>Creates a scatter plot with a diagonal reference line for regression
+evaluation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> – True target values array.</p></li>
+<li><p><strong>y_pred</strong> – Predicted values array.</p></li>
+<li><p><strong>title</strong> – Plot title. Defaults to “Pred vs True”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Matplotlib figure and axes objects.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[plt.Figure, plt.Axes]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.plot_residual_hist">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">plot_residual_hist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Residuals'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">matplotlib.pyplot.Figure</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">matplotlib.pyplot.Axes</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.immstain.plot_residual_hist" title="Link to this definition"></a></dt>
+<dd><p>Plot histogram of prediction residuals.</p>
+<p>Creates a histogram of residuals (predicted - true) for regression
+evaluation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> – True target values array.</p></li>
+<li><p><strong>y_pred</strong> – Predicted values array.</p></li>
+<li><p><strong>title</strong> – Plot title. Defaults to “Residuals”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Matplotlib figure and axes objects.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[plt.Figure, plt.Axes]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.immstain.visualize_patch_prediction">
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">visualize_patch_prediction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#loki2.immstain.TutorialConfig" title="loki2.immstain.TutorialConfig"><span class="pre">TutorialConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">patch_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prediction_json_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guide_channel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expansion_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extend_nuclei</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions_are_log</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">matplotlib.pyplot.Figure</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.immstain.visualize_patch_prediction" title="Link to this definition"></a></dt>
+<dd><p>Plot measured vs predicted expression per cell on one patch.</p>
+<dl class="simple">
+<dt>Produces a 1x2 figure showing:</dt><dd><ul class="simple">
+<li><p>IF channel with measured expression filled per cell</p></li>
+<li><p>IF channel with predicted expression filled per cell</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cfg</strong> – TutorialConfig instance with paths and settings.</p></li>
+<li><p><strong>patch_name</strong> – Patch name in format “r{row:03d}_c{col:03d}”.</p></li>
+<li><p><strong>prediction_json_path</strong> – Path to prediction JSON file.</p></li>
+<li><p><strong>channel_idx</strong> – IF channel index to visualize.</p></li>
+<li><p><strong>guide_channel</strong> – Optional channel index for watershed expansion guide.
+Defaults to None.</p></li>
+<li><p><strong>expansion_distance</strong> – Maximum distance for watershed expansion. Defaults to 20.</p></li>
+<li><p><strong>extend_nuclei</strong> – Whether nuclei were extended using watershed. Defaults to True.</p></li>
+<li><p><strong>predictions_are_log</strong> – Whether predictions are stored as log1p values.
+If True, converts to raw scale. Defaults to True.</p></li>
+<li><p><strong>colorbar_range</strong> – Optional tuple (vmin, vmax) for colorbar range.
+If None, uses 2nd and 98th percentiles. Defaults to None.</p></li>
+<li><p><strong>save_path</strong> – Optional path to save the figure. Defaults to None.</p></li>
+<li><p><strong>show_boundaries</strong> – Whether to show cell boundaries. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Matplotlib figure and axes array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[plt.Figure, np.ndarray]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If channel_idx is out of range for the IF image.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../encode_trans/index.html" class="btn btn-neutral float-left" title="loki2.encode_trans" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../plot/index.html" class="btn btn-neutral float-right" title="loki2.plot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

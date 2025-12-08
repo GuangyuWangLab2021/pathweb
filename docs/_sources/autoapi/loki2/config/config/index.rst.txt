@@ -1,0 +1,27 @@
+loki2.config.config
+===================
+
+.. py:module:: loki2.config.config
+
+.. autoapi-nested-parse::
+
+   Configuration constants for Loki2.
+
+   This module defines color codes for logging and cell types, as well as
+   cell image sizes and other configuration constants used throughout the framework.
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:data:: COLOR_CODES_LOGGING
+
+.. py:data:: COLOR_DICT_CELLS
+   :type:  Dict[int, List[int]]
+
+.. py:data:: TYPE_NUCLEI_DICT_UNISEG
+   :type:  Dict[int, str]
+

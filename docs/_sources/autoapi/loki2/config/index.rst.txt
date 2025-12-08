@@ -1,0 +1,24 @@
+loki2.config
+============
+
+.. py:module:: loki2.config
+
+.. autoapi-nested-parse::
+
+   Configuration module for Loki2.
+
+   This module provides configuration constants, color mappings, and
+   template functions for Loki2 operations.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/config/config/index
+   /autoapi/loki2/config/templates/index
+
+

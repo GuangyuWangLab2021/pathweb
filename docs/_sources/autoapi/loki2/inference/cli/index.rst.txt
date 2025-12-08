@@ -1,0 +1,66 @@
+loki2.inference.cli
+===================
+
+.. py:module:: loki2.inference.cli
+
+.. autoapi-nested-parse::
+
+   CLI for Loki2 cell inference.
+
+   This module provides command-line argument parsers for WSI inference
+   operations, supporting both in-memory and disk-based processing.
+
+
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:function:: parse_wsi_properties(wsi_properties_str: str) -> Dict[str, Any]
+
+   Parse WSI properties from a JSON string.
+
+   :param wsi_properties_str: JSON string containing WSI metadata
+                              (e.g., slide_mpp, magnification).
+
+   :returns: Parsed WSI properties dictionary.
+   :rtype: Dict[str, Any]
+
+   :raises argparse.ArgumentTypeError: If the JSON string is invalid.
+
+
+.. py:class:: InferenceWSIParser
+
+   Parser for in-memory WSI inference calculation.
+
+   This parser handles command-line arguments for processing WSI files
+   using in-memory inference, supporting both single file and batch processing.
+
+
+   .. py:attribute:: parser
+
+
+   .. py:attribute:: requiredNamed
+
+
+   .. py:attribute:: group_classifier
+
+
+   .. py:attribute:: subparsers
+
+
+   .. py:attribute:: subparser_wsi
+
+
+   .. py:attribute:: subparser_dataset
+
+
+   .. py:attribute:: group
+
+
+   .. py:method:: parse_arguments() -> dict
+
+

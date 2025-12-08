@@ -1,0 +1,598 @@
+loki2.immstain
+==============
+
+.. py:module:: loki2.immstain
+
+.. autoapi-nested-parse::
+
+   in silico immunostaing using LightGBM for HE->IF protein prediction.
+
+   1) Split global nuclei JSON + embeddings into per-patch files.
+   2) Build patch datasets with optional watershed-based cell expansion.
+   3) Train a LightGBM regressor and evaluate on held-out patches.
+   4) Save per-cell predictions and make simple diagnostic plots.
+
+
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:class:: TutorialConfig
+
+   Configuration dataclass for LightGBM tutorial pipeline.
+
+   .. attribute:: he_ome_path
+
+      Path to H&E OME-TIFF file.
+
+   .. attribute:: global_nuclei_json
+
+      Path to global nuclei JSON file.
+
+   .. attribute:: global_embedding_pt
+
+      Path to global cell embeddings .pt file.
+
+   .. attribute:: patch_json_dir
+
+      Directory to save patch-specific JSON files.
+
+   .. attribute:: patch_emb_dir
+
+      Directory to save patch-specific embedding files.
+
+   .. attribute:: if_patch_dir
+
+      Directory containing IF (immunofluorescence) patch images.
+
+   .. attribute:: if_patch_pattern
+
+      Pattern string for IF patch filenames with {row:03d}
+      and {col:03d} placeholders. Defaults to
+      "IF_sel_r{row:03d}_c{col:03d}.tif".
+
+   .. attribute:: level0_idx
+
+      Index of level 0 in OME-TIFF pyramid. Defaults to 0.
+
+   .. attribute:: level1_idx
+
+      Index of level 1 in OME-TIFF pyramid. Defaults to 1.
+
+   .. attribute:: patch_size
+
+      Size of patches in pixels. Defaults to 2048.
+
+
+   .. py:attribute:: he_ome_path
+      :type:  pathlib.Path
+
+
+   .. py:attribute:: global_nuclei_json
+      :type:  pathlib.Path
+
+
+   .. py:attribute:: global_embedding_pt
+      :type:  pathlib.Path
+
+
+   .. py:attribute:: patch_json_dir
+      :type:  pathlib.Path
+
+
+   .. py:attribute:: patch_emb_dir
+      :type:  pathlib.Path
+
+
+   .. py:attribute:: if_patch_dir
+      :type:  pathlib.Path
+
+
+   .. py:attribute:: if_patch_pattern
+      :type:  str
+      :value: 'IF_sel_r{row:03d}_c{col:03d}.tif'
+
+
+
+   .. py:attribute:: level0_idx
+      :type:  int
+      :value: 0
+
+
+
+   .. py:attribute:: level1_idx
+      :type:  int
+      :value: 1
+
+
+
+   .. py:attribute:: patch_size
+      :type:  int
+      :value: 2048
+
+
+
+.. py:function:: timed_section(label: str) -> Generator[None, None, None]
+
+   Context manager to time a code section.
+
+   :param label: Label string to display with the timing output.
+
+   :Yields: *None* -- Context manager yields control to the code block.
+
+   .. rubric:: Example
+
+   >>> with timed_section("Processing data"):
+   ...     process_data()
+   [timer] Processing data: 1.23s
+
+
+.. py:function:: parse_patch_index(name: str) -> Tuple[int, int]
+
+   Parse row and column indices from patch filename.
+
+   Extracts row and column indices from filenames matching pattern
+   "r{row}_c{col}".
+
+   :param name: Filename or path containing patch indices.
+
+   :returns: A tuple containing (row, col) indices.
+   :rtype: Tuple[int, int]
+
+   :raises ValueError: If the pattern cannot be found in the filename.
+
+
+.. py:function:: normalize_patch_name(name: str) -> str
+
+   Normalize patch name to standard format.
+
+   Converts a patch filename to a normalized format "r{row:03d}_c{col:03d}".
+
+   :param name: Filename or path containing patch indices.
+
+   :returns: Normalized patch name string (e.g., "r001_c002").
+   :rtype: str
+
+   :raises ValueError: If patch indices cannot be parsed from the name.
+
+
+.. py:function:: compute_ssim_1d(y_true: numpy.ndarray, y_pred: numpy.ndarray) -> float
+
+   Compute 1D Structural Similarity Index (SSIM) between true and predicted values.
+
+   Computes SSIM by reshaping 1D arrays into 2D and using structural similarity
+   metric. Returns NaN if arrays are too small or have zero range.
+
+   :param y_true: True values as 1D numpy array.
+   :param y_pred: Predicted values as 1D numpy array.
+
+   :returns: SSIM value between -1 and 1, or NaN if computation is not possible.
+   :rtype: float
+
+
+.. py:function:: compute_regression_metrics(y_true: numpy.ndarray, y_pred: numpy.ndarray) -> Dict[str, float]
+
+   Compute regression metrics for model evaluation.
+
+   Calculates multiple regression metrics including MSE, MAE, R², Pearson
+   correlation, and SSIM.
+
+   :param y_true: True target values as numpy array.
+   :param y_pred: Predicted values as numpy array.
+
+   :returns:
+
+             Dictionary containing:
+                 - mse: Mean squared error.
+                 - mae: Mean absolute error.
+                 - r2: R² score.
+                 - pearson_r: Pearson correlation coefficient.
+                 - ssim: Structural similarity index.
+   :rtype: Dict[str, float]
+
+
+.. py:function:: setup_dummy_cellvit_modules() -> None
+
+   Set up dummy modules for 'cellvit' and its submodules.
+
+   This is required to simulate the module structure that the torch model
+   expects when loading .pt files that reference cellvit classes. Creates
+   dummy modules in sys.modules to handle unpickling of objects that reference
+   cellvit.data.dataclass.cell_graph classes.
+
+
+.. py:function:: load_global_embeddings(pt_path: pathlib.Path) -> numpy.ndarray
+
+   Load global cell embeddings from a .pt file.
+
+   Sets up dummy cellvit modules and loads embeddings from a PyTorch .pt file.
+   The loaded object must have an 'x' attribute containing the embeddings.
+
+   :param pt_path: Path to the .pt file containing embeddings.
+
+   :returns: Cell embeddings as a numpy array of shape (n_cells, emb_dim).
+   :rtype: np.ndarray
+
+   :raises RuntimeError: If the loaded object does not have an 'x' attribute.
+
+
+.. py:function:: open_level_chw(path: pathlib.Path, level: int, n_channels: int = 3) -> Tuple[zarr.Array, Any]
+
+   Open a specific pyramid level from an OME-TIFF file as CHW format.
+
+   Opens the specified pyramid level from an OME-TIFF file and returns it
+   as a zarr array in channel-first format (C, H, W).
+
+   :param path: Path to the OME-TIFF file.
+   :param level: Pyramid level index to open.
+   :param n_channels: Expected number of channels. Defaults to 3.
+
+   :returns:
+
+             A tuple containing:
+                 - arr: Zarr array in CHW format (channels, height, width).
+                 - tf: TiffFile object (should be closed after use).
+   :rtype: Tuple[zarr.Array, Any]
+
+   :raises RuntimeError: If no zarr.Array is found or the array shape is unsupported.
+
+
+.. py:function:: compute_level_scale(cfg: TutorialConfig) -> Tuple[int, int, int, int, float, float, int, int]
+
+   Compute scale factors between pyramid levels and patch grid dimensions.
+
+   Opens level0 and level1 from the OME-TIFF, computes scale factors, and
+   calculates the number of patches needed to cover level1.
+
+   :param cfg: TutorialConfig instance with OME-TIFF path and patch settings.
+
+   :returns:
+
+             A tuple containing:
+                 - H0: Height of level 0.
+                 - W0: Width of level 0.
+                 - H1: Height of level 1.
+                 - W1: Width of level 1.
+                 - scale_y: Vertical scale factor (H1 / H0).
+                 - scale_x: Horizontal scale factor (W1 / W0).
+                 - n_rows: Number of patch rows needed.
+                 - n_cols: Number of patch columns needed.
+   :rtype: Tuple[int, int, int, int, float, float, int, int]
+
+
+.. py:function:: generate_patch_json_and_embeddings(cfg: TutorialConfig) -> None
+
+   Generate patch-specific JSON and embedding files from global data.
+
+   Splits global nuclei JSON and embeddings into per-patch files based on
+   the patch grid computed from level1. Each patch gets a JSON file with
+   cell contours and an embedding .pt file.
+
+   :param cfg: TutorialConfig instance with paths and settings.
+
+   :raises RuntimeError: If there's a mismatch between JSON cells and embeddings.
+
+
+.. py:function:: list_available_patches(cfg: TutorialConfig) -> List[str]
+
+   List patch names that have both JSON and IF image files.
+
+   Finds patches that have corresponding files in both patch_json_dir and
+   if_patch_dir, matching the IF patch pattern.
+
+   :param cfg: TutorialConfig instance with directory paths and IF pattern.
+
+   :returns: List of normalized patch names (e.g., ["r001_c002", ...]).
+   :rtype: List[str]
+
+
+.. py:function:: expand_nuclei_watershed_multichannel(nuclear_polys_list: List[numpy.ndarray], image_shape: Tuple[int, Ellipsis], if_img: Optional[numpy.ndarray] = None, guide_channel: Optional[int] = None, expansion_distance: int = 20, extend_nuclei: bool = True) -> numpy.ndarray
+
+   Expand nuclear polygons using watershed segmentation.
+
+   Creates a cell mask by expanding nuclear contours using watershed
+   segmentation. Can use IF image intensity as a guide for expansion.
+
+   :param nuclear_polys_list: List of nuclear polygon contours as numpy arrays.
+   :param image_shape: Shape of the image (height, width) or (height, width, channels).
+   :param if_img: Optional IF image to guide expansion. If provided, uses intensity
+                  to guide watershed. Defaults to None.
+   :param guide_channel: Optional channel index to use as guide. If None and if_img
+                         is provided, uses mean across channels. Defaults to None.
+   :param expansion_distance: Maximum distance for expansion in pixels. Defaults to 20.
+   :param extend_nuclei: Whether to extend nuclei using watershed. If False, returns
+                         only the nuclear mask. Defaults to True.
+
+   :returns: Cell mask as uint16 array with cell IDs as pixel values.
+   :rtype: np.ndarray
+
+
+.. py:function:: calculate_protein_expression_single_channel(cell_mask: numpy.ndarray, if_img: numpy.ndarray, nuclear_polys_list: List[numpy.ndarray], channel_idx: int) -> Tuple[numpy.ndarray, List[Dict[str, Union[int, float]]]]
+
+   Calculate protein expression per cell for a single IF channel.
+
+   Computes mean and total expression values for each cell in the cell mask
+   from the specified IF channel.
+
+   :param cell_mask: Cell mask array with cell IDs as pixel values.
+   :param if_img: IF image as HxWxC numpy array.
+   :param nuclear_polys_list: List of nuclear polygon contours.
+   :param channel_idx: Index of the IF channel to analyze.
+
+   :returns:
+
+             A tuple containing:
+                 - expr_mean: Array of mean expression values per cell.
+                 - cell_info: List of dictionaries with cell information:
+                     - cell_id: Cell ID in the mask.
+                     - channel_idx: Channel index.
+                     - mean: Mean expression value.
+                     - total: Total expression value.
+                     - cell_area: Cell area in pixels.
+                     - nuclear_area: Nuclear area in pixels.
+   :rtype: Tuple[np.ndarray, List[Dict[str, Union[int, float]]]]
+
+   :raises ValueError: If if_img is not 3D or channel_idx is out of range.
+
+
+.. py:function:: load_predictions_for_patch(prediction_json_path: pathlib.Path, patch_base: str, channel_idx: int) -> Tuple[numpy.ndarray, numpy.ndarray, numpy.ndarray]
+
+   Load per-cell predictions for a specific patch and channel.
+
+   :param prediction_json_path: Path to the prediction JSON file.
+   :param patch_base: Patch name in format "r{row:03d}_c{col:03d}".
+   :param channel_idx: Channel index to filter predictions.
+
+   :returns:
+
+             A tuple containing:
+                 - local_idxs: Array of local cell indices.
+                 - y_true: Array of true values.
+                 - y_pred: Array of predicted values.
+   :rtype: Tuple[np.ndarray, np.ndarray, np.ndarray]
+
+   :raises FileNotFoundError: If the prediction JSON file does not exist.
+   :raises RuntimeError: If no prediction records are found for the patch and channel.
+
+
+.. py:function:: load_patch_json_and_embeddings(cfg: TutorialConfig, row: int, col: int) -> Tuple[List[numpy.ndarray], numpy.ndarray, pathlib.Path, pathlib.Path]
+
+   Load patch JSON and embeddings for a specific patch.
+
+   :param cfg: TutorialConfig instance with directory paths.
+   :param row: Patch row index.
+   :param col: Patch column index.
+
+   :returns:
+
+             A tuple containing:
+                 - nuclear_polys_list: List of nuclear polygon contours.
+                 - emb: Cell embeddings as numpy array.
+                 - json_path: Path to the loaded JSON file.
+                 - emb_path: Path to the loaded embedding file.
+   :rtype: Tuple[List[np.ndarray], np.ndarray, Path, Path]
+
+   :raises FileNotFoundError: If patch JSON or embedding file does not exist.
+   :raises RuntimeError: If embedding format is unsupported.
+
+
+.. py:function:: load_patch_if_image(cfg: TutorialConfig, row: int, col: int) -> Tuple[numpy.ndarray, pathlib.Path]
+
+   Load IF patch image for a specific patch.
+
+   :param cfg: TutorialConfig instance with IF patch directory and pattern.
+   :param row: Patch row index.
+   :param col: Patch column index.
+
+   :returns:
+
+             A tuple containing:
+                 - if_img: IF image as numpy array (H, W, C). If input is 2D,
+                   adds a channel dimension.
+                 - path: Path to the loaded IF image file.
+   :rtype: Tuple[np.ndarray, Path]
+
+   :raises FileNotFoundError: If the IF patch file does not exist.
+
+
+.. py:function:: build_dataset_for_patches(cfg: TutorialConfig, patch_names: Iterable[str], channel_idx: int, guide_channel: Optional[int] = None, expansion_distance: int = 20, extend_nuclei: bool = True, is_enrich: bool = False, neighbor_k: int = 5) -> Tuple[numpy.ndarray, numpy.ndarray, List[Dict[str, Union[int, str]]]]
+
+   Build training dataset from multiple patches.
+
+   Processes patches to extract embeddings and protein expression values,
+   optionally enriching embeddings with spatial and morphological features.
+
+   :param cfg: TutorialConfig instance with paths and settings.
+   :param patch_names: Iterable of patch names to process.
+   :param channel_idx: IF channel index to extract expression from.
+   :param guide_channel: Optional channel index for watershed expansion guide.
+                         Defaults to None.
+   :param expansion_distance: Maximum distance for watershed expansion. Defaults to 20.
+   :param extend_nuclei: Whether to extend nuclei using watershed. Defaults to True.
+   :param is_enrich: Whether to enrich embeddings with additional features.
+                     Defaults to False.
+   :param neighbor_k: Number of neighbors for enrichment features. Defaults to 5.
+
+   :returns:
+
+             A tuple
+                 containing:
+                 - X: Feature matrix of shape (n_cells, n_features).
+                 - y: Target values array of shape (n_cells,).
+                 - meta: List of metadata dictionaries with keys:
+                     - patch: Patch name.
+                     - local_cell_idx: Local cell index within patch.
+                     - channel_idx: Channel index.
+   :rtype: Tuple[np.ndarray, np.ndarray, List[Dict[str, Union[int, str]]]]
+
+   :raises RuntimeError: If patch_names is empty or no valid patches are found.
+
+
+.. py:function:: build_enrichment_features(nuclear_polys_list: List[numpy.ndarray], cell_info: List[Dict[str, Any]], embeddings: numpy.ndarray, k_neighbors: int = 5) -> numpy.ndarray
+
+   Build enrichment features from spatial and morphological information.
+
+   Creates additional features including nuclear area, cell area, mean distance
+   to neighbors, and mean neighbor embeddings.
+
+   :param nuclear_polys_list: List of nuclear polygon contours.
+   :param cell_info: List of cell information dictionaries with keys:
+                     nuclear_area, cell_area.
+   :param embeddings: Cell embeddings array of shape (n_cells, emb_dim).
+   :param k_neighbors: Number of nearest neighbors to consider. Defaults to 5.
+
+   :returns: Enrichment features array of shape (n_cells, n_enrich_features).
+   :rtype: np.ndarray
+
+
+.. py:function:: compute_neighbor_statistics(centroids: numpy.ndarray, embeddings: numpy.ndarray, k: int = 5) -> Tuple[numpy.ndarray, numpy.ndarray]
+
+   Compute neighbor statistics for enrichment features.
+
+   Calculates mean distance to k nearest neighbors and mean embeddings of
+   those neighbors for each cell.
+
+   :param centroids: Cell centroids array of shape (n_cells, 2).
+   :param embeddings: Cell embeddings array of shape (n_cells, emb_dim).
+   :param k: Number of nearest neighbors to consider. Defaults to 5.
+
+   :returns:
+
+             A tuple containing:
+                 - mean_dist: Mean distance to k nearest neighbors per cell.
+                 - mean_emb: Mean embeddings of k nearest neighbors per cell.
+   :rtype: Tuple[np.ndarray, np.ndarray]
+
+
+.. py:function:: l2_normalize_embeddings(X: numpy.ndarray) -> numpy.ndarray
+
+   L2-normalize embeddings row-wise.
+
+   Normalizes each row (embedding vector) to unit length. Rows with zero
+   norm are set to have norm 1.0 to avoid division by zero.
+
+   :param X: Embedding matrix of shape (n_samples, n_features).
+
+   :returns: L2-normalized embedding matrix with same shape as input.
+   :rtype: np.ndarray
+
+
+.. py:function:: train_lightgbm_regressor(X_train: numpy.ndarray, y_train: numpy.ndarray, X_val: numpy.ndarray, y_val: numpy.ndarray, random_state: int = 42, num_boost_round: int = 2000, early_stopping_rounds: int = 100) -> Tuple[Any, Dict[str, float], numpy.ndarray]
+
+   Train a LightGBM regressor model.
+
+   Trains a LightGBM regression model with early stopping and returns the
+   trained model, validation metrics, and predictions.
+
+   :param X_train: Training feature matrix of shape (n_train, n_features).
+   :param y_train: Training target values of shape (n_train,).
+   :param X_val: Validation feature matrix of shape (n_val, n_features).
+   :param y_val: Validation target values of shape (n_val,).
+   :param random_state: Random seed for reproducibility. Defaults to 42.
+   :param num_boost_round: Maximum number of boosting rounds. Defaults to 2000.
+   :param early_stopping_rounds: Number of rounds to wait for improvement before
+                                 stopping. Defaults to 100.
+
+   :returns:
+
+             A tuple containing:
+                 - model: Trained LightGBM model.
+                 - metrics: Dictionary of validation metrics (mse, mae, r2, etc.).
+                 - y_val_pred: Validation predictions array.
+   :rtype: Tuple[Any, Dict[str, float], np.ndarray]
+
+
+.. py:function:: predict_with_model(model: Any, X: numpy.ndarray) -> numpy.ndarray
+
+   Make predictions using a trained LightGBM model.
+
+   Uses the best iteration if available, otherwise uses all iterations.
+
+   :param model: Trained LightGBM model.
+   :param X: Feature matrix of shape (n_samples, n_features).
+
+   :returns: Predictions array of shape (n_samples,).
+   :rtype: np.ndarray
+
+
+.. py:function:: save_prediction_json(path: pathlib.Path, channel_idx: int, extend_nuclei: bool, enrich_embeddings: bool, normalize_embeddings: bool, metrics: Dict[str, Any], meta: List[Dict[str, Any]], y_true: numpy.ndarray, y_pred: numpy.ndarray) -> None
+
+   Save per-cell predictions to a JSON file.
+
+   Saves predictions along with metadata and metrics to a JSON file for
+   later analysis and visualization.
+
+   :param path: Path to save the JSON file.
+   :param channel_idx: IF channel index.
+   :param extend_nuclei: Whether nuclei were extended using watershed.
+   :param enrich_embeddings: Whether embeddings were enriched with features.
+   :param normalize_embeddings: Whether embeddings were normalized.
+   :param metrics: Dictionary of evaluation metrics.
+   :param meta: List of metadata dictionaries with patch and cell information.
+   :param y_true: True target values array.
+   :param y_pred: Predicted values array.
+
+
+.. py:function:: plot_pred_vs_true(y_true: numpy.ndarray, y_pred: numpy.ndarray, title: str = 'Pred vs True') -> Tuple[matplotlib.pyplot.Figure, matplotlib.pyplot.Axes]
+
+   Plot predicted vs true values scatter plot.
+
+   Creates a scatter plot with a diagonal reference line for regression
+   evaluation.
+
+   :param y_true: True target values array.
+   :param y_pred: Predicted values array.
+   :param title: Plot title. Defaults to "Pred vs True".
+
+   :returns: Matplotlib figure and axes objects.
+   :rtype: Tuple[plt.Figure, plt.Axes]
+
+
+.. py:function:: plot_residual_hist(y_true: numpy.ndarray, y_pred: numpy.ndarray, title: str = 'Residuals') -> Tuple[matplotlib.pyplot.Figure, matplotlib.pyplot.Axes]
+
+   Plot histogram of prediction residuals.
+
+   Creates a histogram of residuals (predicted - true) for regression
+   evaluation.
+
+   :param y_true: True target values array.
+   :param y_pred: Predicted values array.
+   :param title: Plot title. Defaults to "Residuals".
+
+   :returns: Matplotlib figure and axes objects.
+   :rtype: Tuple[plt.Figure, plt.Axes]
+
+
+.. py:function:: visualize_patch_prediction(cfg: TutorialConfig, patch_name: str, prediction_json_path: pathlib.Path, channel_idx: int, guide_channel: Optional[int] = None, expansion_distance: int = 20, extend_nuclei: bool = True, predictions_are_log: bool = True, colorbar_range: Optional[Tuple[float, float]] = None, save_path: Optional[pathlib.Path] = None, show_boundaries: bool = False) -> Tuple[matplotlib.pyplot.Figure, numpy.ndarray]
+
+   Plot measured vs predicted expression per cell on one patch.
+
+   Produces a 1x2 figure showing:
+     - IF channel with measured expression filled per cell
+     - IF channel with predicted expression filled per cell
+
+   :param cfg: TutorialConfig instance with paths and settings.
+   :param patch_name: Patch name in format "r{row:03d}_c{col:03d}".
+   :param prediction_json_path: Path to prediction JSON file.
+   :param channel_idx: IF channel index to visualize.
+   :param guide_channel: Optional channel index for watershed expansion guide.
+                         Defaults to None.
+   :param expansion_distance: Maximum distance for watershed expansion. Defaults to 20.
+   :param extend_nuclei: Whether nuclei were extended using watershed. Defaults to True.
+   :param predictions_are_log: Whether predictions are stored as log1p values.
+                               If True, converts to raw scale. Defaults to True.
+   :param colorbar_range: Optional tuple (vmin, vmax) for colorbar range.
+                          If None, uses 2nd and 98th percentiles. Defaults to None.
+   :param save_path: Optional path to save the figure. Defaults to None.
+   :param show_boundaries: Whether to show cell boundaries. Defaults to False.
+
+   :returns: Matplotlib figure and axes array.
+   :rtype: Tuple[plt.Figure, np.ndarray]
+
+   :raises ValueError: If channel_idx is out of range for the IF image.
+
+

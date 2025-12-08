@@ -1,0 +1,227 @@
+loki2.data.dataclass.wsi
+========================
+
+.. py:module:: loki2.data.dataclass.wsi
+
+.. autoapi-nested-parse::
+
+   WSI Model for Loki2.
+
+   This module defines data structures for working with Whole Slide Images (WSI),
+   including metadata handling, patch processing, and dataset classes.
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:class:: WSIMetadata
+
+   Metadata container for Whole Slide Image information.
+
+   :param name: Name identifier for the WSI.
+   :param slide_path: Full path to the WSI file.
+   :param metadata: Dictionary containing additional metadata about the WSI.
+
+
+   .. py:attribute:: name
+      :type:  str
+
+
+   .. py:attribute:: slide_path
+      :type:  Union[str, pathlib.Path]
+
+
+   .. py:attribute:: metadata
+      :type:  Dict[str, Any]
+
+
+.. py:class:: WSI
+
+   WSI object
+
+   :param name: WSI name
+   :type name: str
+   :param patient: Patient name
+   :type patient: str
+   :param slide_path: Full path to the WSI file.
+   :type slide_path: Union[str, Path]
+   :param patched_slide_path: Full path to preprocessed WSI files (patches). Defaults to None.
+   :type patched_slide_path: Union[str, Path], optional
+   :param embedding_name: Defaults to None.
+   :type embedding_name: Union[str, Path], optional
+   :param label: Label of the WSI. Defaults to None.
+   :type label: Union[str, int, float, np.ndarray], optional
+   :param logger: Logger module for logging information. Defaults to None.
+   :type logger: logging.logger, optional
+
+
+   .. py:attribute:: name
+      :type:  str
+
+
+   .. py:attribute:: patient
+      :type:  str
+
+
+   .. py:attribute:: slide_path
+      :type:  Union[str, pathlib.Path]
+
+
+   .. py:attribute:: patched_slide_path
+      :type:  Optional[Union[str, pathlib.Path]]
+      :value: None
+
+
+
+   .. py:attribute:: embedding_name
+      :type:  Optional[Union[str, pathlib.Path]]
+      :value: None
+
+
+
+   .. py:attribute:: label
+      :type:  Optional[Union[str, int, float, numpy.ndarray]]
+      :value: None
+
+
+
+   .. py:attribute:: logger
+      :type:  Optional[logging.Logger]
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+      :type:  Dict[str, Any]
+
+
+   .. py:attribute:: all_patch_metadata
+      :type:  List[Dict[str, Any]]
+
+
+   .. py:attribute:: patches_list
+      :type:  List[str]
+
+
+   .. py:attribute:: patch_transform
+      :type:  Optional[Callable]
+
+
+   .. py:method:: load_patch_metadata(patch_name: str) -> Dict[str, Any]
+
+      Return the metadata of a patch with given name.
+
+      This function assumes that metadata path is a subpath of the patches
+      dataset path. The patch name should include the patch suffix
+      (e.g., wsi_1_1.png).
+
+      :param patch_name: Name of patch including suffix.
+
+      :returns: Patch metadata dictionary.
+      :rtype: Dict[str, Any]
+
+
+
+   .. py:method:: set_patch_transform(transform: Callable) -> None
+
+      Set the transformation function to process a patch.
+
+      :param transform: Transformation function to apply to patches.
+
+
+
+   .. py:method:: process_patch_image(patch_name: str, transform: Optional[Callable] = None) -> Tuple[torch.Tensor, Dict[str, Any]]
+
+      Process one patch: Load from disk, apply transformation if needed.
+
+      ToTensor is applied automatically. The patch name should include
+      the patch suffix (e.g., wsi_1_1.png).
+
+      :param patch_name: Name of patch to load, including patch suffix.
+      :param transform: Optional patch transformation function.
+
+      :returns:     - torch.Tensor: Patch as torch tensor with shape (3, H, W)
+                    - Dict[str, Any]: Patch metadata as dictionary
+      :rtype: Tuple[torch.Tensor, Dict[str, Any]]
+
+
+
+   .. py:method:: get_number_patches() -> int
+
+      Return the number of patches for this WSI
+
+      :returns: number of patches
+      :rtype: int
+
+
+
+   .. py:method:: get_patches(transform: Optional[Callable] = None) -> Tuple[torch.Tensor, List[Dict[str, Any]]]
+
+      Get all patches for one image.
+
+      :param transform: Optional patch transformation function.
+
+      :returns:
+
+                    - torch.Tensor: Patched images with shape
+                      (num_patches, 3, height, width)
+                    - List[Dict[str, Any]]: List of metadata dictionaries
+                      for each patch
+      :rtype: Tuple[torch.Tensor, List[Dict[str, Any]]]
+
+
+
+   .. py:method:: load_embedding() -> torch.Tensor
+
+      Load embedding from subfolder patched_slide_path/embedding/
+
+      :raises FileNotFoundError: If embedding is not given
+
+      :returns: WSI embedding
+      :rtype: torch.Tensor
+
+
+
+.. py:class:: PatchedWSIInference(wsi_object: WSI, transform: Callable)
+
+   Bases: :py:obj:`torch.utils.data.Dataset`
+
+
+   Inference Dataset for calculating embeddings of a single WSI.
+
+   This dataset is wrapped around a WSI object and provides access to
+   patches for inference processing.
+
+   :param wsi_object: WSI object containing patch information.
+   :param transform: Inference transformations to apply to patches.
+
+
+   .. py:attribute:: transform
+
+
+   .. py:attribute:: wsi_object
+
+
+   .. py:method:: collate_batch(batch: List[Tuple[torch.Tensor, Dict[str, Any]]]) -> Tuple[torch.Tensor, List[Dict[str, Any]]]
+      :staticmethod:
+
+
+      Create a custom batch from a list of patch tuples.
+
+      Needed to unpack list of tuples with dictionaries and tensors.
+
+      :param batch: Input batch consisting of a list of tuples
+                    (patch, patch-metadata).
+
+      :returns:
+
+                    - torch.Tensor: Stacked patches with shape
+                      (batch_size, 3, patch_size, patch_size)
+                    - List[Dict[str, Any]]: List of metadata dictionaries
+      :rtype: Tuple[torch.Tensor, List[Dict[str, Any]]]
+
+
+

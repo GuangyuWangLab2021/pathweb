@@ -1,0 +1,49 @@
+loki2.config.templates
+======================
+
+.. py:module:: loki2.config.templates
+
+.. autoapi-nested-parse::
+
+   GeoJSON templates for Loki2.
+
+   This module provides template functions for creating GeoJSON objects
+   for points and segmentation polygons.
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:function:: get_template_point() -> Dict[str, Any]
+
+   Return a template for a Point GeoJSON object.
+
+   :returns:
+
+             Template dictionary for a Point GeoJSON feature
+                 with structure:
+                 - type: "Feature"
+                 - id: "TODO" (placeholder)
+                 - geometry: MultiPoint with empty coordinates
+                 - properties: objectType and classification placeholders
+   :rtype: Dict[str, Any]
+
+
+.. py:function:: get_template_segmentation() -> Dict[str, Any]
+
+   Return a template for a MultiPolygon GeoJSON object.
+
+   :returns:
+
+             Template dictionary for a MultiPolygon GeoJSON feature
+                 with structure:
+                 - type: "Feature"
+                 - id: "TODO" (placeholder)
+                 - geometry: MultiPolygon with empty coordinates
+                 - properties: objectType and classification placeholders
+   :rtype: Dict[str, Any]
+
+

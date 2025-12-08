@@ -1,0 +1,23 @@
+loki2.data
+==========
+
+.. py:module:: loki2.data
+
+.. autoapi-nested-parse::
+
+   Data structures and utilities for Loki2.
+
+   This module provides data classes and utilities for working with
+   whole slide images, cell graphs, and related data structures.
+
+
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/data/dataclass/index
+
+

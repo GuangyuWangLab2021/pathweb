@@ -1,0 +1,23 @@
+loki2.models.classifier
+=======================
+
+.. py:module:: loki2.models.classifier
+
+.. autoapi-nested-parse::
+
+   Classifier models for Loki2.
+
+   This module provides classification models for cell type prediction
+   based on cell embeddings.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/models/classifier/linear_classifier/index
+
+

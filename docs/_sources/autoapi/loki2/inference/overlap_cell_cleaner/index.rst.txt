@@ -1,0 +1,73 @@
+loki2.inference.overlap_cell_cleaner
+====================================
+
+.. py:module:: loki2.inference.overlap_cell_cleaner
+
+.. autoapi-nested-parse::
+
+   Clean overlapping cells from a list of detected cells.
+
+   This module provides functionality for post-processing detected cells
+   to remove duplicates and overlaps that occur at patch boundaries.
+
+
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:class:: OverlapCellCleaner(cell_list: List[Dict[str, Any]], logger: logging.Logger)
+
+   Post-processor for removing overlapping cells from detection results.
+
+   This class handles cleaning of cells detected at patch boundaries,
+   removing duplicates and merging overlapping detections.
+
+
+   .. py:attribute:: logger
+
+
+   .. py:attribute:: cell_df
+
+
+   .. py:attribute:: mid_cells
+
+
+   .. py:attribute:: cell_df_margin
+
+
+   .. py:method:: clean_detected_cells() -> pandas.DataFrame
+
+      Main Post-Processing coordinator, entry point
+
+      :returns: DataFrame with post-processed and cleaned cells
+      :rtype: pd.DataFrame
+
+
+
+   .. py:method:: convert_coordinates_vectorized(cell_df: pandas.DataFrame) -> pandas.DataFrame
+
+      Convert the coordinates of the cells to a string representation for fast querying.
+
+      :param cell_df: DataFrame with cells containing patch_coordinates.
+
+      :returns: DataFrame with converted coordinates as strings.
+      :rtype: pd.DataFrame
+
+
+
+.. py:function:: convert_coordinates(row: pandas.Series) -> pandas.Series
+
+   Convert a row from x,y type to one string representation of the patch position for fast querying
+   Repr: x_y
+
+   :param row: Row to be processed
+   :type row: pd.Series
+
+   :returns: Processed Row
+   :rtype: pd.Series
+
+

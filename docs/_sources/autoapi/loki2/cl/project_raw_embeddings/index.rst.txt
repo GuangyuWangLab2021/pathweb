@@ -1,0 +1,90 @@
+loki2.cl.project_raw_embeddings
+===============================
+
+.. py:module:: loki2.cl.project_raw_embeddings
+
+.. autoapi-nested-parse::
+
+   Project raw morphology/transcription embeddings using a ProjectionCL checkpoint.
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:function:: parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace
+
+.. py:function:: load_morph_embeddings(path: pathlib.Path) -> Tuple[torch.Tensor, Dict[str, numpy.ndarray]]
+
+   Load morphology embeddings from a PyTorch file.
+
+   :param path: Path to the morphology embeddings file (.pt).
+
+   :returns:     - embeddings: Morphology embeddings tensor
+                 - meta: Dictionary containing row_index, cell_id, and optionally positions
+   :rtype: Tuple[torch.Tensor, Dict[str, np.ndarray]]
+
+
+.. py:function:: load_trans_embeddings(path: pathlib.Path) -> Tuple[torch.Tensor, Dict[str, numpy.ndarray]]
+
+   Load transcription embeddings from a PyTorch file.
+
+   :param path: Path to the transcription embeddings file (.pt).
+
+   :returns:     - embeddings: Transcription embeddings tensor
+                 - meta: Dictionary containing cell_id array
+   :rtype: Tuple[torch.Tensor, Dict[str, np.ndarray]]
+
+   :raises KeyError: If the file doesn't contain 'embedding' and 'cell_id' keys.
+
+
+.. py:function:: load_model(ckpt_path: pathlib.Path, device: torch.device) -> model_cl.ProjectionCL
+
+   Load a ProjectionCL model from a checkpoint file.
+
+   :param ckpt_path: Path to the model checkpoint file (.pt).
+   :param device: Device to load the model on.
+
+   :returns: Loaded and initialized model in eval mode.
+   :rtype: ProjectionCL
+
+   :raises RuntimeError: If the checkpoint is missing model weights.
+
+
+.. py:function:: project_batches(tensor: torch.Tensor, projector: Callable[[torch.Tensor], torch.Tensor], batch_size: int, device: torch.device, normalized: bool) -> Tuple[numpy.ndarray, Optional[numpy.ndarray]]
+
+   Project embeddings in batches using a projection function.
+
+   :param tensor: Input embeddings tensor to project.
+   :param projector: Projection function (e.g., model.encode_a or model.encode_b).
+   :param batch_size: Batch size for processing.
+   :param device: Device to run projections on.
+   :param normalized: Whether to also return L2-normalized projections.
+
+   :returns:     - projections: Projected embeddings as NumPy array
+                 - normalized_projections: L2-normalized projections if normalized=True,
+                   otherwise None
+   :rtype: Tuple[np.ndarray, Optional[np.ndarray]]
+
+
+.. py:function:: save_output(directory: pathlib.Path, base: str, tag: str, payload: Dict[str, numpy.ndarray]) -> None
+
+   Save projected embeddings to an NPZ file.
+
+   :param directory: Output directory for the NPZ file.
+   :param base: Base filename (e.g., "morph_proj" or "trans_proj").
+   :param tag: Optional tag to append to filename.
+   :param payload: Dictionary of arrays to save in the NPZ file.
+
+
+.. py:function:: main(argv: Optional[Sequence[str]] = None) -> None
+
+   Main entry point for projecting raw embeddings.
+
+   :param argv: Optional command-line arguments. If None, uses sys.argv.
+
+   :raises ValueError: If required paths are missing for the selected modality.
+
+

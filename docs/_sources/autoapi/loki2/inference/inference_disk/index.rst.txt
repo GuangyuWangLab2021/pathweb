@@ -1,0 +1,351 @@
+loki2.inference.inference_disk
+==============================
+
+.. py:module:: loki2.inference.inference_disk
+
+.. autoapi-nested-parse::
+
+   Loki2 Inference Method for Patch-Wise Inference on a patches test set/Whole WSI.
+
+   Detect Cells with our Networks.
+   Patches dataset needs to have the following requirements:
+   Patch-Size must be 1024, with overlap of 64.
+
+
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:data:: current_dir
+
+.. py:data:: project_root
+
+.. py:data:: project_root
+
+.. py:class:: CellViTInference(model_path: Union[pathlib.Path, str], gpu: int, classifier_path: Optional[Union[pathlib.Path, str]] = None, binary: bool = False, batch_size: int = 8, patch_size: int = 1024, overlap: int = 64, geojson: bool = False, graph: bool = False, compression: bool = False, subdir_name: Optional[str] = None, enforce_mixed_precision: bool = False)
+
+   Cell Segmentation Inference class.
+
+   After setup, a WSI can be processed by calling process_wsi method
+
+   :param model_path: Path to model checkpoint
+   :type model_path: Union[Path, str]
+   :param gpu: CUDA GPU id to use
+   :type gpu: int
+   :param classifier: Path to a classifier (.pth) to exchange to UniSeg classification results with new scheme.
+                      Defaults to None.
+   :type classifier: Union[Path, str], optional
+   :param binary: If just a binary detection/segmentation should be performed.
+                  Cannot be used with classifier. Defaults to False.
+   :type binary: bool, optional
+   :param batch_size: Batch-size for inference. Defaults to 8.
+   :type batch_size: int, optional
+   :param patch_size: Patch-Size. Defaults to 1024.
+   :type patch_size: int, optional
+   :param overlap: Overlap between patches. Defaults to 64.
+   :type overlap: int, optional
+   :param geojson: If a geojson export should be performed. Defaults to False.
+   :type geojson: bool, optional
+   :param graph: If a graph export should be performed. Defaults to False.
+   :type graph: bool, optional
+   :param compression: If a snappy compression should be performed. Defaults to False.
+   :type compression: bool, optional
+   :param subdir_name: If provided, a subdir with the given name is created in the cell_detection folder.
+                       Helpful if you need to store different cell detection results next to each other. Defaults to None (no subdir).
+   :type subdir_name: str, optional
+   :param enforce_mixed_precision: Using PyTorch autocasting with dtype float16 to speed up inference. Also good for trained amp networks.
+                                   Can be used to enforce amp inference even for networks trained without amp. Otherwise, the network setting is used. Defaults to False.
+   :type enforce_mixed_precision: bool, optional
+
+   .. attribute:: logger
+
+      Logger for logging events.
+
+      :type: Logger
+
+   .. attribute:: model
+
+      The model used for inference.
+
+      :type: nn.Module
+
+   .. attribute:: run_conf
+
+      Configuration for the run.
+
+      :type: dict
+
+   .. attribute:: inference_transforms
+
+      Transforms applied during inference.
+
+      :type: Callable
+
+   .. attribute:: mixed_precision
+
+      Flag indicating if mixed precision is used.
+
+      :type: bool
+
+   .. attribute:: num_workers
+
+      Number of workers used for data loading.
+
+      :type: int
+
+   .. attribute:: model_path
+
+      Path to the model checkpoint.
+
+      :type: Path
+
+   .. attribute:: device
+
+      Device used for inference.
+
+      :type: str
+
+   .. attribute:: batch_size
+
+      Batch size used for inference.
+
+      :type: int
+
+   .. attribute:: patch_size
+
+      Size of the patches used for inference.
+
+      :type: int
+
+   .. attribute:: overlap
+
+      Overlap between patches.
+
+      :type: int
+
+   .. attribute:: geojson
+
+      Flag indicating if a geojson export should be performed.
+
+      :type: bool
+
+   .. attribute:: graph
+
+      Flag indicating if a graph export should be performed.
+
+      :type: bool
+
+   .. attribute:: compression
+
+      If a snappy compression should be performed. Defaults to False
+
+      :type: bool
+
+   .. attribute:: subdir_name
+
+      Name of the subdirectory for storing cell detection results.
+
+      :type: str
+
+   .. attribute:: label_map
+
+      Label map for cell types
+
+      :type: dict
+
+   .. attribute:: classifier
+
+      Classifier module if provided. Default is Npone
+
+      :type: nn.Module
+
+   .. attribute:: binary
+
+      If just a binary detection/segmentation should be performed. Defaults to False.
+
+      :type: bool
+
+   .. attribute:: model_arch
+
+      Model architecture as str
+
+      :type: str
+
+   .. attribute:: ray_actors
+
+      Number of ray actors
+
+      :type: int
+
+   .. attribute:: num_workers
+
+      Number of workers for DataLoader
+
+      :type: int
+
+   .. method:: _instantiate_logger() -> None
+
+      
+      Instantiate logger
+
+   .. method:: _load_model() -> None
+
+      
+      Load model and checkpoint and load the state_dict
+
+   .. method:: _load_classifier(classifier_path
+
+      Union[Path, str]) -> None:
+      Load the classifier if provided
+
+   .. method:: _get_model(model_type
+
+      Literal["CellViT", "CellViTSAM"]) -> Union[CellViT, CellViTSAM]:
+      Return the trained model for inference
+
+   .. method:: _load_inference_transforms() -> None
+
+      
+      Load the inference transformations from the run_configuration
+
+   .. method:: _setup_amp(enforce_mixed_precision
+
+      bool = False) -> None:
+      Setup automated mixed precision (amp) for inference.
+
+   .. method:: _setup_worker() -> None
+
+      
+      Setup the worker for inference
+
+   .. method:: process_wsi(wsi
+
+      WSI, resolution: float = 0.25) -> None:
+      Process WSI file
+
+   .. method:: apply_softmax_reorder(predictions
+
+      dict) -> dict:
+      Apply softmax and reorder the predictions
+
+   .. method:: _post_process_edge_cells(cell_list
+
+      List[dict]) -> List[int]:
+      Use the CellPostProcessor to remove multiple cells and merge due to overlap
+
+   .. method:: _reallign_grid(cell_dict_wsi
+
+      list[dict], cell_dict_detection: list[dict], rescaling_factor: float) -> Tuple[list[dict],list[dict]]:
+      Reallign grid if interpolation was used (including target_mpp_tolerance)
+
+   .. method:: _convert_json_geojson(cell_list
+
+      list[dict], polygons: bool = False) -> List[dict]:
+      Convert a list of cells to a geojson object
+
+   .. method:: _check_wsi(wsi
+
+      WSI, resolution: float = 0.25) -> None:
+      Check if provided patched WSI is having the right settings
+      
+
+
+   .. py:attribute:: logger
+      :type:  loki2.utils.logger.Logger
+
+
+   .. py:attribute:: model
+      :type:  torch.nn.Module
+
+
+   .. py:attribute:: run_conf
+      :type:  dict
+
+
+   .. py:attribute:: inference_transforms
+      :type:  Callable
+
+
+   .. py:attribute:: mixed_precision
+      :type:  bool
+
+
+   .. py:attribute:: num_workers
+      :type:  int
+
+
+   .. py:attribute:: label_map
+      :type:  dict
+
+
+   .. py:attribute:: classifier
+      :type:  torch.nn.Module
+      :value: None
+
+
+
+   .. py:attribute:: binary
+      :type:  bool
+
+
+   .. py:attribute:: model_arch
+      :type:  str
+
+
+   .. py:attribute:: ray_actors
+      :type:  int
+
+
+   .. py:attribute:: model_path
+
+
+   .. py:attribute:: device
+
+
+   .. py:attribute:: batch_size
+
+
+   .. py:attribute:: patch_size
+
+
+   .. py:attribute:: overlap
+
+
+   .. py:attribute:: geojson
+
+
+   .. py:attribute:: graph
+
+
+   .. py:attribute:: compression
+
+
+   .. py:attribute:: subdir_name
+
+
+   .. py:method:: process_wsi(wsi: loki2.data.dataclass.wsi.WSI, resolution: float = 0.25) -> None
+
+      Process WSI file
+
+      :param wsi: WSI object
+      :type wsi: WSI
+      :param resolution: Resolution for inference. Defaults to 0.25.
+      :type resolution: float, optional
+
+
+
+   .. py:method:: apply_softmax_reorder(predictions: Dict[str, torch.Tensor]) -> Dict[str, torch.Tensor]
+
+      Reorder and apply softmax on predictions.
+
+      :param predictions: Predictions dictionary with tensors.
+
+      :returns: Reordered predictions with softmax applied.
+      :rtype: Dict[str, torch.Tensor]
+
+
+

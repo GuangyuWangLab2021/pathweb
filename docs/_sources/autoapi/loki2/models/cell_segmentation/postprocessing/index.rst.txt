@@ -1,0 +1,99 @@
+loki2.models.cell_segmentation.postprocessing
+=============================================
+
+.. py:module:: loki2.models.cell_segmentation.postprocessing
+
+.. autoapi-nested-parse::
+
+   Postprocessing of Loki2 network output for cell detection.
+
+   This module provides CPU-based postprocessing for extracting detected cells
+   from network prediction maps.
+
+
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:class:: DetectionCellPostProcessor(nr_types: int, magnification: Literal[20, 40] = 40, gt: bool = False)
+
+   Postprocessor for extracting detected cells from prediction maps.
+
+   This class processes network prediction maps to extract detected cells
+   using CPU-based operations.
+
+
+   .. py:attribute:: nr_types
+
+
+   .. py:attribute:: magnification
+
+
+   .. py:attribute:: gt
+
+
+   .. py:method:: check_network_output(predictions_: Dict[str, torch.Tensor]) -> None
+
+      Check if the network output is valid.
+
+      :param predictions_: Network predictions dictionary with required keys:
+                           * nuclei_binary_map: Binary nucleus predictions. Shape: (B, H, W, 2)
+                           * nuclei_type_map: Type prediction of nuclei.
+                               Shape: (B, H, W, self.nr_types)
+                           * hv_map: Horizontal-Vertical nuclei mapping. Shape: (B, H, W, 2)
+
+      :raises AssertionError: If predictions dictionary is invalid or missing required keys.
+
+
+
+   .. py:method:: post_process_batch(predictions_: Dict[str, torch.Tensor]) -> Tuple[torch.Tensor, List[Dict[str, Any]]]
+
+      Post-process a batch of predictions and generate cell dictionaries.
+
+      :param predictions_: Network predictions dictionary with required keys:
+                           * nuclei_binary_map: Binary nucleus predictions. Shape: (B, H, W, 2)
+                           * nuclei_type_map: Type prediction of nuclei.
+                               Shape: (B, H, W, self.nr_types)
+                           * hv_map: Horizontal-Vertical nuclei mapping. Shape: (B, H, W, 2)
+
+      :returns:
+
+                    - Instance map tensor where each instance has own integer.
+                      Shape: (B, H, W)
+                    - List of cell dictionaries, one per image in batch
+                    * List of dictionaries. Each List entry is one image. Each dict contains another dict for each detected nucleus.
+                        For each nucleus, the following information are returned: "bbox", "centroid", "contour", "type_prob", "type"
+      :rtype: Tuple[torch.Tensor, List[Dict[str, Any]]]
+
+
+
+   .. py:method:: post_process_single_image(pred_map: numpy.ndarray) -> Tuple[numpy.ndarray, dict[int, dict]]
+
+      Process one single image and generate cell dictionary and instance predictions
+
+      :param pred_map: Combined output of tp, np and hv branches, in the same order. Shape: (H, W, 4)
+      :type pred_map: np.ndarray
+
+      :returns: _description_
+      :rtype: Tuple[np.ndarray, dict[int, dict]]
+
+
+
+.. py:function:: stack_pred_maps(nuclei_type_map: numpy.ndarray, nuclei_binary_map: numpy.ndarray, hv_map: numpy.ndarray) -> numpy.ndarray
+
+   Creates the prediction map for HoVer-Net post-processing
+
+   Args:
+   nuclei_binary_map:
+       nuclei_type_map (np.ndarray):  Type prediction of nuclei. Shape: (B, H, W, self.num_nuclei_classes,)
+       nuclei_binary_map (np.ndarray): Binary Nucleus Predictions. Shape: (B, H, W, 2)
+       hv_map (np.ndarray): Horizontal-Vertical nuclei mapping. Shape: (B, H, W, 2)
+
+   :returns: A numpy array containing the stacked prediction maps. Shape [B, H, W, 4]
+   :rtype: np.ndarray
+
+

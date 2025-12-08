@@ -1,0 +1,229 @@
+loki2.plot
+==========
+
+.. py:module:: loki2.plot
+
+.. autoapi-nested-parse::
+
+   Helpers for mapping high-dimensional embeddings to low-dimensional
+   coordinates and hex colors for visualization.
+
+
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:data:: UMAP
+   :value: None
+
+
+.. py:function:: plot_cell_types(pos: numpy.ndarray, cells: List[Dict[str, Any]], size: float = 0.1, min_count: int = 100, min_fraction: float = 0.01, title: str = 'Loki2 Predicted Cell Types') -> None
+
+   Plot Loki2 cell-type map with a filtered legend.
+
+   The legend only shows categories meeting BOTH:
+       - count >= min_count
+       - fraction >= min_fraction
+
+   :param pos: Array of shape (N, 2) containing cell positions.
+   :param cells: List of cell dictionaries, each containing a 'type' key.
+   :param size: Scatter point size. Defaults to 0.1.
+   :param min_count: Minimum cell count for legend inclusion. Defaults to 100.
+   :param min_fraction: Minimum fraction for legend inclusion. Defaults to 0.01.
+   :param title: Plot title. Defaults to "Loki2 Predicted Cell Types".
+
+
+.. py:function:: embeddings_to_hex(embeddings: numpy.ndarray, method: str = 'umap', n_components: int = 3, random_state: int | None = None) -> Tuple[numpy.ndarray, List[str], numpy.ndarray]
+
+   Reduce high-dimensional embeddings and map to hex colors using UMAP or PCA.
+
+   :param embeddings: Array of shape (N, D) with input vectors.
+   :param method: 'umap' or 'pca' to choose reduction algorithm.
+   :param n_components: Number of output dimensions (default: 3).
+   :param random_state: Seed for reproducibility.
+
+   :returns:     Array of shape (N, n_components) with reduced embeddings.
+             hex_colors:
+                 List of length N containing '#RRGGBB' strings.
+             normalized_coords:
+                 Array of shape (N, n_components), each dimension scaled to [0, 1].
+   :rtype: coords
+
+
+.. py:function:: labels_to_hex(pred: numpy.ndarray, color_dict: Dict[Any, str], default: str = '#808080') -> numpy.ndarray
+
+   Convert label array to hex color array.
+
+   :param pred: Array of labels.
+   :param color_dict: Dictionary mapping labels to hex color strings.
+   :param default: Default hex color for unmapped labels. Defaults to "#808080".
+
+   :returns: Array of hex color strings with the same shape as pred.
+   :rtype: np.ndarray
+
+
+.. py:function:: plot_gene(sc_ad: Any, indices: numpy.ndarray, data_morph: Dict[str, Any], gene: str, scatter_size: float = 0.3, perc: float = 0.95, show: bool = True) -> Optional[Any]
+
+   Plot gene expression on spatial coordinates.
+
+   :param sc_ad: AnnData object containing single-cell data.
+   :param indices: Array of indices for matching cells.
+   :param data_morph: Dictionary containing 'positions' key with spatial coordinates.
+   :param gene: Gene name to plot.
+   :param scatter_size: Size of scatter points. Defaults to 0.3.
+   :param perc: Percentile for vmax normalization. Defaults to 0.95.
+   :param show: Whether to display the plot. Defaults to True.
+
+   :returns: Figure object if show=False, otherwise None.
+   :rtype: Optional[Any]
+
+
+.. py:function:: scatter_plot(embedding: numpy.ndarray, annotations, *, palette: str | dict | None = 'tab10', invert_y: bool = False, equal_aspect: bool = True, save_path: str | pathlib.Path | None = None, save_dpi: int = 200, figsize: tuple[int, int] | None = (5, 5), dpi: int | None = 150, figure_kwargs: dict | None = None, **kwargs) -> None
+
+   Simple scatter helper that supports numeric, categorical, or per-point colors.
+
+   :param embedding: Array of shape (N, 2) containing 2D coordinates.
+   :param annotations: Array or list of annotations for coloring points.
+                       Can be numeric values, categorical labels, or hex color strings.
+   :param palette: Color palette name (str) or dictionary mapping labels to colors.
+                   Defaults to "tab10".
+   :param invert_y: Whether to invert the y-axis. Defaults to False.
+   :param equal_aspect: Whether to set equal aspect ratio. Defaults to True.
+   :param save_path: Optional path to save the figure. Defaults to None.
+   :param save_dpi: Resolution for saved figure. Defaults to 200.
+   :param figsize: Figure size tuple. Defaults to (5, 5).
+   :param dpi: Figure resolution. Defaults to 150.
+   :param figure_kwargs: Additional keyword arguments for figure creation.
+                         Defaults to None.
+   :param \*\*kwargs: Additional keyword arguments passed to scatter plot.
+
+
+.. py:function:: plot_indices_on_patch(wsi_path: str, egdf: geopandas.GeoDataFrame, idxs: Iterable[int], *, window: Tuple[int, int, int, int] | None = None, pad: int = 50, override_color: Optional[Tuple[float, float, float] | str] = None, clip_to_window: bool = True, eps: float = 0.5, draw: str = 'fill', edge_width: float = 0.6, draw_holes: bool = False, alpha: float = 0.5, title: Optional[str] = None, dpi: int = 150) -> None
+
+   Plot selected cell indices on a WSI patch.
+
+   :param wsi_path: Path to WSI file.
+   :param egdf: GeoDataFrame containing cell geometries and colors.
+   :param idxs: Iterable of indices to plot.
+   :param window: Optional window coordinates (x, y, w, h). If None, computed
+                  from selected geometries. Defaults to None.
+   :param pad: Padding around window in pixels. Defaults to 50.
+   :param override_color: Optional color to override all polygons. Defaults to None.
+   :param clip_to_window: Whether to clip polygons to window. Defaults to True.
+   :param eps: Epsilon for geometry operations. Defaults to 0.5.
+   :param draw: Drawing mode, "fill" or "edge". Defaults to "fill".
+   :param edge_width: Edge width when draw="edge". Defaults to 0.6.
+   :param draw_holes: Whether to draw hole outlines. Defaults to False.
+   :param alpha: Transparency value. Defaults to 0.5.
+   :param title: Optional plot title. Defaults to None.
+   :param dpi: Resolution for output. Defaults to 150.
+
+   :raises ValueError: If draw is not "fill" or "edge".
+
+
+.. py:function:: plot_type_legend(egdf: geopandas.GeoDataFrame, color_col: str = 'rgb_norm', label_col: str = 'type', title: str = 'Cell classes', ncol: Optional[int] = None, max_label_chars: int = 32, marker_size: int = 12, frameon: bool = False, sort: bool = True, ax: Optional[Any] = None, savepath: Optional[str | pathlib.Path] = None, dpi: int = 150) -> Tuple[Any, Any]
+
+   Plot a legend for cell types from a GeoDataFrame.
+
+   :param egdf: GeoDataFrame containing cell type information.
+   :param color_col: Column name for colors. Defaults to "rgb_norm".
+   :param label_col: Column name for labels. Defaults to "type".
+   :param title: Legend title. Defaults to "Cell classes".
+   :param ncol: Number of columns in legend. If None, auto-determined.
+                Defaults to None.
+   :param max_label_chars: Maximum characters per label. Defaults to 32.
+   :param marker_size: Size of legend markers. Defaults to 12.
+   :param frameon: Whether to draw frame around legend. Defaults to False.
+   :param sort: Whether to sort labels alphabetically. Defaults to True.
+   :param ax: Optional matplotlib axes. If None, creates new figure.
+              Defaults to None.
+   :param savepath: Optional path to save the legend. Defaults to None.
+   :param dpi: Resolution for output. Defaults to 150.
+
+   :returns: Figure and axes objects.
+   :rtype: Tuple[Any, Any]
+
+
+.. py:function:: load_attention_df(txt_path: str, case_prefix: str) -> pandas.DataFrame
+
+   Load attention data from text file.
+
+   :param txt_path: Path to text file containing attention data (TSV format).
+   :param case_prefix: Case ID prefix for filtering data.
+
+   :returns:
+
+             DataFrame with X, Y, Attention columns, and log10_Attention
+                 if available.
+   :rtype: pd.DataFrame
+
+   :raises ValueError: If required columns X/Y/Attention are missing.
+
+
+.. py:function:: make_slide_thumbnail(svs_path: str, max_dim: int = 2048) -> Tuple[Any, Tuple[int, int], Tuple[int, int]]
+
+   Generate thumbnail from SVS file.
+
+   :param svs_path: Path to SVS file.
+   :param max_dim: Maximum side length for thumbnail. Defaults to 2048.
+
+   :returns:     - thumb: PIL Image thumbnail
+                 - (W, H): Original level 0 dimensions
+                 - (w, h): Thumbnail dimensions
+   :rtype: Tuple[Any, Tuple[int, int], Tuple[int, int]]
+
+
+.. py:function:: normalize(v: numpy.ndarray, qmin: float = 1.0, qmax: float = 99.0) -> numpy.ndarray
+
+   Normalize array values to [0, 1] range using percentiles.
+
+   :param v: Input array.
+   :param qmin: Minimum percentile for clipping. Defaults to 1.0.
+   :param qmax: Maximum percentile for clipping. Defaults to 99.0.
+
+   :returns: Normalized array with values in [0, 1].
+   :rtype: np.ndarray
+
+
+.. py:function:: plot_attention_on_slide(svs_path: str, att_txt: str, case_prefix: str, save_path: pathlib.Path | None = None, max_dim: int = 2048, point_size: float = 8, alpha: float = 0.6, cmap: str = 'rainbow') -> None
+
+   Plot attention heatmap on SVS thumbnail.
+
+   Always displays the image. Saves the image if save_path is provided.
+
+   :param svs_path: Path to SVS file.
+   :param att_txt: Path to attention data text file.
+   :param case_prefix: Case ID prefix for filtering data.
+   :param save_path: Optional path to save the figure. Defaults to None.
+   :param max_dim: Maximum dimension for thumbnail. Defaults to 2048.
+   :param point_size: Size of scatter points. Defaults to 8.
+   :param alpha: Transparency of scatter points. Defaults to 0.6.
+   :param cmap: Colormap name. Defaults to "rainbow".
+
+
+.. py:data:: TYPE_MAP_JSON
+
+.. py:data:: COLOR_DICT
+   :type:  dict[int, list[int]]
+
+.. py:data:: COLOR_DICT_FLOAT
+   :type:  dict[int, numpy.ndarray]
+
+.. py:data:: COLOR_DICT_NORM
+
+.. py:data:: max_code
+
+.. py:data:: color_list
+
+.. py:data:: LOKI2_CMAP
+
+.. py:data:: bounds
+
+.. py:data:: norm
+
+.. py:data:: SC_COLOR_DICT
+

@@ -1,0 +1,41 @@
+loki2.mil.models.TCGA-Loki2_MILCell_blca_metastasis_5fold
+=========================================================
+
+.. py:module:: loki2.mil.models.TCGA-Loki2_MILCell_blca_metastasis_5fold
+
+.. autoapi-nested-parse::
+
+   5-fold cross-validation script for BLCA metastasis MIL model.
+
+   This script performs 5-fold cross-validation training for a Multiple Instance
+   Learning (MIL) model to predict metastasis status from cell embeddings.
+
+
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:function:: main(args: argparse.Namespace) -> None
+
+   Main function for 5-fold cross-validation training.
+
+   Performs data preparation, creates balanced folds, trains models for each
+   fold, and computes overall cross-validation metrics.
+
+   :param args: Argument namespace containing all hyperparameters and paths:
+                - data_path: Path to embedding data parquet file.
+                - type_path: Path to label/metadata file.
+                - base_output_folder: Base output folder for results.
+                - class_type: Class type name (e.g., "Disease_Stage").
+                - signature: Signature name (e.g., "Patient_Label").
+                - n_folds: Number of folds for cross-validation.
+                - seed: Random seed.
+                - All other model and training hyperparameters.
+
+
+.. py:data:: parser
+

@@ -1,0 +1,34 @@
+loki2.mil
+=========
+
+.. py:module:: loki2.mil
+
+.. autoapi-nested-parse::
+
+   Cell-level Multiple Instance Learning (MIL) module for Loki2 .
+
+   This module provides functionality for training MIL models on cell embeddings
+   to predict patient-level outcomes, including data preparation, model training,
+   and evaluation utilities.
+
+
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/mil/models/index
+   /autoapi/loki2/mil/prampt_generate/index
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/mil/prampt_downsample/index
+
+

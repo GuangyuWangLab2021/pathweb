@@ -1,0 +1,314 @@
+loki2.models.base.vision_transformer
+====================================
+
+.. py:module:: loki2.models.base.vision_transformer
+
+.. autoapi-nested-parse::
+
+   Vision Transformer implementation for Loki2.
+
+   This module provides a Vision Transformer (ViT) backbone architecture
+   based on the implementation from CellViT++.
+
+   Vision Transformer, based on https://people.sc.fsu.edu/~jburkardt/presentations/truncated_normal.pdf
+
+
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:function:: trunc_normal_(tensor: torch.Tensor, mean: float = 0.0, std: float = 1.0, a: float = -2.0, b: float = 2.0) -> torch.Tensor
+
+   Initialize tensor with truncated normal distribution.
+
+   :param tensor: Tensor to initialize.
+   :param mean: Mean of the normal distribution. Defaults to 0.0.
+   :param std: Standard deviation of the normal distribution. Defaults to 1.0.
+   :param a: Lower bound of truncation. Defaults to -2.0.
+   :param b: Upper bound of truncation. Defaults to 2.0.
+
+   :returns: The initialized tensor (modified in-place).
+   :rtype: torch.Tensor
+
+
+.. py:function:: drop_path(x: torch.Tensor, drop_prob: float = 0.0, training: bool = False) -> torch.Tensor
+
+   Drop paths (Stochastic Depth) per sample.
+
+   :param x: Input tensor.
+   :param drop_prob: Drop probability. Defaults to 0.0.
+   :param training: Whether in training mode. Defaults to False.
+
+   :returns: Output tensor with dropped paths applied.
+   :rtype: torch.Tensor
+
+
+.. py:class:: PatchEmbed(img_size: int = 224, patch_size: int = 16, in_chans: int = 3, embed_dim: int = 768)
+
+   Bases: :py:obj:`torch.nn.Module`
+
+
+   Image to Patch Embedding (without positional embedding).
+
+   Converts input images into patch embeddings using a convolutional layer.
+
+   :param img_size: Input image size. Defaults to 224.
+   :param patch_size: Patch token size (one dimension only, tokens are squared).
+                      Defaults to 16.
+   :param in_chans: Number of input channels. Defaults to 3.
+   :param embed_dim: Embedding dimension. Defaults to 768.
+
+
+   .. py:attribute:: num_patches
+
+
+   .. py:attribute:: img_size
+
+
+   .. py:attribute:: patch_size
+
+
+   .. py:attribute:: proj
+
+
+   .. py:method:: forward(x)
+
+
+.. py:class:: Attention(dim: int, num_heads: int = 8, qkv_bias: bool = False, qk_scale: float = None, attn_drop: float = 0.0, proj_drop: float = 0.0)
+
+   Bases: :py:obj:`torch.nn.Module`
+
+
+   Attention Module (Multi-Head Attention, MHA)
+
+   :param dim: Embedding dimension
+   :type dim: int
+   :param num_heads: Number of attention heads. Defaults to 8.
+   :type num_heads: int, optional
+   :param qkv_bias: If bias should be used for query (q), key (k), and value (v). Defaults to False.
+   :type qkv_bias: bool, optional
+   :param qk_scale: Scaling parameter. Defaults to None.
+   :type qk_scale: float, optional
+   :param attn_drop: Dropout for attention layer. Defaults to 0.0.
+   :type attn_drop: float, optional
+   :param proj_drop: Dropout for projection layers. Defaults to 0.0.
+   :type proj_drop: float, optional
+
+
+   .. py:attribute:: num_heads
+
+
+   .. py:attribute:: head_dim
+
+
+   .. py:attribute:: scale
+
+
+   .. py:attribute:: qkv
+
+
+   .. py:attribute:: attn_drop
+
+
+   .. py:attribute:: proj
+
+
+   .. py:attribute:: proj_drop
+
+
+   .. py:method:: forward(x)
+
+
+.. py:class:: Mlp(in_features: int, hidden_features: int = None, out_features: int = None, act_layer: Callable = nn.GELU, drop: float = 0.0)
+
+   Bases: :py:obj:`torch.nn.Module`
+
+
+   Base class for all neural network modules.
+
+   Your models should also subclass this class.
+
+   Modules can also contain other Modules, allowing to nest them in
+   a tree structure. You can assign the submodules as regular attributes::
+
+       import torch.nn as nn
+       import torch.nn.functional as F
+
+       class Model(nn.Module):
+           def __init__(self):
+               super().__init__()
+               self.conv1 = nn.Conv2d(1, 20, 5)
+               self.conv2 = nn.Conv2d(20, 20, 5)
+
+           def forward(self, x):
+               x = F.relu(self.conv1(x))
+               return F.relu(self.conv2(x))
+
+   Submodules assigned in this way will be registered, and will have their
+   parameters converted too when you call :meth:`to`, etc.
+
+   .. note::
+       As per the example above, an ``__init__()`` call to the parent class
+       must be made before assignment on the child.
+
+   :ivar training: Boolean represents whether this module is in training or
+                   evaluation mode.
+   :vartype training: bool
+
+
+   .. py:attribute:: out_features
+
+
+   .. py:attribute:: hidden_features
+
+
+   .. py:attribute:: fc1
+
+
+   .. py:attribute:: act
+
+
+   .. py:attribute:: fc2
+
+
+   .. py:attribute:: drop
+
+
+   .. py:method:: forward(x)
+
+
+.. py:class:: DropPath(drop_prob=None)
+
+   Bases: :py:obj:`torch.nn.Module`
+
+
+   Drop paths (Stochastic Depth) per sample  (when applied in main path of residual blocks).
+
+
+   .. py:attribute:: drop_prob
+
+
+   .. py:method:: forward(x)
+
+
+.. py:class:: Block(dim: int, num_heads: int, mlp_ratio: float = 4.0, qkv_bias: bool = False, qk_scale: float = None, drop: float = 0.0, attn_drop: float = 0.0, drop_path: float = 0.0, act_layer: Callable = nn.GELU, norm_layer: Callable = nn.LayerNorm)
+
+   Bases: :py:obj:`torch.nn.Module`
+
+
+   Base class for all neural network modules.
+
+   Your models should also subclass this class.
+
+   Modules can also contain other Modules, allowing to nest them in
+   a tree structure. You can assign the submodules as regular attributes::
+
+       import torch.nn as nn
+       import torch.nn.functional as F
+
+       class Model(nn.Module):
+           def __init__(self):
+               super().__init__()
+               self.conv1 = nn.Conv2d(1, 20, 5)
+               self.conv2 = nn.Conv2d(20, 20, 5)
+
+           def forward(self, x):
+               x = F.relu(self.conv1(x))
+               return F.relu(self.conv2(x))
+
+   Submodules assigned in this way will be registered, and will have their
+   parameters converted too when you call :meth:`to`, etc.
+
+   .. note::
+       As per the example above, an ``__init__()`` call to the parent class
+       must be made before assignment on the child.
+
+   :ivar training: Boolean represents whether this module is in training or
+                   evaluation mode.
+   :vartype training: bool
+
+
+   .. py:attribute:: norm1
+
+
+   .. py:attribute:: attn
+
+
+   .. py:attribute:: drop_path
+
+
+   .. py:attribute:: norm2
+
+
+   .. py:attribute:: mlp_hidden_dim
+
+
+   .. py:attribute:: mlp
+
+
+   .. py:method:: forward(x, return_attention=False)
+
+
+.. py:class:: VisionTransformer(img_size: List[int] = [224], patch_size: int = 16, in_chans: int = 3, num_classes: int = 0, embed_dim: int = 768, depth: int = 12, num_heads: int = 12, mlp_ratio: float = 4.0, qkv_bias: bool = False, qk_scale: float = None, drop_rate: float = 0.0, attn_drop_rate: float = 0.0, drop_path_rate: float = 0.0, norm_layer: Callable = nn.LayerNorm, **kwargs)
+
+   Bases: :py:obj:`torch.nn.Module`
+
+
+   Vision Transformer
+
+
+   .. py:attribute:: patch_embed
+
+
+   .. py:attribute:: num_patches
+
+
+   .. py:attribute:: cls_token
+
+
+   .. py:attribute:: pos_embed
+
+
+   .. py:attribute:: pos_drop
+
+
+   .. py:attribute:: dpr
+
+
+   .. py:attribute:: blocks
+
+
+   .. py:attribute:: norm
+
+
+   .. py:attribute:: head
+
+
+   .. py:method:: interpolate_pos_encoding(x, w, h)
+
+
+   .. py:method:: prepare_tokens(x)
+
+
+   .. py:method:: forward(x: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]
+
+      Forward pass
+
+      :param x: Input batch
+      :type x: torch.Tensor
+
+      :returns: Class token (raw)
+      :rtype: Tuple[torch.Tensor]
+
+
+
+   .. py:method:: get_last_selfattention(x)
+
+
+   .. py:method:: get_intermediate_layers(x, n=1)
+
+

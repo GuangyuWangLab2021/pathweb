@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>loki2.mil.prampt_generate.blca_stage_prampt &mdash; Loki2  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="loki2.mil.prampt_downsample" href="../../prampt_downsample/index.html" />
+    <link rel="prev" title="loki2.mil.prampt_generate.blca_metastasis_prampt" href="../blca_metastasis_prampt/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            Loki2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html">loki2</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../../index.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../../cl/index.html">loki2.cl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../config/index.html">loki2.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data/index.html">loki2.data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../inference/index.html">loki2.inference</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../../index.html">loki2.mil</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../models/index.html">loki2.models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../utils/index.html">loki2.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../index.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/Loki2_cell_type_inference.html">Loki2 Cell Type Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/Loki2_morph_retrieve.html">Loki2 Morphology-to-Transcriptome Retrieval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/Loki2_morph_psdtime_COAD.html">Loki2 Morphological Pseudotime Inference - Colon Cancer Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/Loki2_morph_psdtime_PRAD.html">Loki2 Morphological Pseudotime Inference - Prostate Cancer Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/Loki2_in_silico_immunostaining.html">Loki2 <em>in silico</em> immunostaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/Loki2_multiple_instance_learning.html">Loki2 Cell-level Multiple Instance Learning</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Loki2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">loki2</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">loki2.mil</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">loki2.mil.prampt_generate</a></li>
+      <li class="breadcrumb-item active">loki2.mil.prampt_generate.blca_stage_prampt</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../_sources/autoapi/loki2/mil/prampt_generate/blca_stage_prampt/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-loki2.mil.prampt_generate.blca_stage_prampt">
+<span id="loki2-mil-prampt-generate-blca-stage-prampt"></span><h1>loki2.mil.prampt_generate.blca_stage_prampt<a class="headerlink" href="#module-loki2.mil.prampt_generate.blca_stage_prampt" title="Link to this heading"></a></h1>
+<p>Generate PRAMPT data for BLCA stage analysis.</p>
+<p>This script loads cell embeddings from .pt files, samples balanced subsets
+of cells by disease stage, and saves the merged embeddings as a parquet file
+for MIL training.</p>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.mil.prampt_generate.blca_stage_prampt.setup_dummy_modules">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.prampt_generate.blca_stage_prampt.</span></span><span class="sig-name descname"><span class="pre">setup_dummy_modules</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span></span><a class="headerlink" href="#loki2.mil.prampt_generate.blca_stage_prampt.setup_dummy_modules" title="Link to this definition"></a></dt>
+<dd><p>Sets up dummy modules for ‘loki2’ and its submodules.</p>
+<p>This is required to simulate the module structure that the torch model
+expects when unpickling objects that reference e.g. ‘loki2.data.dataclass.cell_graph’.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.mil.prampt_generate.blca_stage_prampt.load_tensor">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.prampt_generate.blca_stage_prampt.</span></span><span class="sig-name descname"><span class="pre">load_tensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#loki2.mil.prampt_generate.blca_stage_prampt.load_tensor" title="Link to this definition"></a></dt>
+<dd><p>Load torch object from .pt file with dummy loki2 module support.</p>
+<p>Sets up dummy loki2 modules before loading to handle unpickling of
+objects that reference loki2.data.dataclass.cell_graph classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> – Path to the .pt file to load.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded torch object (typically containing cell embeddings and positions).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.mil.prampt_generate.blca_stage_prampt.load_stage_data">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.prampt_generate.blca_stage_prampt.</span></span><span class="sig-name descname"><span class="pre">load_stage_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="headerlink" href="#loki2.mil.prampt_generate.blca_stage_prampt.load_stage_data" title="Link to this definition"></a></dt>
+<dd><p>Load Disease_Stage data from TCGA_GRADE.txt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>DataFrame with columns: Patient_ID, Disease_Stage,</dt><dd><p>and sample_name (Patient_ID + ‘-01Z-00-DX1’).</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.mil.prampt_generate.blca_stage_prampt.get_balanced_sample_names">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.prampt_generate.blca_stage_prampt.</span></span><span class="sig-name descname"><span class="pre">get_balanced_sample_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stage_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_samples_per_stage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.mil.prampt_generate.blca_stage_prampt.get_balanced_sample_names" title="Link to this definition"></a></dt>
+<dd><p>Get balanced sample names for stage 0 and stage 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stage_df</strong> – DataFrame with Disease_Stage and sample_name columns.</p></li>
+<li><p><strong>target_samples_per_stage</strong> – Target number of samples per stage.
+Defaults to 20.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>stage_0_samples: List of all stage 0 sample names.</p></li>
+<li><p>stage_1_samples: List of all stage 1 sample names.</p></li>
+<li><p>selected_stage_0: List of selected stage 0 sample names.</p></li>
+<li><p>selected_stage_1: List of selected stage 1 sample names.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple containing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.mil.prampt_generate.blca_stage_prampt.process_stage_samples">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.prampt_generate.blca_stage_prampt.</span></span><span class="sig-name descname"><span class="pre">process_stage_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stage_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stage_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stage_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">records</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.DataFrame</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_ratio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.mil.prampt_generate.blca_stage_prampt.process_stage_samples" title="Link to this definition"></a></dt>
+<dd><p>Process all samples for a stage until target is reached.</p>
+<p>Loads and processes cell embeddings from .pt files, sampling a subset
+of cells based on sample_ratio, and appends to records list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stage_samples</strong> – List of sample names to process.</p></li>
+<li><p><strong>target_count</strong> – Target number of successfully processed samples.</p></li>
+<li><p><strong>stage_num</strong> – Stage number (0 or 1) for logging.</p></li>
+<li><p><strong>directory_path</strong> – Directory containing _cells.pt files.</p></li>
+<li><p><strong>stage_df</strong> – DataFrame with Disease_Stage information.</p></li>
+<li><p><strong>records</strong> – List to append processed DataFrames to.</p></li>
+<li><p><strong>sample_ratio</strong> – Ratio of cells to sample from each file. Defaults to 0.1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of successfully processed sample names.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="loki2.mil.prampt_generate.blca_stage_prampt.stage_df">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.prampt_generate.blca_stage_prampt.</span></span><span class="sig-name descname"><span class="pre">stage_df</span></span><a class="headerlink" href="#loki2.mil.prampt_generate.blca_stage_prampt.stage_df" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="loki2.mil.prampt_generate.blca_stage_prampt.target_samples_per_stage">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.prampt_generate.blca_stage_prampt.</span></span><span class="sig-name descname"><span class="pre">target_samples_per_stage</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">60</span></em><a class="headerlink" href="#loki2.mil.prampt_generate.blca_stage_prampt.target_samples_per_stage" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="loki2.mil.prampt_generate.blca_stage_prampt.sample_ratio">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.prampt_generate.blca_stage_prampt.</span></span><span class="sig-name descname"><span class="pre">sample_ratio</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.1</span></em><a class="headerlink" href="#loki2.mil.prampt_generate.blca_stage_prampt.sample_ratio" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="loki2.mil.prampt_generate.blca_stage_prampt.directory_path">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.prampt_generate.blca_stage_prampt.</span></span><span class="sig-name descname"><span class="pre">directory_path</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'./data/TCGA/BLCA'</span></em><a class="headerlink" href="#loki2.mil.prampt_generate.blca_stage_prampt.directory_path" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="loki2.mil.prampt_generate.blca_stage_prampt.records">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.prampt_generate.blca_stage_prampt.</span></span><span class="sig-name descname"><span class="pre">records</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#loki2.mil.prampt_generate.blca_stage_prampt.records" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="loki2.mil.prampt_generate.blca_stage_prampt.successful_stage_0">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.prampt_generate.blca_stage_prampt.</span></span><span class="sig-name descname"><span class="pre">successful_stage_0</span></span><a class="headerlink" href="#loki2.mil.prampt_generate.blca_stage_prampt.successful_stage_0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="loki2.mil.prampt_generate.blca_stage_prampt.successful_stage_1">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.prampt_generate.blca_stage_prampt.</span></span><span class="sig-name descname"><span class="pre">successful_stage_1</span></span><a class="headerlink" href="#loki2.mil.prampt_generate.blca_stage_prampt.successful_stage_1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="loki2.mil.prampt_generate.blca_stage_prampt.merged_df">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.prampt_generate.blca_stage_prampt.</span></span><span class="sig-name descname"><span class="pre">merged_df</span></span><a class="headerlink" href="#loki2.mil.prampt_generate.blca_stage_prampt.merged_df" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../blca_metastasis_prampt/index.html" class="btn btn-neutral float-left" title="loki2.mil.prampt_generate.blca_metastasis_prampt" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../prampt_downsample/index.html" class="btn btn-neutral float-right" title="loki2.mil.prampt_downsample" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

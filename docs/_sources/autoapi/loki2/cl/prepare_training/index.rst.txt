@@ -1,0 +1,87 @@
+loki2.cl.prepare_training
+=========================
+
+.. py:module:: loki2.cl.prepare_training
+
+.. autoapi-nested-parse::
+
+   Convert morphology/transcription embeddings into WebDataset shards for contrastive training.
+
+
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:data:: DTYPE_MAP
+
+.. py:function:: parse_args(argv: Iterable[str] | None = None) -> argparse.Namespace
+
+   Parse command-line arguments for building WebDataset shards.
+
+   :param argv: Optional list of arguments to parse. If None, uses sys.argv.
+
+   :returns: Parsed arguments.
+   :rtype: argparse.Namespace
+
+
+.. py:function:: cell_id_to_index(cell_id: str) -> int
+
+   Extract row index from a cell ID string.
+
+   :param cell_id: Cell ID string ending with a numeric index.
+
+   :returns: Zero-based row index extracted from the cell ID.
+   :rtype: int
+
+   :raises ValueError: If no numeric suffix is found in the cell ID.
+
+
+.. py:function:: tensor_to_bytes(tensor: torch.Tensor, dtype: torch.dtype) -> bytes
+
+   Convert a PyTorch tensor to NumPy array bytes.
+
+   :param tensor: PyTorch tensor to convert.
+   :param dtype: Target dtype for the conversion.
+
+   :returns: Serialized NumPy array as bytes.
+   :rtype: bytes
+
+
+.. py:function:: write_shard(dest: pathlib.Path, samples: List[Tuple[str, List[Tuple[str, bytes]]]]) -> None
+
+   Write a WebDataset shard (tar file) containing samples.
+
+   :param dest: Destination path for the tar shard file.
+   :param samples: List of (key, payloads) tuples where payloads is a list
+                   of (suffix, data) tuples.
+
+
+.. py:function:: build_samples(dataset_name: str, morphological: torch.Tensor, morph_positions: torch.Tensor, transcription: torch.Tensor, ordered_indices: Sequence[int], ordered_cell_ids: Sequence[str], split: str, tensor_dtype: torch.dtype) -> Iterator[Tuple[str, List[Tuple[str, bytes]], Tuple[str, str, int, float, float]]]
+
+   Build WebDataset samples from paired morphological and transcription embeddings.
+
+   :param dataset_name: Name identifier for the dataset.
+   :param morphological: Morphology embeddings tensor.
+   :param morph_positions: Position coordinates for morphology embeddings.
+   :param transcription: Transcription embeddings tensor.
+   :param ordered_indices: Ordered row indices matching the transcription embeddings.
+   :param ordered_cell_ids: Ordered cell IDs matching the transcription embeddings.
+   :param split: Dataset split identifier ('train' or 'val').
+   :param tensor_dtype: Data type for serializing tensors.
+
+   :Yields: *Tuple containing* --     - key: Sample key string
+                - payloads: List of (suffix, data) tuples for the shard
+                - meta_row: Metadata tuple (key, cell_id, row_index, x, y, split)
+
+
+.. py:function:: main(argv: Iterable[str] | None = None) -> None
+
+   Main entry point for preparing WebDataset shards from embeddings.
+
+   :param argv: Optional command-line arguments. If None, uses sys.argv.
+
+

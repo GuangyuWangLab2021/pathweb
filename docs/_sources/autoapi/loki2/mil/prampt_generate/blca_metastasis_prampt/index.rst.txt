@@ -1,0 +1,67 @@
+loki2.mil.prampt_generate.blca_metastasis_prampt
+================================================
+
+.. py:module:: loki2.mil.prampt_generate.blca_metastasis_prampt
+
+.. autoapi-nested-parse::
+
+   Generate PRAMPT data for BLCA metastasis analysis.
+
+   This script loads cell embeddings from .pt files, samples a subset of cells,
+   and saves the merged embeddings as a parquet file for MIL training.
+
+
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:function:: setup_dummy_modules() -> None
+
+   Sets up dummy modules for 'loki2' and its submodules.
+
+   This is required to simulate the module structure that the torch model
+   expects when unpickling objects that reference e.g. 'loki2.data.dataclass.cell_graph'.
+
+
+.. py:function:: load_tensor(file_path: Union[str, pathlib.Path]) -> Any
+
+   Load torch object from .pt file with dummy loki2 module support.
+
+   Sets up dummy loki2 modules before loading to handle unpickling of
+   objects that reference loki2.data.dataclass.cell_graph classes.
+
+   :param file_path: Path to the .pt file to load.
+
+   :returns: Loaded torch object (typically containing cell embeddings and positions).
+
+
+.. py:data:: directory_path
+   :value: './data/TCGA/BLCA'
+
+
+.. py:data:: meta_path
+   :value: './data/loki2_MIL/data/downsamples/blca_metastasis/BLCA_META.txt'
+
+
+.. py:data:: sample_ratio
+   :value: 0.1
+
+
+.. py:data:: meta_df
+
+.. py:data:: patient_embeddings
+
+.. py:data:: patient_id
+
+.. py:data:: records
+   :value: []
+
+
+.. py:data:: combined_df
+
+.. py:data:: merged_df
+

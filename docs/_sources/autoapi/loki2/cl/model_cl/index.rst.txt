@@ -1,0 +1,120 @@
+loki2.cl.model_cl
+=================
+
+.. py:module:: loki2.cl.model_cl
+
+.. autoapi-nested-parse::
+
+   Minimal projection-only alignment module.
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:class:: ProjectionCL(embed_dim: int = 512, modality_dims: Tuple[int, int] = (1280, 768), *, bias: bool = False, logit_scale_init: float = 1.0, num_layers: int = 1, hidden_dim: Optional[int] = None, dropout: float = 0.0, max_logit_scale: float = 10.0, min_logit_scale: Optional[float] = None)
+
+   Bases: :py:obj:`torch.nn.Module`
+
+
+   CLIP-style symmetric contrastive projector for paired embeddings.
+
+   :param embed_dim: Shared embedding dimensionality after projection. Defaults to 512.
+   :param modality_dims: Tuple containing input dimensions for the two modalities.
+                         Defaults to (1280, 768).
+   :param bias: Whether to enable bias terms in the projection layers. Defaults to False.
+   :param logit_scale_init: Initial value (not log-space) of the logit scale multiplier ``s``.
+                            Defaults to 1.0.
+   :param num_layers: Number of layers in each projection head. Defaults to 1.
+   :param hidden_dim: Hidden dimension for intermediate projection layers (defaults to embed dim).
+                      Defaults to None.
+   :param dropout: Dropout rate for hidden layers. Defaults to 0.0.
+   :param max_logit_scale: Upper bound for ``s`` (enforces a minimum temperature ``1 / s``).
+                           Defaults to 10.0.
+   :param min_logit_scale: Optional lower bound for ``s``. Defaults to None.
+
+   :raises ValueError: If modality_dims does not contain exactly two dimensions, num_layers is less
+       than 1, dropout is not in [0, 1], logit_scale_init is not positive, max_logit_scale
+       is not positive, or min_logit_scale is not in (0, max_logit_scale].
+   :raises RuntimeError: If a projection head does not contain at least one linear layer.
+
+
+   .. py:attribute:: hidden_dim
+
+
+   .. py:attribute:: proj_a
+
+
+   .. py:attribute:: proj_b
+
+
+   .. py:attribute:: init_value
+
+
+   .. py:attribute:: logit_scale
+
+
+   .. py:method:: encode_a(features: torch.Tensor) -> torch.Tensor
+
+      Encode features from modality A through its projection head.
+
+      :param features: Input features for modality A.
+
+      :returns: Projected features for modality A.
+      :rtype: torch.Tensor
+
+
+
+   .. py:method:: encode_b(features: torch.Tensor) -> torch.Tensor
+
+      Encode features from modality B through its projection head.
+
+      :param features: Input features for modality B.
+
+      :returns: Projected features for modality B.
+      :rtype: torch.Tensor
+
+
+
+   .. py:method:: forward(features_a: torch.Tensor, features_b: torch.Tensor, *, return_loss: bool = False) -> Union[Tuple[torch.Tensor, torch.Tensor], Tuple[torch.Tensor, torch.Tensor, torch.Tensor]]
+
+      Project both modalities, compute scaled cosine similarities, and optionally return the CLIP-style contrastive loss.
+
+      Let ``f_i`` and ``g_i`` denote the raw embeddings for sample ``i`` from modalities ``a`` and ``b``.
+      After the projection heads and L2 normalisation we obtain unit vectors ``\hat f_i`` and
+      ``\hat g_i``.  The learnable logit-scale parameter ``s = \exp(\text{logit\_scale})`` plays the
+      role of the inverse temperature ``1/\tau``.  The logits matrix we feed to the cross-entropy loss is
+
+      .. math::
+
+          L_{ij} = \min(s, s_{\text{max}})\; \hat f_i^\top \hat g_j,
+
+      where ``s_{max}`` is the configured maximum scale.  When ``return_loss`` is ``True`` we minimise the
+      symmetric InfoNCE objective
+
+      .. math::
+
+          \mathcal{L} = \tfrac{1}{2} \bigl[ \operatorname{CE}(L, I) + \operatorname{CE}(L^\top, I) \bigr],
+
+      where ``CE`` is the cross-entropy and ``I`` indexes the matching pairs along the diagonal.
+
+      :param features_a: Input features for modality A.
+      :param features_b: Input features for modality B.
+      :param return_loss: If True, also return the contrastive loss. Defaults to False.
+
+      :returns:     - Tuple[torch.Tensor, torch.Tensor]: Logits for A-B and B-A similarity if return_loss=False.
+                    - Tuple[torch.Tensor, torch.Tensor, torch.Tensor]: Logits and loss if return_loss=True.
+      :rtype: Union[Tuple[torch.Tensor, torch.Tensor], Tuple[torch.Tensor, torch.Tensor, torch.Tensor]]
+
+      :raises ValueError: If return_loss=True and batch sizes for both modalities are not equal.
+
+
+
+   .. py:method:: current_logit_scale() -> float
+
+      Return the effective logit scale as a Python float for logging.
+
+
+

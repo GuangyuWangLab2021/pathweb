@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>loki2.mil.models.src.dataset &mdash; Loki2  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+    <link rel="next" title="loki2.mil.models.src.model" href="../model/index.html" />
+    <link rel="prev" title="loki2.mil.models.src" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../../index.html" class="icon icon-home">
+            Loki2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../../index.html">loki2</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../../../index.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../../../cl/index.html">loki2.cl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../config/index.html">loki2.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../data/index.html">loki2.data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../inference/index.html">loki2.inference</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../../../index.html">loki2.mil</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../models/index.html">loki2.models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../utils/index.html">loki2.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../index.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../notebooks/Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../notebooks/Loki2_cell_type_inference.html">Loki2 Cell Type Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../notebooks/Loki2_morph_retrieve.html">Loki2 Morphology-to-Transcriptome Retrieval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../notebooks/Loki2_morph_psdtime_COAD.html">Loki2 Morphological Pseudotime Inference - Colon Cancer Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../notebooks/Loki2_morph_psdtime_PRAD.html">Loki2 Morphological Pseudotime Inference - Prostate Cancer Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../notebooks/Loki2_in_silico_immunostaining.html">Loki2 <em>in silico</em> immunostaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../notebooks/Loki2_multiple_instance_learning.html">Loki2 Cell-level Multiple Instance Learning</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">Loki2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">loki2</a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">loki2.mil</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">loki2.mil.models</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">loki2.mil.models.src</a></li>
+      <li class="breadcrumb-item active">loki2.mil.models.src.dataset</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../../_sources/autoapi/loki2/mil/models/src/dataset/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-loki2.mil.models.src.dataset">
+<span id="loki2-mil-models-src-dataset"></span><h1>loki2.mil.models.src.dataset<a class="headerlink" href="#module-loki2.mil.models.src.dataset" title="Link to this heading"></a></h1>
+<p>Dataset classes for Multiple Instance Learning (MIL) cell analysis.</p>
+<p>This module provides PyTorch Dataset classes for processing patient tile
+embeddings in a bag-of-instances format for MIL training and evaluation.</p>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.PatientTileBagDataset_v2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">loki2.mil.models.src.dataset.</span></span><span class="sig-name descname"><span class="pre">PatientTileBagDataset_v2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bag_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">27</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki2.mil.models.src.dataset.PatientTileBagDataset_v2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
+<p>Dataset for patient tile bagging with fixed bag size.</p>
+<p>This dataset groups patient data by Patient_Bagging_ID and samples
+a fixed number of tiles (bag_size) from each group for training.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.PatientTileBagDataset_v2.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.PatientTileBagDataset_v2.data" title="Link to this definition"></a></dt>
+<dd><p>Input DataFrame containing patient embeddings and labels.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.PatientTileBagDataset_v2.bag_size">
+<span class="sig-name descname"><span class="pre">bag_size</span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.PatientTileBagDataset_v2.bag_size" title="Link to this definition"></a></dt>
+<dd><p>Number of tiles to sample per bag. Defaults to 300.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.PatientTileBagDataset_v2.rng">
+<span class="sig-name descname"><span class="pre">rng</span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.PatientTileBagDataset_v2.rng" title="Link to this definition"></a></dt>
+<dd><p>Random number generator for reproducible sampling.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.PatientTileBagDataset_v2.patient_groups">
+<span class="sig-name descname"><span class="pre">patient_groups</span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.PatientTileBagDataset_v2.patient_groups" title="Link to this definition"></a></dt>
+<dd><p>Grouped DataFrame by Patient_Bagging_ID.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.PatientTileBagDataset_v2.patient_ids">
+<span class="sig-name descname"><span class="pre">patient_ids</span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.PatientTileBagDataset_v2.patient_ids" title="Link to this definition"></a></dt>
+<dd><p>List of unique Patient_Bagging_ID values.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">bag_size</span></span><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">rng</span></span><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">patient_groups</span></span><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">patient_ids</span></span><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.PatientTileBagDatasetForAttention_V7">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">loki2.mil.models.src.dataset.</span></span><span class="sig-name descname"><span class="pre">PatientTileBagDatasetForAttention_V7</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bag_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki2.mil.models.src.dataset.PatientTileBagDatasetForAttention_V7" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
+<p>Dataset for attention analysis with patient and bagging ID tracking.</p>
+<p>This dataset groups data by both Patient_ID and Patient_Bagging_ID,
+allowing for attention analysis across multiple bags per patient.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.PatientTileBagDatasetForAttention_V7.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.PatientTileBagDatasetForAttention_V7.data" title="Link to this definition"></a></dt>
+<dd><p>Input DataFrame containing patient embeddings and labels.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.PatientTileBagDatasetForAttention_V7.bag_size">
+<span class="sig-name descname"><span class="pre">bag_size</span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.PatientTileBagDatasetForAttention_V7.bag_size" title="Link to this definition"></a></dt>
+<dd><p>Number of tiles to sample per bag. Defaults to 2000.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.PatientTileBagDatasetForAttention_V7.rng">
+<span class="sig-name descname"><span class="pre">rng</span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.PatientTileBagDatasetForAttention_V7.rng" title="Link to this definition"></a></dt>
+<dd><p>Random number generator for reproducible sampling.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.PatientTileBagDatasetForAttention_V7.group_cols">
+<span class="sig-name descname"><span class="pre">group_cols</span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.PatientTileBagDatasetForAttention_V7.group_cols" title="Link to this definition"></a></dt>
+<dd><p>List of column names to group by.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.PatientTileBagDatasetForAttention_V7.patient_groups">
+<span class="sig-name descname"><span class="pre">patient_groups</span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.PatientTileBagDatasetForAttention_V7.patient_groups" title="Link to this definition"></a></dt>
+<dd><p>Grouped DataFrame by Patient_ID and Patient_Bagging_ID.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.PatientTileBagDatasetForAttention_V7.keys">
+<span class="sig-name descname"><span class="pre">keys</span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.PatientTileBagDatasetForAttention_V7.keys" title="Link to this definition"></a></dt>
+<dd><p>List of unique (Patient_ID, Patient_Bagging_ID) tuples.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">bag_size</span></span><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">rng</span></span><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">group_cols</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Patient_ID',</span> <span class="pre">'Patient_Bagging_ID']</span></em><a class="headerlink" href="#id8" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">patient_groups</span></span><a class="headerlink" href="#id9" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-name descname"><span class="pre">keys</span></span><a class="headerlink" href="#id10" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.dynamic_multiplication_factor">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.models.src.dataset.</span></span><span class="sig-name descname"><span class="pre">dynamic_multiplication_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">total_patches</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.dynamic_multiplication_factor" title="Link to this definition"></a></dt>
+<dd><p>Calculate dynamic multiplication factor for bagging.</p>
+<p>The multiplication factor increases as the number of patches decreases,
+ensuring adequate bagging for patients with fewer patches.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>total_patches</strong> – Total number of patches for a patient.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Multiplication factor between 2 and 5, rounded to nearest integer.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.create_bagging_dataframe_noreplacement_V12">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.models.src.dataset.</span></span><span class="sig-name descname"><span class="pre">create_bagging_dataframe_noreplacement_V12</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BAG_SIZE</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MIN_PATCHES_PER_WSI</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MAX_PATCHES_PER_WSI</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">27</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.create_bagging_dataframe_noreplacement_V12" title="Link to this definition"></a></dt>
+<dd><p>Create bagging dataframe without replacement.</p>
+<p>Groups patients and creates bags of tiles, ensuring no tile is reused
+within the same patient until all tiles have been used. The number of
+bags per patient is determined by a dynamic multiplication factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – Input DataFrame with columns: Patient_ID, cell_position, and
+embedding features.</p></li>
+<li><p><strong>BAG_SIZE</strong> – Number of tiles per bag.</p></li>
+<li><p><strong>MIN_PATCHES_PER_WSI</strong> – Minimum number of patches to use per WSI.</p></li>
+<li><p><strong>MAX_PATCHES_PER_WSI</strong> – Maximum number of patches to use per WSI.</p></li>
+<li><p><strong>random_seed</strong> – Random seed for reproducibility. Defaults to 27.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>DataFrame with added Patient_Bagging_ID column,</dt><dd><p>containing bagged tile data.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.create_bagging_dataframe_All_v7">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.models.src.dataset.</span></span><span class="sig-name descname"><span class="pre">create_bagging_dataframe_All_v7</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">27</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.create_bagging_dataframe_All_v7" title="Link to this definition"></a></dt>
+<dd><p>Create bagging dataframe for attention analysis.</p>
+<p>Creates a single bag per patient by setting Patient_Bagging_ID to
+the Patient_ID. This is used for full attention analysis without
+bagging.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – Input DataFrame with columns: Patient_ID, Patient_Label, and
+embedding features.</p></li>
+<li><p><strong>random_seed</strong> – Random seed for reproducibility (unused but kept for
+consistency). Defaults to 27.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>DataFrame with Patient_Bagging_ID set to Patient_ID</dt><dd><p>for each row.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.custom_collate_fn">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.models.src.dataset.</span></span><span class="sig-name descname"><span class="pre">custom_collate_fn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.custom_collate_fn" title="Link to this definition"></a></dt>
+<dd><p>Custom collate function for attention analysis dataloader.</p>
+<p>Stacks bag tensors and label tensors, and collects metadata lists
+(patient IDs, bagging IDs, cell positions) without stacking.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>batch</strong> – List of tuples from PatientTileBagDatasetForAttention_V7,
+each containing (bag_tensor, label_tensor, patient_id,
+bagging_id, cell_positions).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>bag_tensor_cat: Stacked bag tensors of shape
+(batch_size, bag_size, embedding_dim).</p></li>
+<li><p>label_tensor_cat: Stacked label tensors of shape
+(batch_size, 1).</p></li>
+<li><p>patient_id_list: List of patient ID strings.</p></li>
+<li><p>bagging_id_list: List of bagging ID strings.</p></li>
+<li><p>cell_positions_list: List of NumPy arrays of cell positions.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple containing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.prepare_data_for_attention_dataset">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.models.src.dataset.</span></span><span class="sig-name descname"><span class="pre">prepare_data_for_attention_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.prepare_data_for_attention_dataset" title="Link to this definition"></a></dt>
+<dd><p>Prepare data for attention dataset by adding necessary columns.</p>
+<p>Ensures the DataFrame has all required columns for attention analysis,
+including Patient_Bagging_ID if missing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dataframe</strong> – Input DataFrame with patient data.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>DataFrame with all required columns, including</dt><dd><p>Patient_Bagging_ID if it was missing.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If required columns (Patient_ID, Patient_Bagging_ID,
+Patient_Label, cell_position) are missing.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.create_balanced_fold_assignments">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.models.src.dataset.</span></span><span class="sig-name descname"><span class="pre">create_balanced_fold_assignments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">patient_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patient_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_folds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">27</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.create_balanced_fold_assignments" title="Link to this definition"></a></dt>
+<dd><p>Create balanced fold assignments.</p>
+<p>Ensures each fold has both positive and negative samples by manually
+distributing patients across folds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>patient_ids</strong> – Array of patient IDs.</p></li>
+<li><p><strong>patient_labels</strong> – Array of patient labels (0/1).</p></li>
+<li><p><strong>n_folds</strong> – Number of folds for cross-validation.</p></li>
+<li><p><strong>seed</strong> – Random seed for reproducibility. Defaults to 27.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>List of dictionaries, one per fold.</dt><dd><dl class="simple">
+<dt>Each dictionary contains:</dt><dd><ul class="simple">
+<li><p>’positive’: List of positive patient IDs.</p></li>
+<li><p>’negative’: List of negative patient IDs.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Dict[str, List[str]]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.mil.models.src.dataset.create_balanced_train_val_split">
+<span class="sig-prename descclassname"><span class="pre">loki2.mil.models.src.dataset.</span></span><span class="sig-name descname"><span class="pre">create_balanced_train_val_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_patient_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_patient_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">27</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.mil.models.src.dataset.create_balanced_train_val_split" title="Link to this definition"></a></dt>
+<dd><p>Create balanced train/val split.</p>
+<p>Ensures both training and validation sets have positive and negative
+samples by manually selecting at least one of each class for validation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_patient_ids</strong> – Array of training patient IDs.</p></li>
+<li><p><strong>train_patient_labels</strong> – Array of training patient labels (0/1).</p></li>
+<li><p><strong>val_size</strong> – Validation set ratio (target fraction of patients).</p></li>
+<li><p><strong>seed</strong> – Random seed for reproducibility. Defaults to 27.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>train_patients_inner: Array of inner training set patient IDs.</p></li>
+<li><p>val_patients_inner: Array of inner validation set patient IDs.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[np.ndarray, np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="loki2.mil.models.src" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../model/index.html" class="btn btn-neutral float-right" title="loki2.mil.models.src.model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+loki2.models.base
+=================
+
+.. py:module:: loki2.models.base
+
+.. autoapi-nested-parse::
+
+   Base model architectures for Loki2.
+
+   This module provides base neural network components including
+   Vision Transformer implementations.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/models/base/vision_transformer/index
+
+

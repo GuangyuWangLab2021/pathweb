@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>loki2.inference.postprocessing_cupy &mdash; Loki2  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="loki2.inference.wsi_meta" href="../wsi_meta/index.html" />
+    <link rel="prev" title="loki2.inference.overlap_cell_cleaner" href="../overlap_cell_cleaner/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Loki2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">loki2</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../cl/index.html">loki2.cl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../config/index.html">loki2.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data/index.html">loki2.data</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">loki2.inference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../mil/index.html">loki2.mil</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../models/index.html">loki2.models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">loki2.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/Loki2_cell_type_inference.html">Loki2 Cell Type Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/Loki2_morph_retrieve.html">Loki2 Morphology-to-Transcriptome Retrieval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/Loki2_morph_psdtime_COAD.html">Loki2 Morphological Pseudotime Inference - Colon Cancer Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/Loki2_morph_psdtime_PRAD.html">Loki2 Morphological Pseudotime Inference - Prostate Cancer Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/Loki2_in_silico_immunostaining.html">Loki2 <em>in silico</em> immunostaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/Loki2_multiple_instance_learning.html">Loki2 Cell-level Multiple Instance Learning</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Loki2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">loki2</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">loki2.inference</a></li>
+      <li class="breadcrumb-item active">loki2.inference.postprocessing_cupy</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/autoapi/loki2/inference/postprocessing_cupy/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-loki2.inference.postprocessing_cupy">
+<span id="loki2-inference-postprocessing-cupy"></span><h1>loki2.inference.postprocessing_cupy<a class="headerlink" href="#module-loki2.inference.postprocessing_cupy" title="Link to this heading"></a></h1>
+<p>Postprocessing of Loki2 network output, tailored for the inference pipeline.</p>
+<p>This module provides GPU-accelerated postprocessing using CuPy for efficient
+cell detection and segmentation from network predictions.</p>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">loki2.inference.postprocessing_cupy.</span></span><span class="sig-name descname"><span class="pre">DetectionCellPostProcessorCupy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wsi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../data/dataclass/wsi/index.html#loki2.data.dataclass.wsi.WSI" title="loki2.data.dataclass.wsi.WSI"><span class="pre">loki2.data.dataclass.wsi.WSI</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../data/dataclass/wsi/index.html#loki2.data.dataclass.wsi.WSIMetadata" title="loki2.data.dataclass.wsi.WSIMetadata"><span class="pre">loki2.data.dataclass.wsi.WSIMetadata</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nr_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classifier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.nn.Module</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">binary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy" title="Link to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.wsi">
+<span class="sig-name descname"><span class="pre">wsi</span></span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.wsi" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.nr_types">
+<span class="sig-name descname"><span class="pre">nr_types</span></span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.nr_types" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.resolution">
+<span class="sig-name descname"><span class="pre">resolution</span></span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.resolution" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.classifier">
+<span class="sig-name descname"><span class="pre">classifier</span></span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.classifier" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.gt">
+<span class="sig-name descname"><span class="pre">gt</span></span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.gt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.binary">
+<span class="sig-name descname"><span class="pre">binary</span></span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.binary" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.check_network_output">
+<span class="sig-name descname"><span class="pre">check_network_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predictions_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span></span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.check_network_output" title="Link to this definition"></a></dt>
+<dd><p>Check if the network output is valid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>predictions</strong> – <p>Network predictions dictionary with required keys:
+* nuclei_binary_map: Binary nucleus predictions. Shape: (B, H, W, 2)
+* nuclei_type_map: Type prediction of nuclei.</p>
+<blockquote>
+<div><p>Shape: (B, H, W, self.nr_types)</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>hv_map: Horizontal-Vertical nuclei mapping. Shape: (B, H, W, 2)</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>AssertionError</strong> – If predictions dictionary is invalid or missing required keys.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.post_process_batch">
+<span class="sig-name descname"><span class="pre">post_process_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predictions_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.post_process_batch" title="Link to this definition"></a></dt>
+<dd><p>Post process a batch of predictions and generate cell dictionary and instance predictions for each image in a list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>predictions</strong> (<em>dict</em>) – Network predictions with tokens. Keys (required):
+* nuclei_binary_map: Binary Nucleus Predictions. Shape: (B, H, W, 2)
+* nuclei_type_map: Type prediction of nuclei. Shape: (B, H, W, self.num_nuclei_classes,)
+* hv_map: Horizontal-Vertical nuclei mapping. Shape: (B, H, W, 2)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>torch.Tensor: Instance map. Each Instance has own integer. Shape: (B, H, W)</p></li>
+<li><dl class="simple">
+<dt>List of dictionaries. Each List entry is one image. Each dict contains another dict for each detected nucleus.</dt><dd><p>For each nucleus, the following information are returned: “bbox”, “centroid”, “contour”, “type_prob”, “type”</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[torch.Tensor, List[dict]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.post_process_single_image">
+<span class="sig-name descname"><span class="pre">post_process_single_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">cupy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy.post_process_single_image" title="Link to this definition"></a></dt>
+<dd><p>Process one single image and generate cell dictionary and instance predictions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pred_map</strong> (<em>cp.ndarray</em>) – Combined output of tp, np and hv branches, in the same order. Shape: (H, W, 4)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[np.ndarray, dict[int, dict]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.BatchPoolingActor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">loki2.inference.postprocessing_cupy.</span></span><span class="sig-name descname"><span class="pre">BatchPoolingActor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detection_cell_postprocessor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy" title="loki2.inference.postprocessing_cupy.DetectionCellPostProcessorCupy"><span class="pre">DetectionCellPostProcessorCupy</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_conf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.BatchPoolingActor" title="Link to this definition"></a></dt>
+<dd><p>Ray Actor for coordinating the postprocessing of batches.</p>
+<p>The postprocessing is done in a separate process to avoid blocking the main process.
+The calculation is done with the help of the <cite>DetectionCellPostProcessorCupy</cite> class.
+This actor acts as a coordinator for the postprocessing of one batch and a wrapper
+for the <cite>DetectionCellPostProcessorCupy</cite> class.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.BatchPoolingActor.detection_cell_postprocessor">
+<span class="sig-name descname"><span class="pre">detection_cell_postprocessor</span></span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.BatchPoolingActor.detection_cell_postprocessor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.BatchPoolingActor.run_conf">
+<span class="sig-name descname"><span class="pre">run_conf</span></span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.BatchPoolingActor.run_conf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.BatchPoolingActor.convert_batch_to_graph_nodes">
+<span class="sig-name descname"><span class="pre">convert_batch_to_graph_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predictions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.BatchPoolingActor.convert_batch_to_graph_nodes" title="Link to this definition"></a></dt>
+<dd><p>Postprocess a batch of predictions and convert it to graph nodes.</p>
+<p>Returns the complete graph nodes (cell dictionary), the detection nodes
+(cell detection dictionary), the cell tokens and the cell positions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predictions</strong> – <p>Network predictions dictionary with required keys:
+* nuclei_binary_map: Binary nucleus predictions. Shape: (B, H, W, 2)
+* nuclei_type_map: Type prediction of nuclei.</p>
+<blockquote>
+<div><p>Shape: (B, H, W, self.num_nuclei_classes)</p>
+</div></blockquote>
+<ul>
+<li><p>hv_map: Horizontal-Vertical nuclei mapping. Shape: (B, H, W, 2)</p></li>
+</ul>
+</p></li>
+<li><p><strong>metadata</strong> – List of metadata dictionaries for each patch.
+Each dictionary needs to contain:
+* row: Row index of the patch
+* col: Column index of the patch
+Other keys are optional.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>Complete graph nodes (cell dictionaries)</p></li>
+<li><p>Detection nodes (cell detection dictionaries)</p></li>
+<li><p>Cell tokens</p></li>
+<li><p>Cell positions</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[List[Dict[str, Any]], List[Dict[str, Any]], List[torch.Tensor], List[torch.Tensor]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.BatchPoolingActor.convert_patch_to_graph_nodes">
+<span class="sig-name descname"><span class="pre">convert_patch_to_graph_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">patch_cell_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patch_metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patch_tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.BatchPoolingActor.convert_patch_to_graph_nodes" title="Link to this definition"></a></dt>
+<dd><p>Extract information from a single patch and convert it to graph nodes for a global view</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>patch_cell_dict</strong> (<em>dict</em>) – Dictionary containing the cell information.
+Each dictionary needs to contain the following keys:
+* bbox: Bounding box of the cell
+* centroid: Centroid of the cell
+* contour: Contour of the cell
+* type_prob: Probability of the cell type
+* type: Type of the cell</p></li>
+<li><p><strong>patch_metadata</strong> (<em>dict</em>) – Metadata dictionary for the patch.
+Each dictionary needs to contain the following keys:
+* row: Row index of the patch
+* col: Column index of the patch
+Other keys are optional but are stored in the graph nodes for later use</p></li>
+<li><p><strong>patch_tokens</strong> (<em>torch.Tensor</em>) – Tokens of the patch. Shape: (D, H, W)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>List[dict]: Complete graph nodes (cell dictionary) of the patch</p></li>
+<li><p>List[dict]: Detection nodes (cell detection dictionary) of the patch</p></li>
+<li><p>List[torch.Tensor]: Cell tokens of the patch</p></li>
+<li><p>List[torch.Tensor]: Cell positions (centroid) of the patch</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[List[dict], List[dict], List[torch.Tensor], List[torch.Tensor]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.get_cell_position">
+<span class="sig-prename descclassname"><span class="pre">loki2.inference.postprocessing_cupy.</span></span><span class="sig-name descname"><span class="pre">get_cell_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1024</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.get_cell_position" title="Link to this definition"></a></dt>
+<dd><p>Get cell position as a list indicating which borders the cell touches.</p>
+<p>Entry is 1 if cell touches the border: [top, right, down, left]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox</strong> – Bounding box of cell as array of shape (2, 2) in (h, w) format.</p></li>
+<li><p><strong>patch_size</strong> – Patch size. Defaults to 1024.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>List with 4 integers [top, right, down, left] indicating</dt><dd><p>border contact (1) or not (0).</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.get_cell_position_marging">
+<span class="sig-prename descclassname"><span class="pre">loki2.inference.postprocessing_cupy.</span></span><span class="sig-name descname"><span class="pre">get_cell_position_marging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1024</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">64</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.get_cell_position_marging" title="Link to this definition"></a></dt>
+<dd><p>Get the status of the cell, describing the cell position.</p>
+<p>A cell is either in the mid (0) or at one of the borders (1-8).
+Numbers are assigned clockwise, starting from top left:
+- top left = 1, top = 2, top right = 3, right = 4
+- bottom right = 5, bottom = 6, bottom left = 7, left = 8
+- Mid status is denoted by 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox</strong> – Bounding box of cell as array of shape (2, 2).</p></li>
+<li><p><strong>patch_size</strong> – Patch size. Defaults to 1024.</p></li>
+<li><p><strong>margin</strong> – Margin size. Defaults to 64.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cell status code (0-8).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="loki2.inference.postprocessing_cupy.get_edge_patch">
+<span class="sig-prename descclassname"><span class="pre">loki2.inference.postprocessing_cupy.</span></span><span class="sig-name descname"><span class="pre">get_edge_patch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.inference.postprocessing_cupy.get_edge_patch" title="Link to this definition"></a></dt>
+<dd><p>Get the edge patches of a cell located at the border.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>position</strong> – Position of the cell encoded as a list [top, right, down, left]
+where 1 indicates contact with that border.</p></li>
+<li><p><strong>row</strong> – Row position of the patch.</p></li>
+<li><p><strong>col</strong> – Column position of the patch.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of edge patches, each patch encoded as [row, col].</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[List[int]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../overlap_cell_cleaner/index.html" class="btn btn-neutral float-left" title="loki2.inference.overlap_cell_cleaner" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../wsi_meta/index.html" class="btn btn-neutral float-right" title="loki2.inference.wsi_meta" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+loki2.mil.models
+================
+
+.. py:module:: loki2.mil.models
+
+.. autoapi-nested-parse::
+
+   Loki2 MIL model implementations and training scripts.
+
+   This submodule contains the core MIL model architecture, training functions,
+   and cross-validation scripts for different cancer types and tasks.
+
+
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/mil/models/src/index
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/mil/models/TCGA-Loki2_MILCell_blca_metastasis_5fold/index
+   /autoapi/loki2/mil/models/TCGA-Loki2_MILCell_blca_stage_5fold/index
+
+

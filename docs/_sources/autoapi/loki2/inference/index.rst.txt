@@ -1,0 +1,28 @@
+loki2.inference
+===============
+
+.. py:module:: loki2.inference
+
+.. autoapi-nested-parse::
+
+   Inference module for Loki2.
+
+   This module provides inference pipelines for processing whole slide images,
+   including in-memory and disk-based processing options.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/inference/cli/index
+   /autoapi/loki2/inference/inference_disk/index
+   /autoapi/loki2/inference/inference_memory/index
+   /autoapi/loki2/inference/overlap_cell_cleaner/index
+   /autoapi/loki2/inference/postprocessing_cupy/index
+   /autoapi/loki2/inference/wsi_meta/index
+
+

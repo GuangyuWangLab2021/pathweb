@@ -1,0 +1,101 @@
+loki2.inference.inference_memory
+================================
+
+.. py:module:: loki2.inference.inference_memory
+
+.. autoapi-nested-parse::
+
+   Loki2 Inference Pipeline for Whole Slide Images (WSI) in Memory.
+
+   This module provides an in-memory inference pipeline for CellViT models,
+   including functionalities for processing WSIs, cleaning GeoJSON outputs,
+   and handling various output formats.
+
+   Patches dataset requirements:
+   - Patch-Size must be 1024, with overlap of 64
+
+
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:function:: clean_geojson(input_fp: str, output_fp: str, *, minify: bool = True, gzip_if_ext: bool = True, drop_empty_props: bool = True) -> None
+
+   Clean and optimize a GeoJSON file.
+
+   Read a GeoJSON (FeatureCollection or list of Features),
+   remove null/empty geometries, make valid via buffer(0),
+   cast coordinates to int, optionally strip empty properties,
+   and write a minified (and optionally gzipped) output.
+
+   Geometry/topology is preserved except for make-valid (buffer(0)), and
+   coordinates are integer-cast exactly as before.
+
+   :param input_fp: Path to input GeoJSON file.
+   :param output_fp: Path to output GeoJSON file.
+   :param minify: Whether to minify JSON output. Defaults to True.
+   :param gzip_if_ext: Whether to gzip if output has .gz extension. Defaults to True.
+   :param drop_empty_props: Whether to drop empty properties. Defaults to True.
+
+   :raises ValueError: If GeoJSON format is unexpected.
+
+
+.. py:class:: CellViTInferenceMemory(model_path: Union[pathlib.Path, str], gpu: int, outdir: Union[pathlib.Path, str], classifier_path: Union[pathlib.Path, str] = None, binary: bool = False, batch_size: int = 8, patch_size: int = 1024, overlap: int = 64, geojson: bool = False, graph: bool = False, compression: bool = False, geojson_gz: bool = False, enforce_mixed_precision: bool = False)
+
+   Bases: :py:obj:`loki2.inference.inference_disk.CellViTInference`
+
+
+   CellViT Inference class for in-memory processing of WSIs.
+
+   This class extends `CellViTInference` to handle WSI processing entirely in memory,
+   which is suitable for smaller WSIs or when disk I/O is a bottleneck.
+   It integrates with Ray for parallel processing of patches.
+
+   :param model_path: Path to model checkpoint.
+   :param gpu: CUDA GPU ID to use.
+   :param outdir: Output directory to store results.
+   :param classifier_path: Path to a classifier (.pth) to exchange UniSeg classification
+                           results with a new scheme. Defaults to None.
+   :param binary: If just a binary detection/segmentation should be performed.
+                  Cannot be used with classifier. Defaults to False.
+   :param batch_size: Batch-size for inference. Defaults to 8.
+   :param patch_size: Size of patches to extract. Defaults to 1024.
+   :param overlap: Overlap between patches in pixels. Defaults to 64.
+   :param geojson: If a geojson export should be performed. Defaults to False.
+   :param graph: If a graph export should be performed. Defaults to False.
+   :param compression: If a snappy compression should be performed. Defaults to False.
+   :param geojson_gz: If a compressed geojson.gz export should be performed with cleaned
+                      geometry. Defaults to False.
+   :param enforce_mixed_precision: Using PyTorch autocasting with dtype float16 to speed
+                                   up inference. Can be used to enforce amp inference even for networks trained
+                                   without amp. Otherwise, the network setting is used. Defaults to False.
+
+
+   .. py:attribute:: outdir
+
+
+   .. py:attribute:: geojson_gz
+
+
+   .. py:method:: process_wsi(wsi_path: Union[pathlib.Path, str], wsi_properties: dict = {}, resolution: float = 0.25, apply_prefilter: bool = True, filter_patches: bool = False, **kwargs) -> None
+
+      Process a whole slide image with CellViT.
+
+      :param wsi_path: Path to the whole slide image.
+      :type wsi_path: Union[Path, str]
+      :param wsi_properties: Optional WSI properties,
+                             Allowed keys are 'slide_mpp' and 'magnification'. Defaults to {}.
+      :type wsi_properties: dict, optional
+      :param resolution: Target resolution. Defaults to 0.25.
+      :type resolution: float, optional
+      :param apply_prefilter: Prefilter. Defaults to True.
+      :type apply_prefilter: bool, optional
+      :param filter_patches: Filter patches after processing. Defaults to False.
+      :type filter_patches: bool, optional
+
+
+

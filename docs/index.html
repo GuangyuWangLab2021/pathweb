@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loki2 documentation &mdash; Loki2  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="autoapi/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            Loki2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_cell_type_inference.html">Loki2 Cell Type Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_morph_retrieve.html">Loki2 Morphology-to-Transcriptome Retrieval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html">Loki2 Morphological Pseudotime Inference - Colon Cancer Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_PRAD.html">Loki2 Morphological Pseudotime Inference - Prostate Cancer Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html">Loki2 <em>in silico</em> immunostaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_multiple_instance_learning.html">Loki2 Cell-level Multiple Instance Learning</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Loki2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Loki2 documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="loki2-documentation">
+<h1>Loki2 documentation<a class="headerlink" href="#loki2-documentation" title="Link to this heading"></a></h1>
+<p>Loki2 is a single-cell pathology foundation model that uses an encoder–decoder architecture to translate nuclear morphology into molecular phenotype. Loki2 is trained on UniSeg, a pan-tissue resource of 15 million cells with paired segmentation and transcriptomic measurements from multiple spatial technologies. This training strategy enables three capabilities from H&amp;E images alone: universal cell type inference, in silico spatial transcriptomics by retrieving transcriptionally matched cells from reference atlases, and continuous morphological pseudotime inference of cell state transitions. By aggregating single-cell features, Loki2 also supports whole-slide clinical tasks. These results show that routine histology contains far richer molecular and cellular information than previously recognized, and that Loki2 provides a general framework for accessing this information across tissues, disease contexts, and scales.</p>
+<p>Please find our github on <a class="reference external" href="https://github.com/GuangyuWangLab2021/Loki2">GitHub</a>.</p>
+<a class="reference internal image-reference" href="_images/Loki2.png"><img alt="_images/Loki2.png" src="_images/Loki2.png" style="width: 100%;" /></a>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/loki2/index.html">loki2</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_cell_type_inference.html">Loki2 Cell Type Inference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_cell_type_inference.html#data-requirements">Data Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_cell_type_inference.html#cell-detection">Cell Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_cell_type_inference.html#load-sample">Load Sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_cell_type_inference.html#plot-image">Plot Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_cell_type_inference.html#plot-cell-types">Plot Cell Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_cell_type_inference.html#plot-umap">Plot UMAP</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_morph_retrieve.html">Loki2 Morphology-to-Transcriptome Retrieval</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_retrieve.html#data-requirements">Data Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_retrieve.html#prepare-training-data">Prepare Training Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_retrieve.html#training">Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_retrieve.html#retrieve-from-scrna-data">Retrieve from scRNA Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_retrieve.html#load-retrieval-results">Load Retrieval Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_retrieve.html#plot-scrna-data">Plot scRNA Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_retrieve.html#plot-loki2-retrieval-results">Plot Loki2 Retrieval Results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html">Loki2 Morphological Pseudotime Inference - Colon Cancer Samples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#data-requirements">Data Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#load-data">Load Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#assemble-the-three-samples-on-one-slide-for-visualization">Assemble the Three Samples on One Slide for Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#check-the-topology-and-gradient-in-image-embeddings-among-samples">Check the Topology and Gradient in Image Embeddings Among Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#prepare-data-and-perform-clustering">Prepare Data and Perform Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#select-starting-cell-for-pseudotime">Select Starting Cell for Pseudotime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#infer-pseudotime">Infer Pseudotime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#visualize-pseudotime">Visualize Pseudotime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#plot-trajectory">Plot Trajectory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_PRAD.html">Loki2 Morphological Pseudotime Inference - Prostate Cancer Sample</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_PRAD.html#data-requirements">Data Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_PRAD.html#load-data">Load Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_PRAD.html#visualize-region-of-interest">Visualize Region of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_PRAD.html#prepare-data-and-perform-clustering">Prepare Data and Perform Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_PRAD.html#select-starting-cell-for-pseudotime">Select Starting Cell for Pseudotime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_PRAD.html#infer-pseudotime">Infer Pseudotime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_PRAD.html#visualize-pseudotime">Visualize Pseudotime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_PRAD.html#plot-trajectory">Plot Trajectory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html">Loki2 <em>in silico</em> immunostaining</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#data-requirements">Data Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#examples-of-panck-marker">Examples of PanCK Marker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#one-time-prep-generate-per-patch-json-and-embeddings">One-time prep: generate per-patch JSON and embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#inspect-available-patches">Inspect available patches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#define-train-val-test-patch-splits">Define train/val/test patch splits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#build-datasets">Build datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#preprocess-features-and-targets">Preprocess features and targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#train-lightgbm-with-patch-level-validation">Train LightGBM with patch-level validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#optional-test-set-evaluation">Optional: test set evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#save-model-and-predictions">Save model and predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#visualize-predictions">Visualize predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#patch-level-gt-vs-pred-visualization">Patch-level GT vs Pred visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#examples-of-cd45ro-marker">Examples of CD45RO Marker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#id2">One-time prep: generate per-patch JSON and embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#id3">Inspect available patches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#id4">Define train/val/test patch splits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#id5">Build datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#id6">Preprocess features and targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#id7">Train LightGBM with patch-level validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#id8">Optional: test set evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#id9">Save model and predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#id10">Visualize predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#id11">Patch-level GT vs Pred visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_multiple_instance_learning.html">Loki2 Cell-level Multiple Instance Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_multiple_instance_learning.html#mil-model">MIL Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_multiple_instance_learning.html#plot-attention-heatmaps-on-wsi">Plot Attention Heatmaps on WSI</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="autoapi/index.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

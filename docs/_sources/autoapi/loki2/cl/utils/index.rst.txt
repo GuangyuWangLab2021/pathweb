@@ -1,0 +1,37 @@
+loki2.cl.utils
+==============
+
+.. py:module:: loki2.cl.utils
+
+.. autoapi-nested-parse::
+
+   Utilities for interacting with Loki2 outputs and .pt/.json files.
+
+   This module provides utilities for loading and processing Loki2 model outputs,
+   including embeddings and metadata files.
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:function:: setup_dummy_modules() -> None
+
+   Sets up dummy modules for 'loki2' and its submodules.
+
+   This is required to simulate the module structure that the torch model
+   expects when unpickling objects that reference e.g. 'loki2.data.dataclass.cell_graph'.
+
+
+.. py:function:: load_and_print_tensor(file_path: str) -> Any
+
+   Load a PyTorch object from a given file path.
+
+   :param file_path: Path to the .pt file.
+
+   :returns: The loaded Python object (typically a tensor or model state).
+   :rtype: Any
+
+

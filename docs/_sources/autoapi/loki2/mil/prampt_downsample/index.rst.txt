@@ -1,0 +1,46 @@
+loki2.mil.prampt_downsample
+===========================
+
+.. py:module:: loki2.mil.prampt_downsample
+
+.. autoapi-nested-parse::
+
+   Downsampling module for MIL data preparation.
+
+   This module provides functionality to downsample patient or sample data
+   by maintaining consistent sampling ratios across groups.
+
+
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:function:: downsample_by_group(df: pandas.DataFrame, id_col: str = 'Patient_ID', target_avg_rows_per_patient: int = 10000, save_path: Union[str, pathlib.Path] = './data/downsample', random_seed: int = 27) -> pandas.DataFrame
+
+   Downsample each Patient_ID or Sample_ID by the same ratio.
+
+   Ensures the average number of rows per patient reaches the target.
+   The sampling ratio for each sample must be consistent, but the overall
+   mean needs to reach the target value.
+
+   :param df: Input DataFrame containing patient/sample data.
+   :param id_col: Column name to group by (e.g., "Patient_ID" or "sample_name").
+                  Defaults to "Patient_ID".
+   :param target_avg_rows_per_patient: Target average number of rows per patient.
+                                       Defaults to 10000.
+   :param save_path: Directory path to save the downsampled parquet file.
+                     Defaults to "./data/downsample".
+   :param random_seed: Random seed for reproducibility. Defaults to 27.
+
+   :returns: Downsampled DataFrame with the same structure as input.
+   :rtype: pd.DataFrame
+
+   :raises ValueError: If the id_col is not found in the DataFrame columns.
+
+
+.. py:data:: parser
+

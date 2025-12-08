@@ -1,0 +1,111 @@
+loki2.mil.prampt_generate.blca_stage_prampt
+===========================================
+
+.. py:module:: loki2.mil.prampt_generate.blca_stage_prampt
+
+.. autoapi-nested-parse::
+
+   Generate PRAMPT data for BLCA stage analysis.
+
+   This script loads cell embeddings from .pt files, samples balanced subsets
+   of cells by disease stage, and saves the merged embeddings as a parquet file
+   for MIL training.
+
+
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:function:: setup_dummy_modules() -> None
+
+   Sets up dummy modules for 'loki2' and its submodules.
+
+   This is required to simulate the module structure that the torch model
+   expects when unpickling objects that reference e.g. 'loki2.data.dataclass.cell_graph'.
+
+
+.. py:function:: load_tensor(file_path: Union[str, pathlib.Path]) -> Any
+
+   Load torch object from .pt file with dummy loki2 module support.
+
+   Sets up dummy loki2 modules before loading to handle unpickling of
+   objects that reference loki2.data.dataclass.cell_graph classes.
+
+   :param file_path: Path to the .pt file to load.
+
+   :returns: Loaded torch object (typically containing cell embeddings and positions).
+
+
+.. py:function:: load_stage_data() -> pandas.DataFrame
+
+   Load Disease_Stage data from TCGA_GRADE.txt.
+
+   :returns:
+
+             DataFrame with columns: Patient_ID, Disease_Stage,
+                 and sample_name (Patient_ID + '-01Z-00-DX1').
+   :rtype: pd.DataFrame
+
+
+.. py:function:: get_balanced_sample_names(stage_df: pandas.DataFrame, target_samples_per_stage: int = 20) -> Tuple[List[str], List[str], List[str], List[str]]
+
+   Get balanced sample names for stage 0 and stage 1.
+
+   :param stage_df: DataFrame with Disease_Stage and sample_name columns.
+   :param target_samples_per_stage: Target number of samples per stage.
+                                    Defaults to 20.
+
+   :returns:     - stage_0_samples: List of all stage 0 sample names.
+                 - stage_1_samples: List of all stage 1 sample names.
+                 - selected_stage_0: List of selected stage 0 sample names.
+                 - selected_stage_1: List of selected stage 1 sample names.
+   :rtype: Tuple containing
+
+
+.. py:function:: process_stage_samples(stage_samples: List[str], target_count: int, stage_num: int, directory_path: Union[str, pathlib.Path], stage_df: pandas.DataFrame, records: List[pandas.DataFrame], sample_ratio: float = 0.1) -> List[str]
+
+   Process all samples for a stage until target is reached.
+
+   Loads and processes cell embeddings from .pt files, sampling a subset
+   of cells based on sample_ratio, and appends to records list.
+
+   :param stage_samples: List of sample names to process.
+   :param target_count: Target number of successfully processed samples.
+   :param stage_num: Stage number (0 or 1) for logging.
+   :param directory_path: Directory containing _cells.pt files.
+   :param stage_df: DataFrame with Disease_Stage information.
+   :param records: List to append processed DataFrames to.
+   :param sample_ratio: Ratio of cells to sample from each file. Defaults to 0.1.
+
+   :returns: List of successfully processed sample names.
+   :rtype: List[str]
+
+
+.. py:data:: stage_df
+
+.. py:data:: target_samples_per_stage
+   :value: 60
+
+
+.. py:data:: sample_ratio
+   :value: 0.1
+
+
+.. py:data:: directory_path
+   :value: './data/TCGA/BLCA'
+
+
+.. py:data:: records
+   :value: []
+
+
+.. py:data:: successful_stage_0
+
+.. py:data:: successful_stage_1
+
+.. py:data:: merged_df
+

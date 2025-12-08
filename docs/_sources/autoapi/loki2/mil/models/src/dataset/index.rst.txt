@@ -1,0 +1,260 @@
+loki2.mil.models.src.dataset
+============================
+
+.. py:module:: loki2.mil.models.src.dataset
+
+.. autoapi-nested-parse::
+
+   Dataset classes for Multiple Instance Learning (MIL) cell analysis.
+
+   This module provides PyTorch Dataset classes for processing patient tile
+   embeddings in a bag-of-instances format for MIL training and evaluation.
+
+
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:class:: PatientTileBagDataset_v2(dataframe: pandas.DataFrame, bag_size: int = 300, random_seed: int = 27)
+
+   Bases: :py:obj:`torch.utils.data.Dataset`
+
+
+   Dataset for patient tile bagging with fixed bag size.
+
+   This dataset groups patient data by Patient_Bagging_ID and samples
+   a fixed number of tiles (bag_size) from each group for training.
+
+   .. attribute:: data
+
+      Input DataFrame containing patient embeddings and labels.
+
+   .. attribute:: bag_size
+
+      Number of tiles to sample per bag. Defaults to 300.
+
+   .. attribute:: rng
+
+      Random number generator for reproducible sampling.
+
+   .. attribute:: patient_groups
+
+      Grouped DataFrame by Patient_Bagging_ID.
+
+   .. attribute:: patient_ids
+
+      List of unique Patient_Bagging_ID values.
+
+
+   .. py:attribute:: data
+
+
+   .. py:attribute:: bag_size
+
+
+   .. py:attribute:: rng
+
+
+   .. py:attribute:: patient_groups
+
+
+   .. py:attribute:: patient_ids
+
+
+.. py:class:: PatientTileBagDatasetForAttention_V7(dataframe: pandas.DataFrame, bag_size: int = 2000, random_seed: int = 42)
+
+   Bases: :py:obj:`torch.utils.data.Dataset`
+
+
+   Dataset for attention analysis with patient and bagging ID tracking.
+
+   This dataset groups data by both Patient_ID and Patient_Bagging_ID,
+   allowing for attention analysis across multiple bags per patient.
+
+   .. attribute:: data
+
+      Input DataFrame containing patient embeddings and labels.
+
+   .. attribute:: bag_size
+
+      Number of tiles to sample per bag. Defaults to 2000.
+
+   .. attribute:: rng
+
+      Random number generator for reproducible sampling.
+
+   .. attribute:: group_cols
+
+      List of column names to group by.
+
+   .. attribute:: patient_groups
+
+      Grouped DataFrame by Patient_ID and Patient_Bagging_ID.
+
+   .. attribute:: keys
+
+      List of unique (Patient_ID, Patient_Bagging_ID) tuples.
+
+
+   .. py:attribute:: data
+
+
+   .. py:attribute:: bag_size
+
+
+   .. py:attribute:: rng
+
+
+   .. py:attribute:: group_cols
+      :value: ['Patient_ID', 'Patient_Bagging_ID']
+
+
+
+   .. py:attribute:: patient_groups
+
+
+   .. py:attribute:: keys
+
+
+.. py:function:: dynamic_multiplication_factor(total_patches: int) -> int
+
+   Calculate dynamic multiplication factor for bagging.
+
+   The multiplication factor increases as the number of patches decreases,
+   ensuring adequate bagging for patients with fewer patches.
+
+   :param total_patches: Total number of patches for a patient.
+
+   :returns: Multiplication factor between 2 and 5, rounded to nearest integer.
+   :rtype: int
+
+
+.. py:function:: create_bagging_dataframe_noreplacement_V12(df: pandas.DataFrame, BAG_SIZE: int, MIN_PATCHES_PER_WSI: int, MAX_PATCHES_PER_WSI: int, random_seed: int = 27) -> pandas.DataFrame
+
+   Create bagging dataframe without replacement.
+
+   Groups patients and creates bags of tiles, ensuring no tile is reused
+   within the same patient until all tiles have been used. The number of
+   bags per patient is determined by a dynamic multiplication factor.
+
+   :param df: Input DataFrame with columns: Patient_ID, cell_position, and
+              embedding features.
+   :param BAG_SIZE: Number of tiles per bag.
+   :param MIN_PATCHES_PER_WSI: Minimum number of patches to use per WSI.
+   :param MAX_PATCHES_PER_WSI: Maximum number of patches to use per WSI.
+   :param random_seed: Random seed for reproducibility. Defaults to 27.
+
+   :returns:
+
+             DataFrame with added Patient_Bagging_ID column,
+                 containing bagged tile data.
+   :rtype: pd.DataFrame
+
+
+.. py:function:: create_bagging_dataframe_All_v7(df: pandas.DataFrame, random_seed: int = 27) -> pandas.DataFrame
+
+   Create bagging dataframe for attention analysis.
+
+   Creates a single bag per patient by setting Patient_Bagging_ID to
+   the Patient_ID. This is used for full attention analysis without
+   bagging.
+
+   :param df: Input DataFrame with columns: Patient_ID, Patient_Label, and
+              embedding features.
+   :param random_seed: Random seed for reproducibility (unused but kept for
+                       consistency). Defaults to 27.
+
+   :returns:
+
+             DataFrame with Patient_Bagging_ID set to Patient_ID
+                 for each row.
+   :rtype: pd.DataFrame
+
+
+.. py:function:: custom_collate_fn(batch: List[Tuple[torch.Tensor, torch.Tensor, str, str, numpy.ndarray]]) -> Tuple[torch.Tensor, torch.Tensor, List[str], List[str], List[numpy.ndarray]]
+
+   Custom collate function for attention analysis dataloader.
+
+   Stacks bag tensors and label tensors, and collects metadata lists
+   (patient IDs, bagging IDs, cell positions) without stacking.
+
+   :param batch: List of tuples from PatientTileBagDatasetForAttention_V7,
+                 each containing (bag_tensor, label_tensor, patient_id,
+                 bagging_id, cell_positions).
+
+   :returns:
+
+                 - bag_tensor_cat: Stacked bag tensors of shape
+                   (batch_size, bag_size, embedding_dim).
+                 - label_tensor_cat: Stacked label tensors of shape
+                   (batch_size, 1).
+                 - patient_id_list: List of patient ID strings.
+                 - bagging_id_list: List of bagging ID strings.
+                 - cell_positions_list: List of NumPy arrays of cell positions.
+   :rtype: Tuple containing
+
+
+.. py:function:: prepare_data_for_attention_dataset(dataframe: pandas.DataFrame) -> pandas.DataFrame
+
+   Prepare data for attention dataset by adding necessary columns.
+
+   Ensures the DataFrame has all required columns for attention analysis,
+   including Patient_Bagging_ID if missing.
+
+   :param dataframe: Input DataFrame with patient data.
+
+   :returns:
+
+             DataFrame with all required columns, including
+                 Patient_Bagging_ID if it was missing.
+   :rtype: pd.DataFrame
+
+   :raises ValueError: If required columns (Patient_ID, Patient_Bagging_ID,
+       Patient_Label, cell_position) are missing.
+
+
+.. py:function:: create_balanced_fold_assignments(patient_ids: numpy.ndarray, patient_labels: numpy.ndarray, n_folds: int, seed: int = 27) -> List[Dict[str, List[str]]]
+
+   Create balanced fold assignments.
+
+   Ensures each fold has both positive and negative samples by manually
+   distributing patients across folds.
+
+   :param patient_ids: Array of patient IDs.
+   :param patient_labels: Array of patient labels (0/1).
+   :param n_folds: Number of folds for cross-validation.
+   :param seed: Random seed for reproducibility. Defaults to 27.
+
+   :returns:
+
+             List of dictionaries, one per fold.
+                 Each dictionary contains:
+                     - 'positive': List of positive patient IDs.
+                     - 'negative': List of negative patient IDs.
+   :rtype: List[Dict[str, List[str]]]
+
+
+.. py:function:: create_balanced_train_val_split(train_patient_ids: numpy.ndarray, train_patient_labels: numpy.ndarray, val_size: float, seed: int = 27) -> Tuple[numpy.ndarray, numpy.ndarray]
+
+   Create balanced train/val split.
+
+   Ensures both training and validation sets have positive and negative
+   samples by manually selecting at least one of each class for validation.
+
+   :param train_patient_ids: Array of training patient IDs.
+   :param train_patient_labels: Array of training patient labels (0/1).
+   :param val_size: Validation set ratio (target fraction of patients).
+   :param seed: Random seed for reproducibility. Defaults to 27.
+
+   :returns:
+
+             A tuple containing:
+                 - train_patients_inner: Array of inner training set patient IDs.
+                 - val_patients_inner: Array of inner validation set patient IDs.
+   :rtype: Tuple[np.ndarray, np.ndarray]
+
+

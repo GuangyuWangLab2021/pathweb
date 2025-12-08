@@ -1,0 +1,24 @@
+loki2.mil.prampt_generate
+=========================
+
+.. py:module:: loki2.mil.prampt_generate
+
+.. autoapi-nested-parse::
+
+   PRAMPT data generation scripts.
+
+   This submodule contains scripts for generating parquet files from cell
+   embedding .pt files for MIL training.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/mil/prampt_generate/blca_metastasis_prampt/index
+   /autoapi/loki2/mil/prampt_generate/blca_stage_prampt/index
+
+

@@ -1,0 +1,26 @@
+loki2.models
+============
+
+.. py:module:: loki2.models
+
+.. autoapi-nested-parse::
+
+   Model architectures for Loki2.
+
+   This module provides neural network models for cell segmentation,
+   classification, and feature extraction from whole slide images.
+
+
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/models/base/index
+   /autoapi/loki2/models/cell_segmentation/index
+   /autoapi/loki2/models/classifier/index
+   /autoapi/loki2/models/utils/index
+
+

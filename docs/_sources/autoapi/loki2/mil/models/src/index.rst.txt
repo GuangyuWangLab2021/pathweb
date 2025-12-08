@@ -1,0 +1,26 @@
+loki2.mil.models.src
+====================
+
+.. py:module:: loki2.mil.models.src
+
+.. autoapi-nested-parse::
+
+   Core MIL model components.
+
+   This submodule contains the dataset classes, model architecture, training
+   functions, and utility functions for MIL model development.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/mil/models/src/dataset/index
+   /autoapi/loki2/mil/models/src/model/index
+   /autoapi/loki2/mil/models/src/train/index
+   /autoapi/loki2/mil/models/src/utils/index
+
+

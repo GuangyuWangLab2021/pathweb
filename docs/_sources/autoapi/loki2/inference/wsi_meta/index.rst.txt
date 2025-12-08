@@ -1,0 +1,37 @@
+loki2.inference.wsi_meta
+========================
+
+.. py:module:: loki2.inference.wsi_meta
+
+.. autoapi-nested-parse::
+
+   Helper functions to load WSI metadata for Loki2.
+
+   This module provides utilities for extracting and processing metadata
+   from whole slide images, including MPP (microns per pixel) and magnification.
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:function:: load_wsi_meta(wsi_path: pathlib.Path, wsi_properties: Optional[Dict[str, Any]], resolution: float, logger: logging.Logger) -> Tuple[Dict[str, float], float]
+
+   Load WSI metadata and compute target MPP.
+
+   :param wsi_path: Path to the WSI file.
+   :param wsi_properties: WSI properties dictionary. Optional keys:
+                          "slide_mpp", "magnification".
+   :param resolution: Target resolution of the network (MPP).
+   :param logger: Logger instance for logging messages.
+
+   :returns:     - WSI properties dictionary with 'mpp' and 'magnification'
+                 - Target MPP for processing
+   :rtype: Tuple[Dict[str, float], float]
+
+   :raises NotImplementedError: If MPP or magnification cannot be determined.
+   :raises RuntimeError: If WSI MPP is invalid or incompatible with network resolution.
+
+

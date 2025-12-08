@@ -1,0 +1,27 @@
+loki2.cl
+========
+
+.. py:module:: loki2.cl
+
+.. autoapi-nested-parse::
+
+   Contrastive learning module for Loki2.
+
+   This module provides functionality for training contrastive learning models
+   to align morphological and transcriptomic embeddings.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/loki2/cl/model_cl/index
+   /autoapi/loki2/cl/prepare_training/index
+   /autoapi/loki2/cl/project_raw_embeddings/index
+   /autoapi/loki2/cl/train_projection_wds/index
+   /autoapi/loki2/cl/utils/index
+
+

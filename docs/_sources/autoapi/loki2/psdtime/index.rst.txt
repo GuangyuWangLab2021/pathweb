@@ -1,0 +1,88 @@
+loki2.psdtime
+=============
+
+.. py:module:: loki2.psdtime
+
+.. autoapi-nested-parse::
+
+   Utility helpers for pseudotime inference, clustering, and visualization.
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:function:: write_txt(file_path: str | pathlib.Path, data: Iterable[str]) -> None
+
+   Write one entry per line to a text file.
+
+   :param file_path: Path to the output text file.
+   :param data: Iterable of strings to write, one per line.
+
+
+.. py:function:: load_txt(file_path: str | pathlib.Path) -> numpy.ndarray
+
+   Read a text file that has one value per line and return a string array.
+
+   :param file_path: Path to the input text file.
+
+   :returns: Array of strings, one per line in the file.
+   :rtype: np.ndarray
+
+
+.. py:function:: get_kmeans(x: numpy.ndarray, target_clusters: int = 10, scale: bool = False) -> numpy.ndarray
+
+   Cluster observations using k-means and return the cluster labels.
+
+   :param x: Input data array of shape (n_samples, n_features).
+   :param target_clusters: Number of clusters to form. Defaults to 10.
+   :param scale: Whether to standardize the data before clustering. Defaults to False.
+
+   :returns: Cluster labels as string array of shape (n_samples,).
+   :rtype: np.ndarray
+
+
+.. py:function:: get_umap(embedding: Any, n_components: int = 3, random_state: int | None = 2024, n_neighbors: int = 15, init: str = 'pca', metric: str = 'cosine') -> numpy.ndarray
+
+   Run UMAP on the provided embedding and return the transformed coordinates.
+
+   :param embedding: Input embedding matrix (will be converted to NumPy array).
+   :param n_components: Number of dimensions for the reduced space. Defaults to 3.
+   :param random_state: Random seed for reproducibility. Defaults to 2024.
+   :param n_neighbors: Number of neighbors for UMAP. Defaults to 15.
+   :param init: Initialization method. Defaults to 'pca'.
+   :param metric: Distance metric. Defaults to 'cosine'.
+
+   :returns: UMAP-transformed coordinates of shape (n_samples, n_components).
+   :rtype: np.ndarray
+
+
+.. py:function:: get_pca(embedding: Any, n_components: int = 15) -> numpy.ndarray
+
+   Project embedding onto PCA axes.
+
+   :param embedding: Input embedding matrix (will be converted to NumPy array).
+   :param n_components: Number of principal components. Defaults to 15.
+
+   :returns: PCA-transformed coordinates of shape (n_samples, n_components).
+   :rtype: np.ndarray
+
+
+.. py:function:: infer_pseudotime_palantir(ad: Any, start_cell: str, output_dir: str | pathlib.Path, name: str, *, n_components: int = 15, knn: int = 100, num_waypoints: int = 500) -> None
+
+   Run Palantir pseudotime inference on AnnData object and persist plots/results.
+
+   The defaults mirror prior behavior; override if you want a different UMAP dimensionality,
+   neighborhood size, or waypoint density.
+
+   :param ad: AnnData object containing single-cell data.
+   :param start_cell: Cell ID to use as the starting point for pseudotime.
+   :param output_dir: Directory to save output plots and results.
+   :param name: Name identifier for output files.
+   :param n_components: Number of components for multiscale space. Defaults to 15.
+   :param knn: Number of nearest neighbors for graph construction. Defaults to 100.
+   :param num_waypoints: Number of waypoints for trajectory inference. Defaults to 500.
+
+

@@ -1,0 +1,96 @@
+loki2.encode_trans
+==================
+
+.. py:module:: loki2.encode_trans
+
+.. autoapi-nested-parse::
+
+   Transcriptomics encoding module.
+
+   This module provides functionality to encode transcriptomics data
+   using pre-trained models for cross-modal analysis.
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:function:: encode_transcriptomics(ad_path: pathlib.Path, output_path: pathlib.Path, model_path: pathlib.Path, housekeeping_path: pathlib.Path, batch_size: int = 100, num_threads: Optional[int] = None, device: str = 'cpu') -> None
+
+   Encode transcriptomics data using a pre-trained model.
+
+   This function processes AnnData objects containing single-cell RNA-seq data,
+   generates gene expression prompts, and encodes them using a pre-trained
+   CLIP model for cross-modal analysis.
+
+   :param ad_path: Path to the input AnnData (.h5ad) file.
+   :param output_path: Path where encoded embeddings will be saved (.pt file).
+   :param model_path: Path to the pre-trained model checkpoint.
+   :param housekeeping_path: Path to CSV file containing housekeeping genes.
+   :param batch_size: Batch size for encoding. Defaults to 100.
+   :param num_threads: Number of threads for PyTorch operations.
+                       If None, uses default. Defaults to None.
+   :param device: Device to use for encoding ('cpu' or 'cuda'). Defaults to 'cpu'.
+
+   :raises ValueError: If observation names are not unique, if duplicate or
+       missing cell identifiers are found, or if num_threads is invalid.
+
+
+.. py:function:: load_model(model_path: pathlib.Path, device: str = 'cuda') -> Tuple[Any, Any, Any]
+
+   Load a pre-trained CoCa model and tokenizer.
+
+   :param model_path: Path to the pre-trained model checkpoint.
+   :param device: Device to load the model on ('cpu' or 'cuda').
+                  Defaults to 'cuda'.
+
+   :returns:
+
+             Tuple containing:
+                 - model: Loaded CoCa model
+                 - preprocess: Preprocessing function for images
+                 - tokenizer: Text tokenizer
+   :rtype: Tuple[Any, Any, Any]
+
+
+.. py:function:: load_prompts_csv(csv_path: pathlib.Path) -> pandas.DataFrame
+
+   Load gene prompts from a CSV file.
+
+   :param csv_path: Path to the CSV file containing gene prompts.
+
+   :returns: DataFrame with 'cell_id' and 'label' columns.
+   :rtype: pd.DataFrame
+
+   :raises ValueError: If required columns are missing.
+
+
+.. py:function:: generate_gene_df(ad: Any, house_keeping_genes: pandas.DataFrame, todense: bool = True) -> pandas.DataFrame
+
+   Generate a DataFrame with the top 50 genes for each observation.
+
+   Removes genes containing '.' or '-' in their names, as well as genes
+   listed in the housekeeping genes DataFrame.
+
+   :param ad: AnnData object containing gene expression data.
+   :param house_keeping_genes: DataFrame with a 'genesymbol' column listing
+                               housekeeping genes to exclude.
+   :param todense: Whether to convert the sparse matrix (ad.X) to a dense
+                   matrix before creating a DataFrame. Defaults to True.
+
+   :returns:
+
+             DataFrame with two columns: 'cell_id' and 'label'.
+                 Each label entry is a string with the top 50 gene names
+                 (space-separated) for that observation.
+   :rtype: pd.DataFrame
+
+
+.. py:function:: encode_texts(model, tokenizer, texts, batch_size=256, device='cuda')
+
+.. py:function:: build_parser() -> argparse.ArgumentParser
+
+.. py:function:: main(argv: Iterable[str] = None) -> None
+

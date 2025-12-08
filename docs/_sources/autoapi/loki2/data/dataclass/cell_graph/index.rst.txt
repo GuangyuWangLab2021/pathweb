@@ -1,0 +1,48 @@
+loki2.data.dataclass.cell_graph
+===============================
+
+.. py:module:: loki2.data.dataclass.cell_graph
+
+.. autoapi-nested-parse::
+
+   Graph Data model for Loki2.
+
+   This module defines the data structure for representing cell graphs
+   from whole slide images.
+
+   For more information, please check out docs/readmes/graphs.md
+
+
+
+
+
+Module Contents
+---------------
+
+.. py:class:: CellGraphDataWSI
+
+   Dataclass for Graph Data representing cells or patches in a WSI.
+
+   This class stores node features, positions, and metadata for graph-based
+   representations of whole slide images.
+
+   :param x: Node feature matrix with shape (num_nodes, num_node_features).
+   :param positions: Each of the objects defined in x has a physical position
+                     in a Cartesian coordinate system, be it detected cells or extracted
+                     patches. Shape (num_nodes, 2).
+   :param metadata: Metadata about the objects stored here. Can include
+                    information about cell types, coordinates, or other annotations.
+
+
+   .. py:attribute:: x
+      :type:  torch.Tensor
+
+
+   .. py:attribute:: positions
+      :type:  torch.Tensor
+
+
+   .. py:attribute:: metadata
+      :type:  Dict[str, Any]
+
+

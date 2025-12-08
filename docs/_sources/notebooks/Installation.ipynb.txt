@@ -1,0 +1,57 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "ffd65545",
+   "metadata": {},
+   "source": [
+    "# Installation"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "67e8cda0",
+   "metadata": {},
+   "source": [
+    "1. **Create a conda environment**:\n",
+    "   ```bash\n",
+    "   conda env create -f environment.yaml\n",
+    "   conda activate loki2_env\n",
+    "   ```\n",
+    "   \n",
+    "2. **Navigate to the Loki2 source directory and install Loki2**:\n",
+    "   ```bash\n",
+    "   cd ./src\n",
+    "   pip install .\n",
+    "   ```"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c7403d07",
+   "metadata": {},
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "loki_env",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.21"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
