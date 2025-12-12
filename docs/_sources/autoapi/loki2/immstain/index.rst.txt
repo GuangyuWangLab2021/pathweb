@@ -519,7 +519,7 @@ Module Contents
    :rtype: np.ndarray
 
 
-.. py:function:: save_prediction_json(path: pathlib.Path, channel_idx: int, extend_nuclei: bool, enrich_embeddings: bool, normalize_embeddings: bool, metrics: Dict[str, Any], meta: List[Dict[str, Any]], y_true: numpy.ndarray, y_pred: numpy.ndarray) -> None
+.. py:function:: save_prediction_json(path: pathlib.Path, channel_idx: int, extend_nuclei: bool, normalize_embeddings: bool, metrics: Dict[str, Any], meta: List[Dict[str, Any]], y_true: numpy.ndarray, y_pred: numpy.ndarray) -> None
 
    Save per-cell predictions to a JSON file.
 
@@ -529,7 +529,6 @@ Module Contents
    :param path: Path to save the JSON file.
    :param channel_idx: IF channel index.
    :param extend_nuclei: Whether nuclei were extended using watershed.
-   :param enrich_embeddings: Whether embeddings were enriched with features.
    :param normalize_embeddings: Whether embeddings were normalized.
    :param metrics: Dictionary of evaluation metrics.
    :param meta: List of metadata dictionaries with patch and cell information.

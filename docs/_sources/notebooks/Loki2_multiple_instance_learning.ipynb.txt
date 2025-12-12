@@ -30,7 +30,7 @@
    "source": [
     "## Plot Attention Heatmaps on WSI\n",
     "\n",
-    "Generate spatial heatmaps showing model attention across whole slide images. Multiple Instance Learning (MIL) models use attention mechanisms to identify which cells/regions are most important for classification decisions. This interpretability feature helps understand what morphological features drive predictions for tasks like cancer staging and metastasis prediction."
+    "Generate spatial heatmaps showing model attention across whole slide images. MIL models use attention mechanisms to identify which cells/regions are most important for classification decisions. This interpretability feature helps understand what morphological features drive predictions for tasks like cancer staging and metastasis prediction."
    ]
   },
   {

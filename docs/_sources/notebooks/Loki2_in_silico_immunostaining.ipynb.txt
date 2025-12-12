@@ -5,7 +5,7 @@
    "id": "ea2b2944",
    "metadata": {},
    "source": [
-    "# Loki2 *in silico* immunostaining\n",
+    "# Loki2 *in silico* Immunostaining\n",
     "\n",
     "This notebook demonstrates how to prepare CRC02 patch-level data, train a LightGBM regressor on HE embeddings to predict IF channel intensity, and visualize predictions. "
    ]

@@ -25,12 +25,6 @@
     "   pip install .\n",
     "   ```"
    ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "c7403d07",
-   "metadata": {},
-   "source": []
   }
  ],
  "metadata": {

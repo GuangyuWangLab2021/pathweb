@@ -55,9 +55,9 @@
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_cell_type_inference.html">Loki2 Cell Type Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_morph_retrieve.html">Loki2 Morphology-to-Transcriptome Retrieval</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html">Loki2 Morphological Pseudotime Inference - Colon Cancer Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html">Loki2 Morphological Pseudotime Inference - Colorectal Cancer Samples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_PRAD.html">Loki2 Morphological Pseudotime Inference - Prostate Cancer Sample</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html">Loki2 <em>in silico</em> immunostaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html">Loki2 <em>in silico</em> Immunostaining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_multiple_instance_learning.html">Loki2 Cell-level Multiple Instance Learning</a></li>
 </ul>
 
@@ -87,8 +87,8 @@
              
   <section id="loki2-documentation">
 <h1>Loki2 documentation<a class="headerlink" href="#loki2-documentation" title="Link to this heading"></a></h1>
-<p>Loki2 is a single-cell pathology foundation model that uses an encoder–decoder architecture to translate nuclear morphology into molecular phenotype. Loki2 is trained on UniSeg, a pan-tissue resource of 15 million cells with paired segmentation and transcriptomic measurements from multiple spatial technologies. This training strategy enables three capabilities from H&amp;E images alone: universal cell type inference, in silico spatial transcriptomics by retrieving transcriptionally matched cells from reference atlases, and continuous morphological pseudotime inference of cell state transitions. By aggregating single-cell features, Loki2 also supports whole-slide clinical tasks. These results show that routine histology contains far richer molecular and cellular information than previously recognized, and that Loki2 provides a general framework for accessing this information across tissues, disease contexts, and scales.</p>
-<p>Please find our github on <a class="reference external" href="https://github.com/GuangyuWangLab2021/Loki2">GitHub</a>.</p>
+<p>Loki2 is a single-cell pathology foundation model that uses an encoder–decoder architecture to reliably translate nucleus morphology into molecular-level information. Loki2 is trained on UniSeg, a pan-tissue resource of 15 million cells with paired segmentation and transcriptomic measurements from multiple spatial technologies. This training strategy enables three capabilities from hematoxylin and eosin (H&amp;E) images alone: universal cell type inference, in silico spatial transcriptomics by retrieving transcriptionally matched cells from reference atlases, and continuous morphological pseudotime inference of cell state transitions. By further aggregating single-cell features, Loki2 supports in silico protein staining and whole-slide clinical inference. These results show that routine histology contains far richer molecular and cellular information than previously recognized, and that Loki2 provides a general framework for accessing this information across technologies, tissues, disease contexts, and scales.</p>
+<p>Please find our github on <a class="reference external" href="https://github.com/GuangyuWangLab2021/pathweb">GitHub</a>.</p>
 <a class="reference internal image-reference" href="_images/Loki2.png"><img alt="_images/Loki2.png" src="_images/Loki2.png" style="width: 100%;" /></a>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
@@ -122,16 +122,16 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_retrieve.html#plot-loki2-retrieval-results">Plot Loki2 Retrieval Results</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html">Loki2 Morphological Pseudotime Inference - Colon Cancer Samples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#data-requirements">Data Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#load-data">Load Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#assemble-the-three-samples-on-one-slide-for-visualization">Assemble the Three Samples on One Slide for Visualization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#check-the-topology-and-gradient-in-image-embeddings-among-samples">Check the Topology and Gradient in Image Embeddings Among Samples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#prepare-data-and-perform-clustering">Prepare Data and Perform Clustering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#select-starting-cell-for-pseudotime">Select Starting Cell for Pseudotime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#infer-pseudotime">Infer Pseudotime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#visualize-pseudotime">Visualize Pseudotime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_COAD.html#plot-trajectory">Plot Trajectory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html">Loki2 Morphological Pseudotime Inference - Colorectal Cancer Samples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#data-requirements">Data Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#load-data">Load Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#assemble-the-three-samples-on-one-slide-for-visualization">Assemble the Three Samples on One Slide for Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#check-the-topology-and-gradient-in-image-embeddings-among-samples">Check the Topology and Gradient in Image Embeddings Among Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#prepare-data-and-perform-clustering">Prepare Data and Perform Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#select-starting-cell-for-pseudotime">Select Starting Cell for Pseudotime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#infer-pseudotime">Infer Pseudotime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#visualize-pseudotime">Visualize Pseudotime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#plot-trajectory">Plot Trajectory</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_PRAD.html">Loki2 Morphological Pseudotime Inference - Prostate Cancer Sample</a><ul>
@@ -145,7 +145,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_PRAD.html#plot-trajectory">Plot Trajectory</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html">Loki2 <em>in silico</em> immunostaining</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html">Loki2 <em>in silico</em> Immunostaining</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#data-requirements">Data Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#examples-of-panck-marker">Examples of PanCK Marker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_in_silico_immunostaining.html#examples-of-cd45ro-marker">Examples of CD45RO Marker</a></li>
