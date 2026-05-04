@@ -25,31 +25,30 @@ The source code will be released on GitHub and Hugging Face after the manuscript
 
 ## Project Structure
 Please organize your project folders as follows:
-
 ```
 .
-├── src/           # Source code for Loki2
-├── model_ckpt/    # Pretrained Loki2 model weights
-├── data/          # Input data files
-├── notebooks/     # Jupyter notebooks for tutorials and examples
-└── outputs/       # Output files and results
+├── src/                 # Source code and conda environment file
+├── model_ckpt/          # Downloaded model checkpoints (loki2_checkpoint.pth)
+├── data/                # Input data (WSI, .h5ad, metadata)
+├── notebooks/           # Local notebooks (copied from GitHub/tutorial materials)
+└── outputs/             # Generated outputs
 ```
 
 
 ## Installation
 
-1. **Create a conda environment**:
+1. **Navigate to the Loki2 source directory and create a conda environment**:
    ```bash
+   cd ./src
    conda env create -f environment.yaml
    conda activate loki2_env
    ```
-
-2. **Navigate to the Loki source directory and install Loki2**:
+   
+2. **Install Loki2**:
    ```bash
-   cd ./src
    pip install .
    ```
-
+   
 
 ## Run the Model
 
