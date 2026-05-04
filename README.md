@@ -6,13 +6,20 @@ The pre-train weights and source code will be released on GitHub and Hugging Fac
 
 
 ## User Manual and Notebooks
-You can view the Loki2 website and notebooks [here](https://guangyuwanglab2021.github.io/pathweb/).
+User manual and notebook walkthroughs are available at [PathWeb](https://guangyuwanglab2021.github.io/pathweb/).
 This README provides a quick overview of how to set up and use Loki2.
+
+
+## Demonstration Data 
+Please find the demonstration data for the tutorial [here](https://drive.google.com/drive/folders/19qzd8jTZBQ57a3N5xbiZFSGZJNpIz8NQ?usp=sharing).
+
+
+## Pretrained Weights
+The pretrain weights will be released on GitHub and Hugging Face after the manuscript is accepted.
 
 
 ## Source Code
 All source code for Loki2 is contained in the `./src/loki2` directory.
-
 The source code will be released on GitHub and Hugging Face after the manuscript is accepted.
 
 
@@ -44,17 +51,221 @@ Please organize your project folders as follows:
    ```
 
 
-## Usage
-Once Loki2 is installed, you can import it in your Python scripts or notebooks:
-   ```python
-   import loki2.preprocess
-   import loki2.plot
-   import loki2.retrieve
-   import loki2.psdtime
-   import loki2.immstain
-   import loki2.mil
+## Run the Model
+
+### Whole slide images cell segmentation and annotation
+See [Notebook - Loki2 Cell Type Inference](https://guangyuwanglab2021.github.io/pathweb/notebooks/Loki2_cell_type_inference.html) for more details.
+
+```bash
+MODEL="../model_ckpt/loki2_checkpoint.pth"
+OUTDIR="../outputs/cell_infer"
+mkdir -p "$OUTDIR"
+
+FILE="../data/cell_infer/colon_cancer_sample.tif"
+WSI_PROPERTIES='{"slide_mpp": 0.25, "magnification": 40}'
+
+echo "Processing ${FILE}"
+python ../src/loki2/detect_cells.py \
+  --model "$MODEL" \
+  --outdir "$OUTDIR" \
+  --geojson \
+  --graph \
+  process_wsi \
+  --wsi_path "$FILE" \
+  --wsi_properties "$WSI_PROPERTIES"
+```
+
+
+### Single-cell morphology-to-transcriptome retrieval
+See [Notebook - Loki2 Morphology-to-Transcriptome Retrieval](https://guangyuwanglab2021.github.io/pathweb/notebooks/Loki2_morph_retrieve.html) for more details.
+
+1. Prepare Finetuning Data
+```bash
+conda activate loki_env
+
+DATA_PATH="../data/morph_retrieve/P1CRC_VISIUMHD_LOKI2_mask.h5ad"
+OUTPUT="../outputs/morph_retrieve/output/P1CRC_cell_trans_emb_raw.pt"
+
+python ../src/loki2/encode_trans.py "$DATA_PATH" \
+    --output "$OUTPUT" \
+    --batch-size 1024 \
+    --num-threads 32 \
+    --device cuda
+
+python ../src/loki2/cl/prepare_training.py \
+    --dataset-name P1CRC \
+    --trans-path "$OUTPUT" \
+    --morph-path ../data/morph_retrieve/P1CRC_cell_morph_emb.pt \
+    --output-dir ../outputs/morph_retrieve/output/P1CRC_train \
+    --shard-size 10000
+```
+
+2. Finetuning
+```bash
+conda activate loki_env
+
+DATASET="${DATASET:-P1CRC}"
+RUN_NAME="${RUN_NAME:-${DATASET}_wds_vanilla}"
+RUN_DIR="../outputs/morph_retrieve/output/runs/${RUN_NAME}"
+
+TRAIN_DIR="../outputs/morph_retrieve/output/P1CRC_train/${DATASET}/train"
+VAL_DIR="../outputs/morph_retrieve/output/P1CRC_train/${DATASET}/val"
+TRAIN_META="${TRAIN_DIR}/manifest_train.csv"
+VAL_META="${VAL_DIR}/manifest_val.csv"
+
+if [[ ! -f "${TRAIN_META}" ]]; then
+  echo "Missing train manifest: ${TRAIN_META}" >&2
+  exit 1
+fi
+
+if [[ ! -f "${VAL_META}" ]]; then
+  echo "Missing validation manifest: ${VAL_META}" >&2
+  exit 1
+fi
+
+mapfile -t TRAIN_SHARDS < <(find "${TRAIN_DIR}" -maxdepth 1 -type f -name 'shard-*.tar' | sort)
+mapfile -t VAL_SHARDS < <(find "${VAL_DIR}" -maxdepth 1 -type f -name 'shard-*.tar' | sort)
+
+if [[ ${#TRAIN_SHARDS[@]} -eq 0 ]]; then
+  echo "No training shards found in ${TRAIN_DIR}" >&2
+  exit 1
+fi
+
+if [[ ${#VAL_SHARDS[@]} -eq 0 ]]; then
+  echo "No validation shards found in ${VAL_DIR}" >&2
+  exit 1
+fi
+
+TRAIN_SHARD_LIST=$(IFS=, ; echo "${TRAIN_SHARDS[*]}")
+VAL_SHARD_LIST=$(IFS=, ; echo "${VAL_SHARDS[*]}")
+
+mkdir -p "${RUN_DIR}"
+
+python ../src/loki2/cl/train_projection_wds.py \
+  --train-shards "${TRAIN_SHARD_LIST}" \
+  --train-meta "${TRAIN_META}" \
+  --val-shards "${VAL_SHARD_LIST}" \
+  --val-meta "${VAL_META}" \
+  --num-layers 1 \
+  --batch-size 4096 \
+  --epochs 20 \
+  --lr 5e-4 \
+  --device cuda \
+  --amp \
+  --save-every 1 \
+  --output-dir "${RUN_DIR}" \
+  --log-file train.log
+```
+
+3. Retrieve from scRNA Data
+```bash
+conda activate loki_env
+
+sam="CRC_sc"
+DATA_PATH="../data/morph_retrieve/CRC_sc.h5ad"
+OUTPUT="../outputs/morph_retrieve/output/${sam}_trans.pt"
+
+python ../src/loki2/encode_trans.py "$DATA_PATH" \
+    --output "$OUTPUT" \
+    --batch-size 1024 \
+    --num-threads 32 \
+    --device cuda
+
+conda deactivate
+conda activate loki2_env
+
+CHECKPOINT_DIR="../outputs/morph_retrieve/output/runs/P1CRC_wds_vanilla"
+
+# Set the epoch to use for projection (default: 20)
+EPOCH=${EPOCH:-20}
+CKPT_PATH="${CHECKPOINT_DIR}/projection_cl_epoch${EPOCH}.pt"
+
+if [[ ! -f "${CKPT_PATH}" ]]; then
+  echo "Checkpoint not found: ${CKPT_PATH}" >&2
+  exit 1
+fi
+
+declare -A SAMPLE_MAP=(
+  ["Cancer_P2"]="P2CRC"
+)
+
+for label in Cancer_P2; do
+  dataset="${SAMPLE_MAP[$label]}"
+  morph_path="../data/morph_retrieve/${SAMPLE_MAP[$label]}_cell_morph_emb.pt"
+  output_dir="../outputs/morph_retrieve/output/data_projection/${dataset}"
+
+  if [[ ! -f "${morph_path}" ]]; then
+    echo "Skipping ${label}: missing morphology embeddings at ${morph_path}" >&2
+    continue
+  fi
+
+  echo "Projecting ${label} (dataset: ${dataset})"
+  mkdir -p "${output_dir}"
+
+  python ../src/loki2/cl/project_raw_embeddings.py \
+    --checkpoint "${CKPT_PATH}" \
+    --morph-path "${morph_path}" \
+    --modality morph \
+    --batch-size 4096 \
+    --normalized \
+    --tag "${label}_epoch${EPOCH}" \
+    --output-dir "${output_dir}"
+done
+
+TRANS_PATH="../outputs/morph_retrieve/output/CRC_sc_trans.pt"
+OUTPUT_DIR="../outputs/morph_retrieve/output/data_projection/sc"
+
+if [[ ! -f "${TRANS_PATH}" ]]; then
+  echo "Transcription embeddings missing: ${TRANS_PATH}" >&2
+  exit 1
+fi
+
+mkdir -p "${OUTPUT_DIR}"
+
+python ../src/loki2/cl/project_raw_embeddings.py \
+  --checkpoint "${CKPT_PATH}" \
+  --trans-path "${TRANS_PATH}" \
+  --modality trans \
+  --batch-size 4096 \
+  --normalized \
+  --tag "epoch${EPOCH}" \
+  --output-dir "${OUTPUT_DIR}"
+
+declare -A SAMPLE_MAP=(
+  ["Cancer_P2"]="P2CRC"
+)
+
+for label in "${!SAMPLE_MAP[@]}"; do
+    dataset="${SAMPLE_MAP[$label]}"
+    output_dir=${3:-"../outputs/morph_retrieve/output/result_centroid/retrieve_epoch${EPOCH}"}
+    mkdir -p ${output_dir}
+    echo "Processing sample: ${dataset}, output directory: ${output_dir}"
+    python ../src/loki2/retrieve_from_sc.py ${dataset} ${label} ${EPOCH} ${output_dir}
+done
+```
+
+### Run Notebooks for [morphological pseudotime inference](https://guangyuwanglab2021.github.io/pathweb/notebooks/Loki2_morph_psdtime_CRC.html), [in silico immunostaining](https://guangyuwanglab2021.github.io/pathweb/notebooks/Loki2_in_silico_immunostaining.html), and [cell-level multiple instance learning for cancer patient staging](https://guangyuwanglab2021.github.io/pathweb/notebooks/Loki2_multiple_instance_learning.html)
+
+1. Download/copy the tutorial notebooks from [PathWeb](https://guangyuwanglab2021.github.io/pathweb/) into `./notebooks`.
+2. Activate the Loki2 environment:
+   ```bash
+   conda activate loki2_env
    ```
+3. Start Jupyter from repository root:
+   ```bash
+   jupyter notebook
+   ```
+4. Open notebooks from `./notebooks` and set the kernel to `loki2_env`.
 
 
-## Pretrained weights
-The pretrained weights will be released on GitHub and Hugging Face after the manuscript is accepted.
+## Python API
+After installation, Loki2 modules are importable in Python scripts and notebooks:
+
+```python
+import loki2.preprocess
+import loki2.plot
+import loki2.retrieve
+import loki2.psdtime
+import loki2.immstain
+import loki2.mil
+```
