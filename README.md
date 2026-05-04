@@ -53,7 +53,7 @@ Please organize your project folders as follows:
 
 ## Run the Model
 
-### Whole slide images cell segmentation and annotation
+### Whole Slide Images Cell Segmentation and Annotation
 See [Notebook - Loki2 Cell Type Inference](https://guangyuwanglab2021.github.io/pathweb/notebooks/Loki2_cell_type_inference.html) for more details.
 
 ```bash
@@ -76,7 +76,7 @@ python ../src/loki2/detect_cells.py \
 ```
 
 
-### Single-cell morphology-to-transcriptome retrieval
+### Single-cell Morphology-to-Transcriptome Retrieval
 See [Notebook - Loki2 Morphology-to-Transcriptome Retrieval](https://guangyuwanglab2021.github.io/pathweb/notebooks/Loki2_morph_retrieve.html) for more details.
 
 1. Prepare Finetuning Data
@@ -244,7 +244,7 @@ for label in "${!SAMPLE_MAP[@]}"; do
 done
 ```
 
-### Run Notebooks for [morphological pseudotime inference](https://guangyuwanglab2021.github.io/pathweb/notebooks/Loki2_morph_psdtime_CRC.html), [in silico immunostaining](https://guangyuwanglab2021.github.io/pathweb/notebooks/Loki2_in_silico_immunostaining.html), and [cell-level multiple instance learning for cancer patient staging](https://guangyuwanglab2021.github.io/pathweb/notebooks/Loki2_multiple_instance_learning.html)
+### Run Notebooks for [Morphological Pseudotime Inference](https://guangyuwanglab2021.github.io/pathweb/notebooks/Loki2_morph_psdtime_CRC.html), [In silico Immunostaining](https://guangyuwanglab2021.github.io/pathweb/notebooks/Loki2_in_silico_immunostaining.html), and [Cell-level Multiple Instance Learning for Cancer Patient Staging](https://guangyuwanglab2021.github.io/pathweb/notebooks/Loki2_multiple_instance_learning.html)
 
 1. Download/copy the tutorial notebooks from [PathWeb](https://guangyuwanglab2021.github.io/pathweb/) into `./notebooks`.
 2. Activate the Loki2 environment:
