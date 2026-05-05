@@ -8,7 +8,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
-      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
 
   
   <!--[if lt IE 9]>
@@ -61,7 +61,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#mil-model">MIL Model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#plot-attention-heatmaps-on-wsi">Plot Attention Heatmaps on WSI</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#tcga-blca-stage-subtype-mil-results">TCGA BLCA Stage Subtype MIL Results</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tcga-blca-metastasis-subtype-mil-results">TCGA BLCA Metastasis Subtype MIL Results</a></li>
 </ul>
 </li>
 </ul>
@@ -99,12 +98,11 @@
 <h2>MIL Model<a class="headerlink" href="#mil-model" title="Link to this heading"></a></h2>
 <p>Prepare training data:</p>
 <ul class="simple">
-<li><p>Prepare your data as prampt files by code in <code class="docutils literal notranslate"><span class="pre">../src/mil/data/data_prepare/prampt_generate</span></code> for stage and metastasis task.</p></li>
+<li><p>Prepare your data as prampt files by code in <code class="docutils literal notranslate"><span class="pre">../src/mil/data/data_prepare/prampt_generate</span></code> for stage task.</p></li>
 <li><p>Downsample cell embeddings by <code class="docutils literal notranslate"><span class="pre">../src/mil/data/data_prepare/prampt_downsample.py</span></code>.</p></li>
 </ul>
 <p>Run MIL to generate attention weights:</p>
 <ul class="simple">
-<li><p>Run metastasis task by <code class="docutils literal notranslate"><span class="pre">../src/mil/models/TCGA-Loki_MILCell_blca_metastasis_5fold.py</span></code>.</p></li>
 <li><p>Run stage task by <code class="docutils literal notranslate"><span class="pre">../src/mil/models/TCGA-Loki_MILCell_blca_stage_5fold.py</span></code>.</p></li>
 </ul>
 </section>
@@ -199,73 +197,6 @@
 </pre></div>
 </div>
 <img alt="../_images/93713245e2b108e63f8efb9ed6fae08e299acaad2d1806460ae16939c9b50382.png" src="../_images/93713245e2b108e63f8efb9ed6fae08e299acaad2d1806460ae16939c9b50382.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ All attention heatmaps processed!
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="tcga-blca-metastasis-subtype-mil-results">
-<h3>TCGA BLCA Metastasis Subtype MIL Results<a class="headerlink" href="#tcga-blca-metastasis-subtype-mil-results" title="Link to this heading"></a></h3>
-<p>Visualize attention weights from MIL models trained for metastasis prediction. This highlights cells and regions that are most predictive of metastasis.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure SVS file paths and attention file paths</span>
-<span class="n">slide_dict_stage_meta</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;TCGA-DK-A3X2&quot;</span><span class="p">:</span> <span class="s2">&quot;../data/mil/TCGA-DK-A3X2-01Z-00-DX1.CB507611-E3AE-43A2-B5F8-EEAE59423E2E.svs&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;TCGA-FD-A6TF&quot;</span><span class="p">:</span> <span class="s2">&quot;../data/mil/TCGA-FD-A6TF-01Z-00-DX1.15B2C3E0-A0D7-4879-82B1-6C9AB09AF8E2.svs&quot;</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">attention_weights_meta</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;TCGA-DK-A3X2&quot;</span><span class="p">:</span> <span class="s2">&quot;../data/mil/metastasis_attention.txt&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;TCGA-FD-A6TF&quot;</span><span class="p">:</span> <span class="s2">&quot;../data/mil/metastasis_attention.txt&quot;</span><span class="p">,</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../outputs/mil/output/metastasis/&quot;</span><span class="p">)</span>
-<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">save_images</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># If True → save PNG; if False → only display</span>
-
-<span class="k">for</span> <span class="n">case_id</span><span class="p">,</span> <span class="n">svs_path</span> <span class="ow">in</span> <span class="n">slide_dict_stage_meta</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">att_txt</span> <span class="o">=</span> <span class="n">attention_weights_meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">case_id</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">att_txt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[SKIP] No attention file for </span><span class="si">{</span><span class="n">case_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">continue</span>
-
-    <span class="n">out_png</span> <span class="o">=</span> <span class="n">out_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;attention_heatmap_</span><span class="si">{</span><span class="n">case_id</span><span class="si">}</span><span class="s2">.png&quot;</span> <span class="k">if</span> <span class="n">save_images</span> <span class="k">else</span> <span class="kc">None</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[PLOT] </span><span class="si">{</span><span class="n">case_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    
-    <span class="n">loki2</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_attention_on_slide</span><span class="p">(</span>
-        <span class="n">svs_path</span><span class="o">=</span><span class="n">svs_path</span><span class="p">,</span>
-        <span class="n">att_txt</span><span class="o">=</span><span class="n">att_txt</span><span class="p">,</span>
-        <span class="n">case_prefix</span><span class="o">=</span><span class="n">case_id</span><span class="p">,</span>
-        <span class="n">save_path</span><span class="o">=</span><span class="n">out_png</span><span class="p">,</span>
-        <span class="n">max_dim</span><span class="o">=</span><span class="n">max_dim</span><span class="p">,</span>
-        <span class="n">point_size</span><span class="o">=</span><span class="n">point_size</span><span class="p">,</span>
-        <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span>
-        <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
-    <span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✅ All attention heatmaps processed!&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[PLOT] TCGA-DK-A3X2
-[SAVED] ../outputs/mil/output/metastasis/attention_heatmap_TCGA-DK-A3X2.png
-</pre></div>
-</div>
-<img alt="../_images/fa3aedb5e03871d35a6dccd8ea81243eb98d20d0fbb7d2f77b002bd1b20f3a0d.png" src="../_images/fa3aedb5e03871d35a6dccd8ea81243eb98d20d0fbb7d2f77b002bd1b20f3a0d.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[PLOT] TCGA-FD-A6TF
-[SAVED] ../outputs/mil/output/metastasis/attention_heatmap_TCGA-FD-A6TF.png
-</pre></div>
-</div>
-<img alt="../_images/3fef0c280de3ba063f225ff2827e5ee46a3ee45ce29d269b14d1afedd940ea53.png" src="../_images/3fef0c280de3ba063f225ff2827e5ee46a3ee45ce29d269b14d1afedd940ea53.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ All attention heatmaps processed!
 </pre></div>
 </div>

@@ -8,7 +8,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
-      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
 
   
   <!--[if lt IE 9]>
@@ -56,8 +56,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Loki2_cell_type_inference.html">Loki2 Cell Type Inference</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Loki2 Morphology-to-Transcriptome Retrieval</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#data-requirements">Data Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#prepare-training-data">Prepare Training Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#training">Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prepare-fintuning-data">Prepare Fintuning Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#finetuning">Finetuning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#retrieve-from-scrna-data">Retrieve from scRNA Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#load-retrieval-results">Load Retrieval Results</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#plot-scrna-data">Plot scRNA Data</a></li>
@@ -102,17 +102,17 @@
 <p>The example data is stored in the directory <code class="docutils literal notranslate"><span class="pre">../data/morph_retrieve</span></code>, which can be donwloaded from <a class="reference external" href="https://drive.google.com/drive/folders/19qzd8jTZBQ57a3N5xbiZFSGZJNpIz8NQ?usp=sharing">Google Drive</a>.</p>
 <p>You will need:</p>
 <ul class="simple">
-<li><p>Paired morphology-transcriptome data for training</p></li>
+<li><p>Paired morphology-transcriptome data for finetuning</p></li>
 <li><p>Single-cell RNA-seq reference atlas</p></li>
 <li><p>H&amp;E image to retrieve transcriptome data</p></li>
 <li><p>OmiCLIP model checkpoint for transcriptome encoding</p></li>
 </ul>
 </section>
-<section id="prepare-training-data">
-<h2>Prepare Training Data<a class="headerlink" href="#prepare-training-data" title="Link to this heading"></a></h2>
-<p>Extract transcriptomic embeddings using OmiCLIP and pair them with morphological embeddings from Loki2. This creates paired training data that links morphological features to transcriptomic profiles. The data is organized into shards for efficient training with WebDataset format.</p>
-<p>Please follow <a class="reference external" href="https://guangyuwanglab2021.github.io/Loki/">Loki Notebooks</a> to creat the conda enveriment <code class="docutils literal notranslate"><span class="pre">loki_env</span></code> for contrastive learning. <br />
-Please put the <a class="reference external" href="https://huggingface.co/WangGuangyuLab/Loki">OmiCLIP checkpoint</a> <code class="docutils literal notranslate"><span class="pre">omiclip.pt</span></code> to <code class="docutils literal notranslate"><span class="pre">../src/loki2/</span></code>.</p>
+<section id="prepare-fintuning-data">
+<h2>Prepare Fintuning Data<a class="headerlink" href="#prepare-fintuning-data" title="Link to this heading"></a></h2>
+<p>Extract transcriptomic embeddings using OmiCLIP and pair them with morphological embeddings from Loki2. This creates paired finetuning data that links morphological features to transcriptomic profiles. The data is organized into shards for efficient finetuning with WebDataset format.</p>
+<p>Please follow <a class="reference external" href="https://guangyuwanglab2021.github.io/Loki/"><strong>Loki</strong> Notebooks</a> to creat the conda enverionment <code class="docutils literal notranslate"><span class="pre">loki_env</span></code> for contrastive learning. <br />
+Please put (and remane) the <a class="reference external" href="https://huggingface.co/WangGuangyuLab/Loki"><strong>OmiCLIP</strong> checkpoint</a> <code class="docutils literal notranslate"><span class="pre">omiclip.pt</span></code> to <code class="docutils literal notranslate"><span class="pre">../src/loki2/</span></code>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>loki_env
 
 <span class="nv">DATA_PATH</span><span class="o">=</span><span class="s2">&quot;../data/morph_retrieve/P1CRC_VISIUMHD_LOKI2_mask.h5ad&quot;</span>
@@ -133,8 +133,8 @@ python<span class="w"> </span>../src/loki2/cl/prepare_training.py<span class="w"
 </pre></div>
 </div>
 </section>
-<section id="training">
-<h2>Training<a class="headerlink" href="#training" title="Link to this heading"></a></h2>
+<section id="finetuning">
+<h2>Finetuning<a class="headerlink" href="#finetuning" title="Link to this heading"></a></h2>
 <p>Train a neural network projection model using contrastive learning to align morphological and transcriptomic embedding spaces. The model learns to project embeddings from both modalities into a shared space where similar cells from different modalities are close together. This enables cross-modal retrieval between morphology and transcriptome.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>loki_env
 

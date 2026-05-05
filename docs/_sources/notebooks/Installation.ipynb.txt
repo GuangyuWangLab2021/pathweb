@@ -13,15 +13,15 @@
    "id": "67e8cda0",
    "metadata": {},
    "source": [
-    "1. **Create a conda environment**:\n",
+    "1. **Navigate to the Loki2 source directory and create a conda environment**:\n",
     "   ```bash\n",
+    "   cd ./src\n",
     "   conda env create -f environment.yaml\n",
     "   conda activate loki2_env\n",
     "   ```\n",
     "   \n",
-    "2. **Navigate to the Loki2 source directory and install Loki2**:\n",
+    "2. **Install Loki2**:\n",
     "   ```bash\n",
-    "   cd ./src\n",
     "   pip install .\n",
     "   ```"
    ]
