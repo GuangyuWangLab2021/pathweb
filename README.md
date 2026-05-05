@@ -6,7 +6,7 @@ The pre-train weights and source code will be released on GitHub and Hugging Fac
 
 
 ## User Manual and Notebooks
-User manual and notebook walkthroughs are available at [PathWeb](https://guangyuwanglab2021.github.io/pathweb/).
+User manual and notebook walkthroughs are available at [GitHub](https://guangyuwanglab2021.github.io/pathweb/).
 This README provides a quick overview of how to set up and use Loki2.
 
 
@@ -245,7 +245,7 @@ done
 
 ### Run Notebooks for [Morphological Pseudotime Inference](https://guangyuwanglab2021.github.io/pathweb/notebooks/Loki2_morph_psdtime_CRC.html), [In silico Immunostaining](https://guangyuwanglab2021.github.io/pathweb/notebooks/Loki2_in_silico_immunostaining.html), and [Cell-level Multiple Instance Learning for Cancer Patient Staging](https://guangyuwanglab2021.github.io/pathweb/notebooks/Loki2_multiple_instance_learning.html)
 
-1. Download/copy the tutorial notebooks from [PathWeb](https://guangyuwanglab2021.github.io/pathweb/) into `./notebooks`.
+1. Download/copy the tutorial notebooks from [GitHub](https://guangyuwanglab2021.github.io/pathweb/) into `./notebooks`.
 2. Activate the Loki2 environment:
    ```bash
    conda activate loki2_env
