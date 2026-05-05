@@ -8,7 +8,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
-      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
 
   
   <!--[if lt IE 9]>
@@ -226,58 +226,69 @@ conda<span class="w"> </span>activate<span class="w"> </span>loki2_env
 <span class="w">  </span><span class="o">[</span><span class="s2">&quot;Cancer_P2&quot;</span><span class="o">]=</span><span class="s2">&quot;P2CRC&quot;</span>
 <span class="o">)</span>
 
-<span class="k">for</span><span class="w"> </span>label<span class="w"> </span><span class="k">in</span><span class="w"> </span>Cancer_P2<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">  </span><span class="nv">dataset</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SAMPLE_MAP</span><span class="p">[</span><span class="nv">$label</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="nv">morph_path</span><span class="o">=</span><span class="s2">&quot;../data/morph_retrieve/</span><span class="si">${</span><span class="nv">SAMPLE_MAP</span><span class="p">[</span><span class="nv">$label</span><span class="p">]</span><span class="si">}</span><span class="s2">_cell_morph_emb.pt&quot;</span>
-<span class="w">  </span><span class="nv">output_dir</span><span class="o">=</span><span class="s2">&quot;../outputs/morph_retrieve/output/data_projection/</span><span class="si">${</span><span class="nv">dataset</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="c1"># --------------------------------------------------</span>
+<span class="c1"># 1) Project morphology embeddings for each sample</span>
+<span class="c1"># --------------------------------------------------</span>
+<span class="k">for</span><span class="w"> </span>label<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="p">!SAMPLE_MAP[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="nv">dataset</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SAMPLE_MAP</span><span class="p">[</span><span class="nv">$label</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nv">morph_path</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT_PATH</span><span class="si">}</span><span class="s2">/Visium_HD_Human_Colon_</span><span class="si">${</span><span class="nv">label</span><span class="si">}</span><span class="s2">_tissue_image_PYRAMIDAL_cells.pt&quot;</span>
+<span class="w">  </span><span class="nv">output_dir</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT_PATH</span><span class="si">}</span><span class="s2">/output/data_projection/</span><span class="si">${</span><span class="nv">dataset</span><span class="si">}</span><span class="s2">&quot;</span>
 
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">morph_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Skipping </span><span class="si">${</span><span class="nv">label</span><span class="si">}</span><span class="s2">: missing morphology embeddings at </span><span class="si">${</span><span class="nv">morph_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
-<span class="w">    </span><span class="k">continue</span>
-<span class="w">  </span><span class="k">fi</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">morph_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Skipping </span><span class="si">${</span><span class="nv">label</span><span class="si">}</span><span class="s2">: missing morphology embeddings at </span><span class="si">${</span><span class="nv">morph_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">    </span><span class="k">continue</span>
+<span class="w">  </span><span class="k">fi</span>
 
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Projecting </span><span class="si">${</span><span class="nv">label</span><span class="si">}</span><span class="s2"> (dataset: </span><span class="si">${</span><span class="nv">dataset</span><span class="si">}</span><span class="s2">)&quot;</span>
-<span class="w">  </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">output_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Projecting </span><span class="si">${</span><span class="nv">label</span><span class="si">}</span><span class="s2"> (dataset: </span><span class="si">${</span><span class="nv">dataset</span><span class="si">}</span><span class="s2">)&quot;</span>
+<span class="w">  </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">output_dir</span><span class="si">}</span><span class="s2">&quot;</span>
 
-<span class="w">  </span>python<span class="w"> </span>../src/loki2/cl/project_raw_embeddings.py<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--checkpoint<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CKPT_PATH</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--morph-path<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">morph_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--modality<span class="w"> </span>morph<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--batch-size<span class="w"> </span><span class="m">4096</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--normalized<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--tag<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">label</span><span class="si">}</span><span class="s2">_epoch</span><span class="si">${</span><span class="nv">EPOCH</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--output-dir<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">output_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span>python<span class="w"> </span>/condo/wanglab/shared/wxc/Dinov2/loki2_source_code/src/loki2/cl/project_raw_embeddings.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--checkpoint<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CKPT_PATH</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--morph-path<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">morph_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--modality<span class="w"> </span>morph<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--batch-size<span class="w"> </span><span class="m">4096</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--normalized<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--tag<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">label</span><span class="si">}</span><span class="s2">_epoch</span><span class="si">${</span><span class="nv">EPOCH</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output-dir<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">output_dir</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="k">done</span>
 
-<span class="nv">TRANS_PATH</span><span class="o">=</span><span class="s2">&quot;../outputs/morph_retrieve/output/CRC_sc_trans.pt&quot;</span>
-<span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;../outputs/morph_retrieve/output/data_projection/sc&quot;</span>
+<span class="c1"># --------------------------------------------------</span>
+<span class="c1"># 2) Project transcript embeddings once</span>
+<span class="c1"># --------------------------------------------------</span>
+<span class="nv">TRANS_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT_PATH</span><span class="si">}</span><span class="s2">/output/CRC_sc_trans.pt&quot;</span>
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT_PATH</span><span class="si">}</span><span class="s2">/output/data_projection/sc&quot;</span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">TRANS_PATH</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Transcription embeddings missing: </span><span class="si">${</span><span class="nv">TRANS_PATH</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
-<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Transcription embeddings missing: </span><span class="si">${</span><span class="nv">TRANS_PATH</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 
 mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OUTPUT_DIR</span><span class="si">}</span><span class="s2">&quot;</span>
 
-python<span class="w"> </span>../src/loki2/cl/project_raw_embeddings.py<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--checkpoint<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CKPT_PATH</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--trans-path<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">TRANS_PATH</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--modality<span class="w"> </span>trans<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--batch-size<span class="w"> </span><span class="m">4096</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--normalized<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--tag<span class="w"> </span><span class="s2">&quot;epoch</span><span class="si">${</span><span class="nv">EPOCH</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--output-dir<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OUTPUT_DIR</span><span class="si">}</span><span class="s2">&quot;</span>
+python<span class="w"> </span>/condo/wanglab/shared/wxc/Dinov2/loki2_source_code/src/loki2/cl/project_raw_embeddings.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--checkpoint<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CKPT_PATH</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--trans-path<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">TRANS_PATH</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--modality<span class="w"> </span>trans<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--batch-size<span class="w"> </span><span class="m">4096</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--normalized<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--tag<span class="w"> </span><span class="s2">&quot;epoch</span><span class="si">${</span><span class="nv">EPOCH</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output-dir<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OUTPUT_DIR</span><span class="si">}</span><span class="s2">&quot;</span>
 
-<span class="nb">declare</span><span class="w"> </span>-A<span class="w"> </span><span class="nv">SAMPLE_MAP</span><span class="o">=(</span>
-<span class="w">  </span><span class="o">[</span><span class="s2">&quot;Cancer_P2&quot;</span><span class="o">]=</span><span class="s2">&quot;P2CRC&quot;</span>
-<span class="o">)</span>
+<span class="c1"># --------------------------------------------------</span>
+<span class="c1"># 3) Retrieval for each sample</span>
+<span class="c1"># --------------------------------------------------</span>
+<span class="nv">pt_dir</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT_PATH</span><span class="si">}</span><span class="s2">/output/data_projection&quot;</span>
+<span class="nv">trans_path</span><span class="o">=</span><span class="s2">&quot;/condo/wanglab/shared/wxc/Dinov2/loki2_source_code/data/morph_retrieve/CRC_sc.h5ad&quot;</span>
 
 <span class="k">for</span><span class="w"> </span>label<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="p">!SAMPLE_MAP[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">    </span><span class="nv">dataset</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SAMPLE_MAP</span><span class="p">[</span><span class="nv">$label</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nv">output_dir</span><span class="o">=</span><span class="si">${</span><span class="nv">3</span><span class="k">:-</span><span class="s2">&quot;../outputs/morph_retrieve/output/result_centroid/retrieve_epoch</span><span class="si">${</span><span class="nv">EPOCH</span><span class="si">}</span><span class="s2">&quot;</span><span class="si">}</span>
-<span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="si">${</span><span class="nv">output_dir</span><span class="si">}</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing sample: </span><span class="si">${</span><span class="nv">dataset</span><span class="si">}</span><span class="s2">, output directory: </span><span class="si">${</span><span class="nv">output_dir</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">    </span>python<span class="w"> </span>../src/loki2/retrieve_from_sc.py<span class="w"> </span><span class="si">${</span><span class="nv">dataset</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">label</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">EPOCH</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">output_dir</span><span class="si">}</span>
+<span class="w">  </span><span class="nv">dataset</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SAMPLE_MAP</span><span class="p">[</span><span class="nv">$label</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nv">output_dir</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT_PATH</span><span class="si">}</span><span class="s2">/output/result_centroid/</span><span class="si">${</span><span class="nv">dataset</span><span class="si">}</span><span class="s2">/retrieve_epoch</span><span class="si">${</span><span class="nv">EPOCH</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="w">  </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">output_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing sample: </span><span class="si">${</span><span class="nv">dataset</span><span class="si">}</span><span class="s2">, output directory: </span><span class="si">${</span><span class="nv">output_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="w">  </span>python<span class="w"> </span>/condo/wanglab/shared/wxc/Dinov2/loki2_source_code/src/loki2/retrieve_from_sc.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">dataset</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">label</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">EPOCH</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">output_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">pt_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">trans_path</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="k">done</span>
 </pre></div>
 </div>

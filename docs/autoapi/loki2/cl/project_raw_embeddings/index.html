@@ -163,21 +163,11 @@
 <dt class="sig sig-object py" id="loki2.cl.project_raw_embeddings.load_model">
 <span class="sig-prename descclassname"><span class="pre">loki2.cl.project_raw_embeddings.</span></span><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ckpt_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.device</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../model_cl/index.html#loki2.cl.model_cl.ProjectionCL" title="loki2.cl.model_cl.ProjectionCL"><span class="pre">model_cl.ProjectionCL</span></a></span></span><a class="headerlink" href="#loki2.cl.project_raw_embeddings.load_model" title="Link to this definition"></a></dt>
 <dd><p>Load a ProjectionCL model from a checkpoint file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>ckpt_path</strong> – Path to the model checkpoint file (.pt).</p></li>
-<li><p><strong>device</strong> – Device to load the model on.</p></li>
+<dl class="simple">
+<dt>Supports both:</dt><dd><ul class="simple">
+<li><p>final checkpoints with ‘config’</p></li>
+<li><p>epoch checkpoints with only ‘model’ weights</p></li>
 </ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Loaded and initialized model in eval mode.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="../model_cl/index.html#loki2.cl.model_cl.ProjectionCL" title="loki2.cl.model_cl.ProjectionCL">ProjectionCL</a></p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>RuntimeError</strong> – If the checkpoint is missing model weights.</p>
 </dd>
 </dl>
 </dd></dl>

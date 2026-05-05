@@ -130,6 +130,10 @@ Module Contents
 
 .. py:data:: output_dir
 
+.. py:data:: pt_dir
+
+.. py:data:: trans_path
+
 .. py:data:: proj_path
 
 .. py:data:: sc_proj_path

@@ -44,13 +44,9 @@ Module Contents
 
    Load a ProjectionCL model from a checkpoint file.
 
-   :param ckpt_path: Path to the model checkpoint file (.pt).
-   :param device: Device to load the model on.
-
-   :returns: Loaded and initialized model in eval mode.
-   :rtype: ProjectionCL
-
-   :raises RuntimeError: If the checkpoint is missing model weights.
+   Supports both:
+     - final checkpoints with 'config'
+     - epoch checkpoints with only 'model' weights
 
 
 .. py:function:: project_batches(tensor: torch.Tensor, projector: Callable[[torch.Tensor], torch.Tensor], batch_size: int, device: torch.device, normalized: bool) -> Tuple[numpy.ndarray, Optional[numpy.ndarray]]
