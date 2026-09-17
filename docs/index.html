@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -5,22 +7,18 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Loki2 documentation &mdash; Loki2  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
-      <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -89,7 +87,8 @@
 <h1>Loki2 documentation<a class="headerlink" href="#loki2-documentation" title="Link to this heading"></a></h1>
 <p>Loki2 is a single-cell pathology foundation model that uses an encoder–decoder architecture to reliably translate nucleus morphology into molecular-level information. Loki2 is trained on UniSeg, a pan-tissue resource of 15 million cells with paired segmentation and transcriptomic measurements from multiple spatial technologies. This training strategy enables three capabilities from hematoxylin and eosin (H&amp;E) images alone: universal cell type inference, in silico spatial transcriptomics by retrieving transcriptionally matched cells from reference atlases, and continuous morphological pseudotime inference of cell state transitions. By further aggregating single-cell features, Loki2 supports in silico protein staining and whole-slide clinical inference. These results show that routine histology contains far richer molecular and cellular information than previously recognized, and that Loki2 provides a pretrained single-cell foundation model along with an ecosystem for accessing this information across technologies, tissues, disease contexts, and scales.</p>
 <p>Please find our github on <a class="reference external" href="https://github.com/GuangyuWangLab2021/pathweb">GitHub</a>.</p>
-<a class="reference internal image-reference" href="_images/Loki2.png"><img alt="_images/Loki2.png" src="_images/Loki2.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="_images/Loki2.png"><img alt="_images/Loki2.png" src="_images/Loki2.png" style="width: 100%;" />
+</a>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul>
@@ -127,7 +126,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#load-data">Load Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#assemble-the-three-samples-on-one-slide-for-visualization">Assemble the Three Samples on One Slide for Visualization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#check-the-topology-and-gradient-in-image-embeddings-among-samples">Check the Topology and Gradient in Image Embeddings Among Samples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#prepare-data-and-perform-clustering">Prepare Data and Perform Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#clusters-in-tissue-space">Clusters in Tissue Space</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#select-starting-cell-for-pseudotime">Select Starting Cell for Pseudotime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#infer-pseudotime">Infer Pseudotime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Loki2_morph_psdtime_CRC.html#visualize-pseudotime">Visualize Pseudotime</a></li>

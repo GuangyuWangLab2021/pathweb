@@ -15,8 +15,8 @@ loki2
 
 
 
-Subpackages
------------
+Submodules
+----------
 
 .. toctree::
    :maxdepth: 1
@@ -24,25 +24,17 @@ Subpackages
    /autoapi/loki2/cl/index
    /autoapi/loki2/config/index
    /autoapi/loki2/data/index
-   /autoapi/loki2/inference/index
-   /autoapi/loki2/mil/index
-   /autoapi/loki2/models/index
-   /autoapi/loki2/utils/index
-
-
-Submodules
-----------
-
-.. toctree::
-   :maxdepth: 1
-
    /autoapi/loki2/detect_cells/index
    /autoapi/loki2/encode_trans/index
    /autoapi/loki2/immstain/index
+   /autoapi/loki2/inference/index
+   /autoapi/loki2/mil/index
+   /autoapi/loki2/models/index
    /autoapi/loki2/plot/index
    /autoapi/loki2/preprocess/index
    /autoapi/loki2/psdtime/index
    /autoapi/loki2/retrieve/index
    /autoapi/loki2/retrieve_from_sc/index
+   /autoapi/loki2/utils/index
 
 

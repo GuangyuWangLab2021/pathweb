@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../../../">
 <head>
@@ -5,26 +7,22 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>loki2.models.cell_segmentation.loki2_sam &mdash; Loki2  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=fd3f3429" />
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
     <link rel="next" title="loki2.models.cell_segmentation.postprocessing" href="../postprocessing/index.html" />
-    <link rel="prev" title="loki2.models.cell_segmentation.cellvit" href="../cellvit/index.html" /> 
+    <link rel="prev" title="loki2.models.cell_segmentation.loki2_net" href="../loki2_net/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,17 +48,24 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../../index.html">loki2</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../../../index.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../../index.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="../../../cl/index.html">loki2.cl</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../config/index.html">loki2.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../data/index.html">loki2.data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../detect_cells/index.html">loki2.detect_cells</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../encode_trans/index.html">loki2.encode_trans</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../immstain/index.html">loki2.immstain</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../inference/index.html">loki2.inference</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../mil/index.html">loki2.mil</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="../../index.html">loki2.models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../plot/index.html">loki2.plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../preprocess/index.html">loki2.preprocess</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../psdtime/index.html">loki2.psdtime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../retrieve/index.html">loki2.retrieve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../retrieve_from_sc/index.html">loki2.retrieve_from_sc</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../utils/index.html">loki2.utils</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../index.html#submodules">Submodules</a></li>
 </ul>
 </li>
 </ul>
@@ -107,15 +112,15 @@
              
   <section id="module-loki2.models.cell_segmentation.loki2_sam">
 <span id="loki2-models-cell-segmentation-loki2-sam"></span><h1>loki2.models.cell_segmentation.loki2_sam<a class="headerlink" href="#module-loki2.models.cell_segmentation.loki2_sam" title="Link to this heading"></a></h1>
-<p>CellViT-SAM (B, L, H) model.</p>
-<p>This module provides CellViT variants using Segment Anything Model (SAM) backbones.</p>
+<p>Loki2-SAM (B, L, H) model.</p>
+<p>This module provides Loki2 variants using Segment Anything Model (SAM) backbones.</p>
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.CellViTSAM">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">loki2.models.cell_segmentation.loki2_sam.</span></span><span class="sig-name descname"><span class="pre">CellViTSAM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nuclei_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_tissue_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vit_structure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'SAM-B'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'SAM-L'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'SAM-H'</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regression_loss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.CellViTSAM" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../cellvit/index.html#loki2.models.cell_segmentation.cellvit.CellViT" title="loki2.models.cell_segmentation.cellvit.CellViT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">loki2.models.cell_segmentation.cellvit.CellViT</span></code></a></p>
-<p>CellViT with SAM backbone settings.</p>
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.Loki2SAM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">loki2.models.cell_segmentation.loki2_sam.</span></span><span class="sig-name descname"><span class="pre">Loki2SAM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nuclei_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_tissue_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vit_structure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'SAM-B'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'SAM-L'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'SAM-H'</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regression_loss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.Loki2SAM" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../loki2_net/index.html#loki2.models.cell_segmentation.loki2_net.Loki2" title="loki2.models.cell_segmentation.loki2_net.Loki2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">loki2.models.cell_segmentation.loki2_net.Loki2</span></code></a></p>
+<p>Loki2 with SAM backbone settings.</p>
 <p>Skip connections are shared between branches, but each network has a distinct encoder.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -135,48 +140,48 @@ own entry in dict. Defaults to False.</p></li>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.CellViTSAM.input_channels">
-<span class="sig-name descname"><span class="pre">input_channels</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.CellViTSAM.input_channels" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.Loki2SAM.input_channels">
+<span class="sig-name descname"><span class="pre">input_channels</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.Loki2SAM.input_channels" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.CellViTSAM.mlp_ratio">
-<span class="sig-name descname"><span class="pre">mlp_ratio</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.CellViTSAM.mlp_ratio" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.Loki2SAM.mlp_ratio">
+<span class="sig-name descname"><span class="pre">mlp_ratio</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.Loki2SAM.mlp_ratio" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.CellViTSAM.qkv_bias">
-<span class="sig-name descname"><span class="pre">qkv_bias</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.CellViTSAM.qkv_bias" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.Loki2SAM.qkv_bias">
+<span class="sig-name descname"><span class="pre">qkv_bias</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.Loki2SAM.qkv_bias" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.CellViTSAM.num_nuclei_classes">
-<span class="sig-name descname"><span class="pre">num_nuclei_classes</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.CellViTSAM.num_nuclei_classes" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.Loki2SAM.num_nuclei_classes">
+<span class="sig-name descname"><span class="pre">num_nuclei_classes</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.Loki2SAM.num_nuclei_classes" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.CellViTSAM.model_path">
-<span class="sig-name descname"><span class="pre">model_path</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.CellViTSAM.model_path" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.Loki2SAM.model_path">
+<span class="sig-name descname"><span class="pre">model_path</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.Loki2SAM.model_path" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.CellViTSAM.prompt_embed_dim">
-<span class="sig-name descname"><span class="pre">prompt_embed_dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">256</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.CellViTSAM.prompt_embed_dim" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.Loki2SAM.prompt_embed_dim">
+<span class="sig-name descname"><span class="pre">prompt_embed_dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">256</span></em><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.Loki2SAM.prompt_embed_dim" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.CellViTSAM.encoder">
-<span class="sig-name descname"><span class="pre">encoder</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.CellViTSAM.encoder" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.Loki2SAM.encoder">
+<span class="sig-name descname"><span class="pre">encoder</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.Loki2SAM.encoder" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.CellViTSAM.classifier_head">
-<span class="sig-name descname"><span class="pre">classifier_head</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.CellViTSAM.classifier_head" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.Loki2SAM.classifier_head">
+<span class="sig-name descname"><span class="pre">classifier_head</span></span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.Loki2SAM.classifier_head" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.CellViTSAM.load_pretrained_encoder">
-<span class="sig-name descname"><span class="pre">load_pretrained_encoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.CellViTSAM.load_pretrained_encoder" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.Loki2SAM.load_pretrained_encoder">
+<span class="sig-name descname"><span class="pre">load_pretrained_encoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.Loki2SAM.load_pretrained_encoder" title="Link to this definition"></a></dt>
 <dd><p>Load pretrained SAM encoder from provided path</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -186,8 +191,8 @@ own entry in dict. Defaults to False.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.CellViTSAM.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retrieve_tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.CellViTSAM.forward" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.Loki2SAM.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retrieve_tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.Loki2SAM.forward" title="Link to this definition"></a></dt>
 <dd><p>Forward pass</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -218,18 +223,18 @@ own entry in dict. Defaults to False.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.CellViTSAM.init_vit_b">
-<span class="sig-name descname"><span class="pre">init_vit_b</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.CellViTSAM.init_vit_b" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.Loki2SAM.init_vit_b">
+<span class="sig-name descname"><span class="pre">init_vit_b</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.Loki2SAM.init_vit_b" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.CellViTSAM.init_vit_l">
-<span class="sig-name descname"><span class="pre">init_vit_l</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.CellViTSAM.init_vit_l" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.Loki2SAM.init_vit_l">
+<span class="sig-name descname"><span class="pre">init_vit_l</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.Loki2SAM.init_vit_l" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.CellViTSAM.init_vit_h">
-<span class="sig-name descname"><span class="pre">init_vit_h</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.CellViTSAM.init_vit_h" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.models.cell_segmentation.loki2_sam.Loki2SAM.init_vit_h">
+<span class="sig-name descname"><span class="pre">init_vit_h</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.cell_segmentation.loki2_sam.Loki2SAM.init_vit_h" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -241,7 +246,7 @@ own entry in dict. Defaults to False.</p></li>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../cellvit/index.html" class="btn btn-neutral float-left" title="loki2.models.cell_segmentation.cellvit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../loki2_net/index.html" class="btn btn-neutral float-left" title="loki2.models.cell_segmentation.loki2_net" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../postprocessing/index.html" class="btn btn-neutral float-right" title="loki2.models.cell_segmentation.postprocessing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

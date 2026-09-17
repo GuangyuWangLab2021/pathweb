@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -5,21 +7,17 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Loki2 Cell Type Inference &mdash; Loki2  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
-      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -109,33 +107,33 @@ The example data is stored in the directory <code class="docutils literal notran
 <section id="cell-detection">
 <h2>Cell Detection<a class="headerlink" href="#cell-detection" title="Link to this heading"></a></h2>
 <p>This section runs Loki2 to detect and segment cells from whole slide images. The model performs automatic cell segmentation and detection from high-resolution WSIs, generating morphological embeddings that capture cell characteristics.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">MODEL</span><span class="o">=</span><span class="s2">&quot;../model_ckpt/loki2_checkpoint.pth&quot;</span>
-<span class="nv">OUTDIR</span><span class="o">=</span><span class="s2">&quot;../outputs/cell_infer&quot;</span>
-mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTDIR</span><span class="s2">&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">MODEL</span><span class="o">=</span><span class="s2">"../model_ckpt/loki2_checkpoint.pth"</span>
+<span class="nv">OUTDIR</span><span class="o">=</span><span class="s2">"../outputs/cell_infer"</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$OUTDIR</span><span class="s2">"</span>
 
-<span class="nv">FILE</span><span class="o">=</span><span class="s2">&quot;../data/cell_infer/colon_cancer_sample.tif&quot;</span>
-<span class="nv">WSI_PROPERTIES</span><span class="o">=</span><span class="s1">&#39;{&quot;slide_mpp&quot;: 0.25, &quot;magnification&quot;: 40}&#39;</span>
+<span class="nv">FILE</span><span class="o">=</span><span class="s2">"../data/cell_infer/colon_cancer_sample.tif"</span>
+<span class="nv">WSI_PROPERTIES</span><span class="o">=</span><span class="s1">'{"slide_mpp": 0.25, "magnification": 40}'</span>
 
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing </span><span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Processing </span><span class="si">${</span><span class="nv">FILE</span><span class="si">}</span><span class="s2">"</span>
 python<span class="w"> </span>../src/loki2/detect_cells.py<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--model<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$MODEL</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--outdir<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTDIR</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--model<span class="w"> </span><span class="s2">"</span><span class="nv">$MODEL</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--outdir<span class="w"> </span><span class="s2">"</span><span class="nv">$OUTDIR</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--geojson<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--graph<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>process_wsi<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--wsi_path<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--wsi_properties<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WSI_PROPERTIES</span><span class="s2">&quot;</span>
+<span class="w">  </span>--wsi_path<span class="w"> </span><span class="s2">"</span><span class="nv">$FILE</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--wsi_properties<span class="w"> </span><span class="s2">"</span><span class="nv">$WSI_PROPERTIES</span><span class="s2">"</span>
 </pre></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpatches</span>
 
-<span class="kn">import</span> <span class="nn">loki2.preprocess</span>
-<span class="kn">import</span> <span class="nn">loki2.plot</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">loki2.preprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">loki2.plot</span>
 </pre></div>
 </div>
 </div>
@@ -146,14 +144,14 @@ python<span class="w"> </span>../src/loki2/detect_cells.py<span class="w"> </spa
 <p>After cell detection, we load the sample data including cell embeddings, spatial positions, and cell type annotations. The embeddings capture morphological features of each detected cell.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">base</span> <span class="o">=</span> <span class="s1">&#39;../outputs/cell_infer&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">base</span> <span class="o">=</span> <span class="s1">'../outputs/cell_infer'</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_name</span> <span class="o">=</span> <span class="s1">&#39;colon_cancer_sample&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_name</span> <span class="o">=</span> <span class="s1">'colon_cancer_sample'</span>
 </pre></div>
 </div>
 </div>
@@ -162,7 +160,7 @@ python<span class="w"> </span>../src/loki2/detect_cells.py<span class="w"> </spa
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="o">.</span><span class="n">MAX_IMAGE_PIXELS</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># &lt;-- allow very large WSIs</span>
 <span class="c1"># Load the image</span>
-<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../data/cell_infer/</span><span class="si">{</span><span class="n">sample_name</span><span class="si">}</span><span class="s2">.tif&quot;</span><span class="p">)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">"../data/cell_infer/</span><span class="si">{</span><span class="n">sample_name</span><span class="si">}</span><span class="s2">.tif"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -182,7 +180,7 @@ python<span class="w"> </span>../src/loki2/detect_cells.py<span class="w"> </spa
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -214,7 +212,7 @@ python<span class="w"> </span>../src/loki2/detect_cells.py<span class="w"> </spa
 <p>Apply dimensionality reduction using UMAP to visualize cell embeddings in a 2D space. The UMAP visualization reveals the similarity structure of cells based on their morphological embeddings, with similar cells clustering together. The colors are then mapped back to the spatial coordinates to show how morphological similarity relates to spatial organization.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">umap_hex</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">embeddings_to_hex</span><span class="p">(</span><span class="n">emb</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;umap&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">umap_hex</span> <span class="o">=</span> <span class="n">loki2</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">embeddings_to_hex</span><span class="p">(</span><span class="n">emb</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">'umap'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -222,11 +220,11 @@ python<span class="w"> </span>../src/loki2/detect_cells.py<span class="w"> </spa
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pos</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">umap_hex</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pos</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">umap_hex</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">'none'</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">'equal'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;UMAP of Cell Embeddings&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">"off"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"UMAP of Cell Embeddings"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>

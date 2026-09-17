@@ -63,13 +63,19 @@ Module Contents
    :param embed_dim: Embedding dimension. Defaults to 768.
 
 
-   .. py:attribute:: num_patches
-
-
    .. py:attribute:: img_size
+      :value: 224
+
 
 
    .. py:attribute:: patch_size
+      :value: 16
+
+
+
+   .. py:attribute:: num_patches
+      :value: 196
+
 
 
    .. py:attribute:: proj
@@ -100,9 +106,8 @@ Module Contents
 
 
    .. py:attribute:: num_heads
+      :value: 8
 
-
-   .. py:attribute:: head_dim
 
 
    .. py:attribute:: scale
@@ -126,44 +131,6 @@ Module Contents
 .. py:class:: Mlp(in_features: int, hidden_features: int = None, out_features: int = None, act_layer: Callable = nn.GELU, drop: float = 0.0)
 
    Bases: :py:obj:`torch.nn.Module`
-
-
-   Base class for all neural network modules.
-
-   Your models should also subclass this class.
-
-   Modules can also contain other Modules, allowing to nest them in
-   a tree structure. You can assign the submodules as regular attributes::
-
-       import torch.nn as nn
-       import torch.nn.functional as F
-
-       class Model(nn.Module):
-           def __init__(self):
-               super().__init__()
-               self.conv1 = nn.Conv2d(1, 20, 5)
-               self.conv2 = nn.Conv2d(20, 20, 5)
-
-           def forward(self, x):
-               x = F.relu(self.conv1(x))
-               return F.relu(self.conv2(x))
-
-   Submodules assigned in this way will be registered, and will have their
-   parameters converted too when you call :meth:`to`, etc.
-
-   .. note::
-       As per the example above, an ``__init__()`` call to the parent class
-       must be made before assignment on the child.
-
-   :ivar training: Boolean represents whether this module is in training or
-                   evaluation mode.
-   :vartype training: bool
-
-
-   .. py:attribute:: out_features
-
-
-   .. py:attribute:: hidden_features
 
 
    .. py:attribute:: fc1
@@ -190,6 +157,8 @@ Module Contents
 
 
    .. py:attribute:: drop_prob
+      :value: None
+
 
 
    .. py:method:: forward(x)
@@ -198,38 +167,6 @@ Module Contents
 .. py:class:: Block(dim: int, num_heads: int, mlp_ratio: float = 4.0, qkv_bias: bool = False, qk_scale: float = None, drop: float = 0.0, attn_drop: float = 0.0, drop_path: float = 0.0, act_layer: Callable = nn.GELU, norm_layer: Callable = nn.LayerNorm)
 
    Bases: :py:obj:`torch.nn.Module`
-
-
-   Base class for all neural network modules.
-
-   Your models should also subclass this class.
-
-   Modules can also contain other Modules, allowing to nest them in
-   a tree structure. You can assign the submodules as regular attributes::
-
-       import torch.nn as nn
-       import torch.nn.functional as F
-
-       class Model(nn.Module):
-           def __init__(self):
-               super().__init__()
-               self.conv1 = nn.Conv2d(1, 20, 5)
-               self.conv2 = nn.Conv2d(20, 20, 5)
-
-           def forward(self, x):
-               x = F.relu(self.conv1(x))
-               return F.relu(self.conv2(x))
-
-   Submodules assigned in this way will be registered, and will have their
-   parameters converted too when you call :meth:`to`, etc.
-
-   .. note::
-       As per the example above, an ``__init__()`` call to the parent class
-       must be made before assignment on the child.
-
-   :ivar training: Boolean represents whether this module is in training or
-                   evaluation mode.
-   :vartype training: bool
 
 
    .. py:attribute:: norm1
@@ -242,9 +179,6 @@ Module Contents
 
 
    .. py:attribute:: norm2
-
-
-   .. py:attribute:: mlp_hidden_dim
 
 
    .. py:attribute:: mlp
@@ -264,9 +198,6 @@ Module Contents
    .. py:attribute:: patch_embed
 
 
-   .. py:attribute:: num_patches
-
-
    .. py:attribute:: cls_token
 
 
@@ -274,9 +205,6 @@ Module Contents
 
 
    .. py:attribute:: pos_drop
-
-
-   .. py:attribute:: dpr
 
 
    .. py:attribute:: blocks

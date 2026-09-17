@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
@@ -5,21 +7,17 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>loki2.inference.inference_disk &mdash; Loki2  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -50,17 +48,24 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../index.html">loki2</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="../../cl/index.html">loki2.cl</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../config/index.html">loki2.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../data/index.html">loki2.data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../detect_cells/index.html">loki2.detect_cells</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../encode_trans/index.html">loki2.encode_trans</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../immstain/index.html">loki2.immstain</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="../index.html">loki2.inference</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../mil/index.html">loki2.mil</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../models/index.html">loki2.models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../plot/index.html">loki2.plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../preprocess/index.html">loki2.preprocess</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../psdtime/index.html">loki2.psdtime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../retrieve/index.html">loki2.retrieve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../retrieve_from_sc/index.html">loki2.retrieve_from_sc</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">loki2.utils</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../index.html#submodules">Submodules</a></li>
 </ul>
 </li>
 </ul>
@@ -128,8 +133,8 @@ Patch-Size must be 1024, with overlap of 64.</p>
 <dd></dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">loki2.inference.inference_disk.</span></span><span class="sig-name descname"><span class="pre">CellViTInference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classifier_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">binary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1024</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geojson</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subdir_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enforce_mixed_precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">loki2.inference.inference_disk.</span></span><span class="sig-name descname"><span class="pre">Loki2Inference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classifier_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">binary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1024</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geojson</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subdir_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enforce_mixed_precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference" title="Link to this definition"></a></dt>
 <dd><p>Cell Segmentation Inference class.</p>
 <p>After setup, a WSI can be processed by calling process_wsi method</p>
 <dl class="field-list simple">
@@ -155,8 +160,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd>
 </dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.logger">
-<span class="sig-name descname"><span class="pre">logger</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.logger" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.logger">
+<span class="sig-name descname"><span class="pre">logger</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.logger" title="Link to this definition"></a></dt>
 <dd><p>Logger for logging events.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -166,8 +171,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.model" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.model" title="Link to this definition"></a></dt>
 <dd><p>The model used for inference.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -177,8 +182,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.run_conf">
-<span class="sig-name descname"><span class="pre">run_conf</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.run_conf" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.run_conf">
+<span class="sig-name descname"><span class="pre">run_conf</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.run_conf" title="Link to this definition"></a></dt>
 <dd><p>Configuration for the run.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -188,8 +193,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.inference_transforms">
-<span class="sig-name descname"><span class="pre">inference_transforms</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.inference_transforms" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.inference_transforms">
+<span class="sig-name descname"><span class="pre">inference_transforms</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.inference_transforms" title="Link to this definition"></a></dt>
 <dd><p>Transforms applied during inference.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -199,8 +204,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.mixed_precision">
-<span class="sig-name descname"><span class="pre">mixed_precision</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.mixed_precision" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.mixed_precision">
+<span class="sig-name descname"><span class="pre">mixed_precision</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.mixed_precision" title="Link to this definition"></a></dt>
 <dd><p>Flag indicating if mixed precision is used.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -210,8 +215,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.num_workers">
-<span class="sig-name descname"><span class="pre">num_workers</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.num_workers" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.num_workers">
+<span class="sig-name descname"><span class="pre">num_workers</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.num_workers" title="Link to this definition"></a></dt>
 <dd><p>Number of workers used for data loading.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -221,8 +226,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.model_path">
-<span class="sig-name descname"><span class="pre">model_path</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.model_path" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.model_path">
+<span class="sig-name descname"><span class="pre">model_path</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.model_path" title="Link to this definition"></a></dt>
 <dd><p>Path to the model checkpoint.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -232,8 +237,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.device">
-<span class="sig-name descname"><span class="pre">device</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.device" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.device">
+<span class="sig-name descname"><span class="pre">device</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.device" title="Link to this definition"></a></dt>
 <dd><p>Device used for inference.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -243,8 +248,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.batch_size">
-<span class="sig-name descname"><span class="pre">batch_size</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.batch_size" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.batch_size">
+<span class="sig-name descname"><span class="pre">batch_size</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.batch_size" title="Link to this definition"></a></dt>
 <dd><p>Batch size used for inference.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -254,8 +259,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.patch_size">
-<span class="sig-name descname"><span class="pre">patch_size</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.patch_size" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.patch_size">
+<span class="sig-name descname"><span class="pre">patch_size</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.patch_size" title="Link to this definition"></a></dt>
 <dd><p>Size of the patches used for inference.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -265,8 +270,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.overlap">
-<span class="sig-name descname"><span class="pre">overlap</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.overlap" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.overlap">
+<span class="sig-name descname"><span class="pre">overlap</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.overlap" title="Link to this definition"></a></dt>
 <dd><p>Overlap between patches.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -276,8 +281,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.geojson">
-<span class="sig-name descname"><span class="pre">geojson</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.geojson" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.geojson">
+<span class="sig-name descname"><span class="pre">geojson</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.geojson" title="Link to this definition"></a></dt>
 <dd><p>Flag indicating if a geojson export should be performed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -287,8 +292,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.graph">
-<span class="sig-name descname"><span class="pre">graph</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.graph" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.graph">
+<span class="sig-name descname"><span class="pre">graph</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.graph" title="Link to this definition"></a></dt>
 <dd><p>Flag indicating if a graph export should be performed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -298,8 +303,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.compression">
-<span class="sig-name descname"><span class="pre">compression</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.compression" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.compression">
+<span class="sig-name descname"><span class="pre">compression</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.compression" title="Link to this definition"></a></dt>
 <dd><p>If a snappy compression should be performed. Defaults to False</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -309,8 +314,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.subdir_name">
-<span class="sig-name descname"><span class="pre">subdir_name</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.subdir_name" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.subdir_name">
+<span class="sig-name descname"><span class="pre">subdir_name</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.subdir_name" title="Link to this definition"></a></dt>
 <dd><p>Name of the subdirectory for storing cell detection results.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -320,8 +325,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.label_map">
-<span class="sig-name descname"><span class="pre">label_map</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.label_map" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.label_map">
+<span class="sig-name descname"><span class="pre">label_map</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.label_map" title="Link to this definition"></a></dt>
 <dd><p>Label map for cell types</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -331,8 +336,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.classifier">
-<span class="sig-name descname"><span class="pre">classifier</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.classifier" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.classifier">
+<span class="sig-name descname"><span class="pre">classifier</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.classifier" title="Link to this definition"></a></dt>
 <dd><p>Classifier module if provided. Default is Npone</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -342,8 +347,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.binary">
-<span class="sig-name descname"><span class="pre">binary</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.binary" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.binary">
+<span class="sig-name descname"><span class="pre">binary</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.binary" title="Link to this definition"></a></dt>
 <dd><p>If just a binary detection/segmentation should be performed. Defaults to False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -353,8 +358,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.model_arch">
-<span class="sig-name descname"><span class="pre">model_arch</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.model_arch" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.model_arch">
+<span class="sig-name descname"><span class="pre">model_arch</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.model_arch" title="Link to this definition"></a></dt>
 <dd><p>Model architecture as str</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -364,8 +369,8 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.ray_actors">
-<span class="sig-name descname"><span class="pre">ray_actors</span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.ray_actors" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.ray_actors">
+<span class="sig-name descname"><span class="pre">ray_actors</span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.ray_actors" title="Link to this definition"></a></dt>
 <dd><p>Number of ray actors</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -386,14 +391,14 @@ Can be used to enforce amp inference even for networks trained without amp. Othe
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference._instantiate_logger">
-<span class="sig-name descname"><span class="pre">_instantiate_logger</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference._instantiate_logger" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference._instantiate_logger">
+<span class="sig-name descname"><span class="pre">_instantiate_logger</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference._instantiate_logger" title="Link to this definition"></a></dt>
 <dd><p>Instantiate logger</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference._load_model">
-<span class="sig-name descname"><span class="pre">_load_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference._load_model" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference._load_model">
+<span class="sig-name descname"><span class="pre">_load_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference._load_model" title="Link to this definition"></a></dt>
 <dd><p>Load model and checkpoint and load the state_dict</p>
 </dd></dl>
 
@@ -407,13 +412,13 @@ Load the classifier if provided</p>
 <dl class="py method">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">_get_model(model_type</span></span></dt>
-<dd><p>Literal[“CellViT”, “CellViTSAM”]) -&gt; Union[CellViT, CellViTSAM]:
+<dd><p>Literal[“Loki2”, “Loki2SAM”]) -&gt; Union[Loki2, Loki2SAM]:
 Return the trained model for inference</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference._load_inference_transforms">
-<span class="sig-name descname"><span class="pre">_load_inference_transforms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference._load_inference_transforms" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference._load_inference_transforms">
+<span class="sig-name descname"><span class="pre">_load_inference_transforms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference._load_inference_transforms" title="Link to this definition"></a></dt>
 <dd><p>Load the inference transformations from the run_configuration</p>
 </dd></dl>
 
@@ -425,8 +430,8 @@ Setup automated mixed precision (amp) for inference.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference._setup_worker">
-<span class="sig-name descname"><span class="pre">_setup_worker</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference._setup_worker" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference._setup_worker">
+<span class="sig-name descname"><span class="pre">_setup_worker</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference._setup_worker" title="Link to this definition"></a></dt>
 <dd><p>Setup the worker for inference</p>
 </dd></dl>
 
@@ -514,7 +519,7 @@ Check if provided patched WSI is having the right settings</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id10">
-<span class="sig-name descname"><span class="pre">binary</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#id10" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">binary</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#id10" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -539,42 +544,42 @@ Check if provided patched WSI is having the right settings</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id15">
-<span class="sig-name descname"><span class="pre">batch_size</span></span><a class="headerlink" href="#id15" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">batch_size</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#id15" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id16">
-<span class="sig-name descname"><span class="pre">patch_size</span></span><a class="headerlink" href="#id16" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">patch_size</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1024</span></em><a class="headerlink" href="#id16" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id17">
-<span class="sig-name descname"><span class="pre">overlap</span></span><a class="headerlink" href="#id17" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">overlap</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">64</span></em><a class="headerlink" href="#id17" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id18">
-<span class="sig-name descname"><span class="pre">geojson</span></span><a class="headerlink" href="#id18" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">geojson</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#id18" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id19">
-<span class="sig-name descname"><span class="pre">graph</span></span><a class="headerlink" href="#id19" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">graph</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#id19" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id20">
-<span class="sig-name descname"><span class="pre">compression</span></span><a class="headerlink" href="#id20" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">compression</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#id20" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id21">
-<span class="sig-name descname"><span class="pre">subdir_name</span></span><a class="headerlink" href="#id21" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">subdir_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#id21" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.process_wsi">
-<span class="sig-name descname"><span class="pre">process_wsi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wsi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../data/dataclass/wsi/index.html#loki2.data.dataclass.wsi.WSI" title="loki2.data.dataclass.wsi.WSI"><span class="pre">loki2.data.dataclass.wsi.WSI</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.25</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.process_wsi" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.process_wsi">
+<span class="sig-name descname"><span class="pre">process_wsi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wsi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../data/dataclass/wsi/index.html#loki2.data.dataclass.wsi.WSI" title="loki2.data.dataclass.wsi.WSI"><span class="pre">loki2.data.dataclass.wsi.WSI</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.25</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.process_wsi" title="Link to this definition"></a></dt>
 <dd><p>Process WSI file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -587,8 +592,8 @@ Check if provided patched WSI is having the right settings</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="loki2.inference.inference_disk.CellViTInference.apply_softmax_reorder">
-<span class="sig-name descname"><span class="pre">apply_softmax_reorder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predictions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.inference.inference_disk.CellViTInference.apply_softmax_reorder" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="loki2.inference.inference_disk.Loki2Inference.apply_softmax_reorder">
+<span class="sig-name descname"><span class="pre">apply_softmax_reorder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predictions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#loki2.inference.inference_disk.Loki2Inference.apply_softmax_reorder" title="Link to this definition"></a></dt>
 <dd><p>Reorder and apply softmax on predictions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

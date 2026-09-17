@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
@@ -5,25 +7,21 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>loki2.immstain &mdash; Loki2  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="loki2.plot" href="../plot/index.html" />
+    <link rel="next" title="loki2.inference" href="../inference/index.html" />
     <link rel="prev" title="loki2.encode_trans" href="../encode_trans/index.html" /> 
 </head>
 
@@ -50,16 +48,22 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html">loki2</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../index.html#subpackages">Subpackages</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../cl/index.html">loki2.cl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/index.html">loki2.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../data/index.html">loki2.data</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../detect_cells/index.html">loki2.detect_cells</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../encode_trans/index.html">loki2.encode_trans</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">loki2.immstain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../inference/index.html">loki2.inference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../mil/index.html">loki2.mil</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../models/index.html">loki2.models</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../plot/index.html">loki2.plot</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../preprocess/index.html">loki2.preprocess</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../psdtime/index.html">loki2.psdtime</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../retrieve/index.html">loki2.retrieve</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../retrieve_from_sc/index.html">loki2.retrieve_from_sc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utils/index.html">loki2.utils</a></li>
 </ul>
 </li>
 </ul>
@@ -246,7 +250,7 @@ and {col:03d} placeholders. Defaults to
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">timed_section</span><span class="p">(</span><span class="s2">&quot;Processing data&quot;</span><span class="p">):</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">timed_section</span><span class="p">(</span><span class="s2">"Processing data"</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">process_data</span><span class="p">()</span>
 <span class="go">[timer] Processing data: 1.23s</span>
 </pre></div>
@@ -351,21 +355,10 @@ correlation, and SSIM.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="loki2.immstain.setup_dummy_cellvit_modules">
-<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">setup_dummy_cellvit_modules</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span></span><a class="headerlink" href="#loki2.immstain.setup_dummy_cellvit_modules" title="Link to this definition"></a></dt>
-<dd><p>Set up dummy modules for ‘cellvit’ and its submodules.</p>
-<p>This is required to simulate the module structure that the torch model
-expects when loading .pt files that reference cellvit classes. Creates
-dummy modules in sys.modules to handle unpickling of objects that reference
-cellvit.data.dataclass.cell_graph classes.</p>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="loki2.immstain.load_global_embeddings">
 <span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">load_global_embeddings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pt_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#loki2.immstain.load_global_embeddings" title="Link to this definition"></a></dt>
 <dd><p>Load global cell embeddings from a .pt file.</p>
-<p>Sets up dummy cellvit modules and loads embeddings from a PyTorch .pt file.
-The loaded object must have an ‘x’ attribute containing the embeddings.</p>
+<p>The loaded object is a CellGraphDataWSI written by loki2.detect_cells.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>pt_path</strong> – Path to the .pt file containing embeddings.</p>
@@ -485,7 +478,7 @@ if_patch_dir, matching the IF patch pattern.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="loki2.immstain.expand_nuclei_watershed_multichannel">
-<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">expand_nuclei_watershed_multichannel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nuclear_polys_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">if_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guide_channel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expansion_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extend_nuclei</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#loki2.immstain.expand_nuclei_watershed_multichannel" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">loki2.immstain.</span></span><span class="sig-name descname"><span class="pre">expand_nuclei_watershed_multichannel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nuclear_polys_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">if_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guide_channel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../utils/logger/index.html#loki2.utils.logger.ColoredFormatter.None" title="loki2.utils.logger.ColoredFormatter.None"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expansion_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extend_nuclei</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#loki2.immstain.expand_nuclei_watershed_multichannel" title="Link to this definition"></a></dt>
 <dd><p>Expand nuclear polygons using watershed segmentation.</p>
 <p>Creates a cell mask by expanding nuclear contours using watershed
 segmentation. Can use IF image intensity as a guide for expansion.</p>
@@ -956,7 +949,7 @@ If None, uses 2nd and 98th percentiles. Defaults to None.</p></li>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../encode_trans/index.html" class="btn btn-neutral float-left" title="loki2.encode_trans" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../plot/index.html" class="btn btn-neutral float-right" title="loki2.plot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../inference/index.html" class="btn btn-neutral float-right" title="loki2.inference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

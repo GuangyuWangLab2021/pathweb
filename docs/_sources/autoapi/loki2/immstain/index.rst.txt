@@ -195,22 +195,11 @@ Module Contents
    :rtype: Dict[str, float]
 
 
-.. py:function:: setup_dummy_cellvit_modules() -> None
-
-   Set up dummy modules for 'cellvit' and its submodules.
-
-   This is required to simulate the module structure that the torch model
-   expects when loading .pt files that reference cellvit classes. Creates
-   dummy modules in sys.modules to handle unpickling of objects that reference
-   cellvit.data.dataclass.cell_graph classes.
-
-
 .. py:function:: load_global_embeddings(pt_path: pathlib.Path) -> numpy.ndarray
 
    Load global cell embeddings from a .pt file.
 
-   Sets up dummy cellvit modules and loads embeddings from a PyTorch .pt file.
-   The loaded object must have an 'x' attribute containing the embeddings.
+   The loaded object is a CellGraphDataWSI written by loki2.detect_cells.
 
    :param pt_path: Path to the .pt file containing embeddings.
 
@@ -290,7 +279,7 @@ Module Contents
    :rtype: List[str]
 
 
-.. py:function:: expand_nuclei_watershed_multichannel(nuclear_polys_list: List[numpy.ndarray], image_shape: Tuple[int, Ellipsis], if_img: Optional[numpy.ndarray] = None, guide_channel: Optional[int] = None, expansion_distance: int = 20, extend_nuclei: bool = True) -> numpy.ndarray
+.. py:function:: expand_nuclei_watershed_multichannel(nuclear_polys_list: List[numpy.ndarray], image_shape: Tuple[int, ...], if_img: Optional[numpy.ndarray] = None, guide_channel: Optional[int] = None, expansion_distance: int = 20, extend_nuclei: bool = True) -> numpy.ndarray
 
    Expand nuclear polygons using watershed segmentation.
 

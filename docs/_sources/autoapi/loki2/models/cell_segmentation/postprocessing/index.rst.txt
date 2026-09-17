@@ -31,9 +31,13 @@ Module Contents
 
 
    .. py:attribute:: magnification
+      :value: 40
+
 
 
    .. py:attribute:: gt
+      :value: False
+
 
 
    .. py:method:: check_network_output(predictions_: Dict[str, torch.Tensor]) -> None

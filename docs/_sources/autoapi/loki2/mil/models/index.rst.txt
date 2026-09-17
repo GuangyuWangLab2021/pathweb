@@ -12,22 +12,14 @@ loki2.mil.models
 
 
 
-Subpackages
------------
-
-.. toctree::
-   :maxdepth: 1
-
-   /autoapi/loki2/mil/models/src/index
-
-
 Submodules
 ----------
 
 .. toctree::
    :maxdepth: 1
 
-   /autoapi/loki2/mil/models/TCGA-Loki2_MILCell_blca_metastasis_5fold/index
-   /autoapi/loki2/mil/models/TCGA-Loki2_MILCell_blca_stage_5fold/index
+   /autoapi/loki2/mil/models/TCGA_Loki2_MILCell_blca_metastasis_5fold/index
+   /autoapi/loki2/mil/models/TCGA_Loki2_MILCell_blca_stage_5fold/index
+   /autoapi/loki2/mil/models/src/index
 
 

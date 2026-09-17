@@ -5,9 +5,9 @@ loki2.models.cell_segmentation.loki2_sam
 
 .. autoapi-nested-parse::
 
-   CellViT-SAM (B, L, H) model.
+   Loki2-SAM (B, L, H) model.
 
-   This module provides CellViT variants using Segment Anything Model (SAM) backbones.
+   This module provides Loki2 variants using Segment Anything Model (SAM) backbones.
 
 
 
@@ -16,12 +16,12 @@ loki2.models.cell_segmentation.loki2_sam
 Module Contents
 ---------------
 
-.. py:class:: CellViTSAM(model_path: Union[pathlib.Path, str], num_nuclei_classes: int, num_tissue_classes: int, vit_structure: Literal['SAM-B', 'SAM-L', 'SAM-H'], drop_rate: float = 0, regression_loss: bool = False)
+.. py:class:: Loki2SAM(model_path: Union[pathlib.Path, str], num_nuclei_classes: int, num_tissue_classes: int, vit_structure: Literal['SAM-B', 'SAM-L', 'SAM-H'], drop_rate: float = 0, regression_loss: bool = False)
 
-   Bases: :py:obj:`loki2.models.cell_segmentation.cellvit.CellViT`
+   Bases: :py:obj:`loki2.models.cell_segmentation.loki2_net.Loki2`
 
 
-   CellViT with SAM backbone settings.
+   Loki2 with SAM backbone settings.
 
    Skip connections are shared between branches, but each network has a distinct encoder.
 

@@ -26,7 +26,7 @@ Module Contents
 
 .. py:data:: project_root
 
-.. py:class:: CellViTInference(model_path: Union[pathlib.Path, str], gpu: int, classifier_path: Optional[Union[pathlib.Path, str]] = None, binary: bool = False, batch_size: int = 8, patch_size: int = 1024, overlap: int = 64, geojson: bool = False, graph: bool = False, compression: bool = False, subdir_name: Optional[str] = None, enforce_mixed_precision: bool = False)
+.. py:class:: Loki2Inference(model_path: Union[pathlib.Path, str], gpu: int, classifier_path: Optional[Union[pathlib.Path, str]] = None, binary: bool = False, batch_size: int = 8, patch_size: int = 1024, overlap: int = 64, geojson: bool = False, graph: bool = False, compression: bool = False, subdir_name: Optional[str] = None, enforce_mixed_precision: bool = False)
 
    Cell Segmentation Inference class.
 
@@ -204,7 +204,7 @@ Module Contents
 
    .. method:: _get_model(model_type
 
-      Literal["CellViT", "CellViTSAM"]) -> Union[CellViT, CellViTSAM]:
+      Literal["Loki2", "Loki2SAM"]) -> Union[Loki2, Loki2SAM]:
       Return the trained model for inference
 
    .. method:: _load_inference_transforms() -> None
@@ -290,6 +290,8 @@ Module Contents
 
    .. py:attribute:: binary
       :type:  bool
+      :value: False
+
 
 
    .. py:attribute:: model_arch
@@ -307,24 +309,38 @@ Module Contents
 
 
    .. py:attribute:: batch_size
+      :value: 8
+
 
 
    .. py:attribute:: patch_size
+      :value: 1024
+
 
 
    .. py:attribute:: overlap
+      :value: 64
+
 
 
    .. py:attribute:: geojson
+      :value: False
+
 
 
    .. py:attribute:: graph
+      :value: False
+
 
 
    .. py:attribute:: compression
+      :value: False
+
 
 
    .. py:attribute:: subdir_name
+      :value: None
+
 
 
    .. py:method:: process_wsi(wsi: loki2.data.dataclass.wsi.WSI, resolution: float = 0.25) -> None

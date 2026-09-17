@@ -41,16 +41,10 @@ Module Contents
    :raises RuntimeError: If a projection head does not contain at least one linear layer.
 
 
-   .. py:attribute:: hidden_dim
-
-
    .. py:attribute:: proj_a
 
 
    .. py:attribute:: proj_b
-
-
-   .. py:attribute:: init_value
 
 
    .. py:attribute:: logit_scale

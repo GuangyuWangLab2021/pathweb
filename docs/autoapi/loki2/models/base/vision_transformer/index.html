@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../../../">
 <head>
@@ -5,21 +7,17 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>loki2.models.base.vision_transformer &mdash; Loki2  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=fd3f3429" />
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
@@ -50,17 +48,24 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../../index.html">loki2</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../../../index.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../../index.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="../../../cl/index.html">loki2.cl</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../config/index.html">loki2.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../data/index.html">loki2.data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../detect_cells/index.html">loki2.detect_cells</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../encode_trans/index.html">loki2.encode_trans</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../immstain/index.html">loki2.immstain</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../inference/index.html">loki2.inference</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../mil/index.html">loki2.mil</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="../../index.html">loki2.models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../plot/index.html">loki2.plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../preprocess/index.html">loki2.preprocess</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../psdtime/index.html">loki2.psdtime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../retrieve/index.html">loki2.retrieve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../retrieve_from_sc/index.html">loki2.retrieve_from_sc</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../utils/index.html">loki2.utils</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../index.html#submodules">Submodules</a></li>
 </ul>
 </li>
 </ul>
@@ -175,18 +180,18 @@ Defaults to 16.</p></li>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.models.base.vision_transformer.PatchEmbed.num_patches">
-<span class="sig-name descname"><span class="pre">num_patches</span></span><a class="headerlink" href="#loki2.models.base.vision_transformer.PatchEmbed.num_patches" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py" id="loki2.models.base.vision_transformer.PatchEmbed.img_size">
-<span class="sig-name descname"><span class="pre">img_size</span></span><a class="headerlink" href="#loki2.models.base.vision_transformer.PatchEmbed.img_size" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">img_size</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">224</span></em><a class="headerlink" href="#loki2.models.base.vision_transformer.PatchEmbed.img_size" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="loki2.models.base.vision_transformer.PatchEmbed.patch_size">
-<span class="sig-name descname"><span class="pre">patch_size</span></span><a class="headerlink" href="#loki2.models.base.vision_transformer.PatchEmbed.patch_size" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">patch_size</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></em><a class="headerlink" href="#loki2.models.base.vision_transformer.PatchEmbed.patch_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="loki2.models.base.vision_transformer.PatchEmbed.num_patches">
+<span class="sig-name descname"><span class="pre">num_patches</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">196</span></em><a class="headerlink" href="#loki2.models.base.vision_transformer.PatchEmbed.num_patches" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -220,12 +225,7 @@ Defaults to 16.</p></li>
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="loki2.models.base.vision_transformer.Attention.num_heads">
-<span class="sig-name descname"><span class="pre">num_heads</span></span><a class="headerlink" href="#loki2.models.base.vision_transformer.Attention.num_heads" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.models.base.vision_transformer.Attention.head_dim">
-<span class="sig-name descname"><span class="pre">head_dim</span></span><a class="headerlink" href="#loki2.models.base.vision_transformer.Attention.head_dim" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">num_heads</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#loki2.models.base.vision_transformer.Attention.num_heads" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -264,47 +264,6 @@ Defaults to 16.</p></li>
 <dt class="sig sig-object py" id="loki2.models.base.vision_transformer.Mlp">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">loki2.models.base.vision_transformer.</span></span><span class="sig-name descname"><span class="pre">Mlp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act_layer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nn.GELU</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.base.vision_transformer.Mlp" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
-<p>Base class for all neural network modules.</p>
-<p>Your models should also subclass this class.</p>
-<p>Modules can also contain other Modules, allowing to nest them in
-a tree structure. You can assign the submodules as regular attributes:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
-<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
-
-<span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>Submodules assigned in this way will be registered, and will have their
-parameters converted too when you call <code class="xref py py-meth docutils literal notranslate"><span class="pre">to()</span></code>, etc.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>As per the example above, an <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> call to the parent class
-must be made before assignment on the child.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>training</strong> (<em>bool</em>) – Boolean represents whether this module is in training or
-evaluation mode.</p>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.models.base.vision_transformer.Mlp.out_features">
-<span class="sig-name descname"><span class="pre">out_features</span></span><a class="headerlink" href="#loki2.models.base.vision_transformer.Mlp.out_features" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.models.base.vision_transformer.Mlp.hidden_features">
-<span class="sig-name descname"><span class="pre">hidden_features</span></span><a class="headerlink" href="#loki2.models.base.vision_transformer.Mlp.hidden_features" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 <dl class="py attribute">
 <dt class="sig sig-object py" id="loki2.models.base.vision_transformer.Mlp.fc1">
 <span class="sig-name descname"><span class="pre">fc1</span></span><a class="headerlink" href="#loki2.models.base.vision_transformer.Mlp.fc1" title="Link to this definition"></a></dt>
@@ -339,7 +298,7 @@ evaluation mode.</p>
 <p>Drop paths (Stochastic Depth) per sample  (when applied in main path of residual blocks).</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="loki2.models.base.vision_transformer.DropPath.drop_prob">
-<span class="sig-name descname"><span class="pre">drop_prob</span></span><a class="headerlink" href="#loki2.models.base.vision_transformer.DropPath.drop_prob" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">drop_prob</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#loki2.models.base.vision_transformer.DropPath.drop_prob" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -353,37 +312,6 @@ evaluation mode.</p>
 <dt class="sig sig-object py" id="loki2.models.base.vision_transformer.Block">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">loki2.models.base.vision_transformer.</span></span><span class="sig-name descname"><span class="pre">Block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_heads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlp_ratio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qkv_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qk_scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attn_drop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act_layer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nn.GELU</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_layer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nn.LayerNorm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki2.models.base.vision_transformer.Block" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
-<p>Base class for all neural network modules.</p>
-<p>Your models should also subclass this class.</p>
-<p>Modules can also contain other Modules, allowing to nest them in
-a tree structure. You can assign the submodules as regular attributes:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
-<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
-
-<span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>Submodules assigned in this way will be registered, and will have their
-parameters converted too when you call <code class="xref py py-meth docutils literal notranslate"><span class="pre">to()</span></code>, etc.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>As per the example above, an <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> call to the parent class
-must be made before assignment on the child.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>training</strong> (<em>bool</em>) – Boolean represents whether this module is in training or
-evaluation mode.</p>
-</dd>
-</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="loki2.models.base.vision_transformer.Block.norm1">
 <span class="sig-name descname"><span class="pre">norm1</span></span><a class="headerlink" href="#loki2.models.base.vision_transformer.Block.norm1" title="Link to this definition"></a></dt>
@@ -402,11 +330,6 @@ evaluation mode.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="loki2.models.base.vision_transformer.Block.norm2">
 <span class="sig-name descname"><span class="pre">norm2</span></span><a class="headerlink" href="#loki2.models.base.vision_transformer.Block.norm2" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.models.base.vision_transformer.Block.mlp_hidden_dim">
-<span class="sig-name descname"><span class="pre">mlp_hidden_dim</span></span><a class="headerlink" href="#loki2.models.base.vision_transformer.Block.mlp_hidden_dim" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -432,11 +355,6 @@ evaluation mode.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.models.base.vision_transformer.VisionTransformer.num_patches">
-<span class="sig-name descname"><span class="pre">num_patches</span></span><a class="headerlink" href="#loki2.models.base.vision_transformer.VisionTransformer.num_patches" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py" id="loki2.models.base.vision_transformer.VisionTransformer.cls_token">
 <span class="sig-name descname"><span class="pre">cls_token</span></span><a class="headerlink" href="#loki2.models.base.vision_transformer.VisionTransformer.cls_token" title="Link to this definition"></a></dt>
 <dd></dd></dl>
@@ -449,11 +367,6 @@ evaluation mode.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="loki2.models.base.vision_transformer.VisionTransformer.pos_drop">
 <span class="sig-name descname"><span class="pre">pos_drop</span></span><a class="headerlink" href="#loki2.models.base.vision_transformer.VisionTransformer.pos_drop" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="loki2.models.base.vision_transformer.VisionTransformer.dpr">
-<span class="sig-name descname"><span class="pre">dpr</span></span><a class="headerlink" href="#loki2.models.base.vision_transformer.VisionTransformer.dpr" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">

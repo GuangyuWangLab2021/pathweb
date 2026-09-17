@@ -73,12 +73,14 @@ Module Contents
 
 
    .. py:attribute:: eps
+      :value: 1e-06
+
 
 
    .. py:method:: forward(x: torch.Tensor) -> torch.Tensor
 
 
-.. py:class:: ImageEncoderViT(img_size: int = 1024, patch_size: int = 16, in_chans: int = 3, embed_dim: int = 768, depth: int = 12, num_heads: int = 12, mlp_ratio: float = 4.0, out_chans: int = 256, qkv_bias: bool = True, norm_layer: Type[torch.nn.Module] = nn.LayerNorm, act_layer: Type[torch.nn.Module] = nn.GELU, use_abs_pos: bool = True, use_rel_pos: bool = False, rel_pos_zero_init: bool = True, window_size: int = 0, global_attn_indexes: Tuple[int, Ellipsis] = ())
+.. py:class:: ImageEncoderViT(img_size: int = 1024, patch_size: int = 16, in_chans: int = 3, embed_dim: int = 768, depth: int = 12, num_heads: int = 12, mlp_ratio: float = 4.0, out_chans: int = 256, qkv_bias: bool = True, norm_layer: Type[torch.nn.Module] = nn.LayerNorm, act_layer: Type[torch.nn.Module] = nn.GELU, use_abs_pos: bool = True, use_rel_pos: bool = False, rel_pos_zero_init: bool = True, window_size: int = 0, global_attn_indexes: Tuple[int, ...] = ())
 
    Bases: :py:obj:`torch.nn.Module`
 
@@ -111,6 +113,8 @@ Module Contents
 
 
    .. py:attribute:: img_size
+      :value: 1024
+
 
 
    .. py:attribute:: patch_embed
@@ -175,6 +179,8 @@ Module Contents
 
 
    .. py:attribute:: window_size
+      :value: 0
+
 
 
    .. py:method:: forward(x: torch.Tensor) -> torch.Tensor
@@ -207,9 +213,8 @@ Module Contents
 
 
    .. py:attribute:: num_heads
+      :value: 8
 
-
-   .. py:attribute:: head_dim
 
 
    .. py:attribute:: scale
@@ -222,6 +227,8 @@ Module Contents
 
 
    .. py:attribute:: use_rel_pos
+      :value: False
+
 
 
    .. py:method:: forward(x: torch.Tensor) -> torch.Tensor

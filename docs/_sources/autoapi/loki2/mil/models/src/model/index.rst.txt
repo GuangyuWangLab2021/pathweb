@@ -70,21 +70,28 @@ Module Contents
 
 
    .. py:attribute:: M
+      :value: 1280
+
 
 
    .. py:attribute:: L
+      :value: 128
+
 
 
    .. py:attribute:: ATTENTION_BRANCHES
+      :value: 1
+
 
 
    .. py:attribute:: norm_type
+      :value: 'bn'
+
 
 
    .. py:attribute:: output_type
+      :value: 'logits'
 
-
-   .. py:attribute:: layers
 
 
    .. py:attribute:: feature_extractor

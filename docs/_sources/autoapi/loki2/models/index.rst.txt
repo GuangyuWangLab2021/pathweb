@@ -12,8 +12,8 @@ loki2.models
 
 
 
-Subpackages
------------
+Submodules
+----------
 
 .. toctree::
    :maxdepth: 1

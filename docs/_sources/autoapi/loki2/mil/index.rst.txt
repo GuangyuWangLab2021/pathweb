@@ -13,22 +13,14 @@ loki2.mil
 
 
 
-Subpackages
------------
-
-.. toctree::
-   :maxdepth: 1
-
-   /autoapi/loki2/mil/models/index
-   /autoapi/loki2/mil/prampt_generate/index
-
-
 Submodules
 ----------
 
 .. toctree::
    :maxdepth: 1
 
+   /autoapi/loki2/mil/models/index
    /autoapi/loki2/mil/prampt_downsample/index
+   /autoapi/loki2/mil/prampt_generate/index
 
 

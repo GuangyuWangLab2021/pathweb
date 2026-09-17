@@ -70,7 +70,7 @@ Module Contents
    :rtype: np.ndarray
 
 
-.. py:function:: infer_pseudotime_palantir(ad: Any, start_cell: str, output_dir: str | pathlib.Path, name: str, *, n_components: int = 15, knn: int = 100, num_waypoints: int = 500) -> None
+.. py:function:: infer_pseudotime_palantir(ad: Any, start_cell: str, output_dir: str | pathlib.Path, name: str, *, n_components: int = 15, n_eigs: int | None = None, knn: int = 100, num_waypoints: int = 500) -> None
 
    Run Palantir pseudotime inference on AnnData object and persist plots/results.
 
@@ -82,6 +82,10 @@ Module Contents
    :param output_dir: Directory to save output plots and results.
    :param name: Name identifier for output files.
    :param n_components: Number of components for multiscale space. Defaults to 15.
+   :param n_eigs: Number of eigenvectors spanning the multiscale space; the space uses
+                  ``n_eigs - 1`` of them. When None, Palantir picks it from the largest gap in
+                  the eigenvalue spectrum, which is sensitive to small perturbations of the
+                  neighbour graph. Defaults to None.
    :param knn: Number of nearest neighbors for graph construction. Defaults to 100.
    :param num_waypoints: Number of waypoints for trajectory inference. Defaults to 500.
 

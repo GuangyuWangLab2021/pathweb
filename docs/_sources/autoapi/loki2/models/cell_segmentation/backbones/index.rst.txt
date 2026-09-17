@@ -16,7 +16,7 @@ loki2.models.cell_segmentation.backbones
 Module Contents
 ---------------
 
-.. py:class:: ViTCellViT(extract_layers: List[int], img_size: List[int] = [224], patch_size: int = 16, in_chans: int = 3, num_classes: int = 0, embed_dim: int = 768, depth: int = 12, num_heads: int = 12, mlp_ratio: float = 4, qkv_bias: bool = False, qk_scale: Optional[float] = None, drop_rate: float = 0, attn_drop_rate: float = 0, drop_path_rate: float = 0, norm_layer: Callable = nn.LayerNorm, **kwargs)
+.. py:class:: ViTLoki2(extract_layers: List[int], img_size: List[int] = [224], patch_size: int = 16, in_chans: int = 3, num_classes: int = 0, embed_dim: int = 768, depth: int = 12, num_heads: int = 12, mlp_ratio: float = 4, qkv_bias: bool = False, qk_scale: Optional[float] = None, drop_rate: float = 0, attn_drop_rate: float = 0, drop_path_rate: float = 0, norm_layer: Callable = nn.LayerNorm, **kwargs)
 
    Bases: :py:obj:`loki2.models.base.vision_transformer.VisionTransformer`
 
@@ -43,12 +43,12 @@ Module Contents
 
 
 
-.. py:class:: ViTCellViTDeit(extract_layers: List[int], img_size: int = 1024, patch_size: int = 16, in_chans: int = 3, embed_dim: int = 768, depth: int = 12, num_heads: int = 12, mlp_ratio: float = 4, out_chans: int = 256, qkv_bias: bool = True, norm_layer: Type[torch.nn.Module] = nn.LayerNorm, act_layer: Type[torch.nn.Module] = nn.GELU, use_abs_pos: bool = True, use_rel_pos: bool = False, rel_pos_zero_init: bool = True, window_size: int = 0, global_attn_indexes: Tuple[int, Ellipsis] = ())
+.. py:class:: ViTLoki2Deit(extract_layers: List[int], img_size: int = 1024, patch_size: int = 16, in_chans: int = 3, embed_dim: int = 768, depth: int = 12, num_heads: int = 12, mlp_ratio: float = 4, out_chans: int = 256, qkv_bias: bool = True, norm_layer: Type[torch.nn.Module] = nn.LayerNorm, act_layer: Type[torch.nn.Module] = nn.GELU, use_abs_pos: bool = True, use_rel_pos: bool = False, rel_pos_zero_init: bool = True, window_size: int = 0, global_attn_indexes: Tuple[int, ...] = ())
 
    Bases: :py:obj:`loki2.models.utils.sam_utils.ImageEncoderViT`
 
 
-   For a parameter description see ViTCellViT
+   For a parameter description see ViTLoki2
 
 
    .. py:attribute:: extract_layers

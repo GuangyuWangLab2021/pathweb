@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
@@ -5,22 +7,18 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>loki2 &mdash; Loki2  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
-      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -51,25 +49,22 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">loki2</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cl/index.html">loki2.cl</a></li>
 <li class="toctree-l4"><a class="reference internal" href="config/index.html">loki2.config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="data/index.html">loki2.data</a></li>
-<li class="toctree-l4"><a class="reference internal" href="inference/index.html">loki2.inference</a></li>
-<li class="toctree-l4"><a class="reference internal" href="mil/index.html">loki2.mil</a></li>
-<li class="toctree-l4"><a class="reference internal" href="models/index.html">loki2.models</a></li>
-<li class="toctree-l4"><a class="reference internal" href="utils/index.html">loki2.utils</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="detect_cells/index.html">loki2.detect_cells</a></li>
 <li class="toctree-l4"><a class="reference internal" href="encode_trans/index.html">loki2.encode_trans</a></li>
 <li class="toctree-l4"><a class="reference internal" href="immstain/index.html">loki2.immstain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inference/index.html">loki2.inference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mil/index.html">loki2.mil</a></li>
+<li class="toctree-l4"><a class="reference internal" href="models/index.html">loki2.models</a></li>
 <li class="toctree-l4"><a class="reference internal" href="plot/index.html">loki2.plot</a></li>
 <li class="toctree-l4"><a class="reference internal" href="preprocess/index.html">loki2.preprocess</a></li>
 <li class="toctree-l4"><a class="reference internal" href="psdtime/index.html">loki2.psdtime</a></li>
 <li class="toctree-l4"><a class="reference internal" href="retrieve/index.html">loki2.retrieve</a></li>
 <li class="toctree-l4"><a class="reference internal" href="retrieve_from_sc/index.html">loki2.retrieve_from_sc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils/index.html">loki2.utils</a></li>
 </ul>
 </li>
 </ul>
@@ -123,32 +118,25 @@
 <li><p>cell-level multiple instance learning (MIL), which aggregates individual cellular risk scores for patient-level prognostication;</p></li>
 <li><p>in silico staining, which generates virtual protein-level biomarker maps.</p></li>
 </ol>
-<section id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cl/index.html">loki2.cl</a></li>
 <li class="toctree-l1"><a class="reference internal" href="config/index.html">loki2.config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data/index.html">loki2.data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="inference/index.html">loki2.inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mil/index.html">loki2.mil</a></li>
-<li class="toctree-l1"><a class="reference internal" href="models/index.html">loki2.models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utils/index.html">loki2.utils</a></li>
-</ul>
-</div>
-</section>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="detect_cells/index.html">loki2.detect_cells</a></li>
 <li class="toctree-l1"><a class="reference internal" href="encode_trans/index.html">loki2.encode_trans</a></li>
 <li class="toctree-l1"><a class="reference internal" href="immstain/index.html">loki2.immstain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inference/index.html">loki2.inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mil/index.html">loki2.mil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models/index.html">loki2.models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plot/index.html">loki2.plot</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preprocess/index.html">loki2.preprocess</a></li>
 <li class="toctree-l1"><a class="reference internal" href="psdtime/index.html">loki2.psdtime</a></li>
 <li class="toctree-l1"><a class="reference internal" href="retrieve/index.html">loki2.retrieve</a></li>
 <li class="toctree-l1"><a class="reference internal" href="retrieve_from_sc/index.html">loki2.retrieve_from_sc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils/index.html">loki2.utils</a></li>
 </ul>
 </div>
 </section>

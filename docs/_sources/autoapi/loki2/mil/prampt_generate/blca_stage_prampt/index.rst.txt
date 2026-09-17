@@ -15,34 +15,23 @@ loki2.mil.prampt_generate.blca_stage_prampt
 
 
 
-
-
 Module Contents
 ---------------
 
-.. py:function:: setup_dummy_modules() -> None
-
-   Sets up dummy modules for 'loki2' and its submodules.
-
-   This is required to simulate the module structure that the torch model
-   expects when unpickling objects that reference e.g. 'loki2.data.dataclass.cell_graph'.
-
-
 .. py:function:: load_tensor(file_path: Union[str, pathlib.Path]) -> Any
 
-   Load torch object from .pt file with dummy loki2 module support.
-
-   Sets up dummy loki2 modules before loading to handle unpickling of
-   objects that reference loki2.data.dataclass.cell_graph classes.
+   Load a CellGraphDataWSI written by loki2.detect_cells from a .pt file.
 
    :param file_path: Path to the .pt file to load.
 
    :returns: Loaded torch object (typically containing cell embeddings and positions).
 
 
-.. py:function:: load_stage_data() -> pandas.DataFrame
+.. py:function:: load_stage_data(stage_file: Union[str, pathlib.Path]) -> pandas.DataFrame
 
-   Load Disease_Stage data from TCGA_GRADE.txt.
+   Load Disease_Stage data from a TCGA grade table.
+
+   :param stage_file: Path to the tab-separated grade table (e.g. TCGA_GRADE.txt).
 
    :returns:
 
@@ -85,27 +74,13 @@ Module Contents
    :rtype: List[str]
 
 
-.. py:data:: stage_df
+.. py:function:: parse_args() -> argparse.Namespace
 
-.. py:data:: target_samples_per_stage
-   :value: 60
-
-
-.. py:data:: sample_ratio
-   :value: 0.1
+   Parse command-line arguments.
 
 
-.. py:data:: directory_path
-   :value: './data/TCGA/BLCA'
+.. py:function:: main(args: argparse.Namespace) -> None
 
+   Build the stage PRAMPT table and write it to parquet.
 
-.. py:data:: records
-   :value: []
-
-
-.. py:data:: successful_stage_0
-
-.. py:data:: successful_stage_1
-
-.. py:data:: merged_df
 

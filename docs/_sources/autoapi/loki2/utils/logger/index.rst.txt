@@ -17,7 +17,7 @@ loki2.utils.logger
 Module Contents
 ---------------
 
-.. py:class:: ColoredFormatter(fmt=None, datefmt=None, style='%', validate=True)
+.. py:class:: ColoredFormatter(fmt=None, datefmt=None, style='%', validate=True, *, defaults=None)
 
    Bases: :py:obj:`logging.Formatter`
 
@@ -135,12 +135,18 @@ Module Contents
 
 
    .. py:attribute:: comment
+      :value: 'logs'
+
 
 
    .. py:attribute:: log_parent_dir
+      :value: None
+
 
 
    .. py:attribute:: use_timestamp
+      :value: False
+
 
 
    .. py:method:: create_handler(logger: logging.Logger) -> None

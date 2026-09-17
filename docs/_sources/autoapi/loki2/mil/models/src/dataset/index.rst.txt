@@ -54,6 +54,8 @@ Module Contents
 
 
    .. py:attribute:: bag_size
+      :value: 300
+
 
 
    .. py:attribute:: rng
@@ -104,6 +106,8 @@ Module Contents
 
 
    .. py:attribute:: bag_size
+      :value: 2000
+
 
 
    .. py:attribute:: rng

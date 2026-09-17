@@ -117,50 +117,13 @@ Module Contents
              (RetrievalResult, predicted_labels, centroid_similarities).
 
 
-.. py:function:: usage() -> None
+.. py:function:: parse_args() -> argparse.Namespace
 
-   Print usage information for the retrieval script.
+   Parse command-line arguments.
 
 
-.. py:data:: sam
+.. py:function:: main(args: argparse.Namespace) -> None
 
-.. py:data:: sample
+   Run centroid-based retrieval against the reference atlas.
 
-.. py:data:: epoch
-
-.. py:data:: output_dir
-
-.. py:data:: pt_dir
-
-.. py:data:: trans_path
-
-.. py:data:: proj_path
-
-.. py:data:: sc_proj_path
-
-.. py:data:: sc_meta_path
-
-.. py:data:: output_dir
-
-.. py:data:: data_morph
-
-.. py:data:: sc_data_trans
-
-.. py:data:: adata_sc
-
-.. py:data:: query_embedding
-
-.. py:data:: embedding_pool
-
-.. py:data:: cell_ids_pool
-
-.. py:data:: pool_labels
-
-.. py:data:: retrieval_path
-
-.. py:data:: pred_scores_np
-
-.. py:data:: assign_df
-
-.. py:data:: assign_path
 

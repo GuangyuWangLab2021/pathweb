@@ -43,24 +43,6 @@ Module Contents
    .. py:attribute:: parser
 
 
-   .. py:attribute:: requiredNamed
-
-
-   .. py:attribute:: group_classifier
-
-
-   .. py:attribute:: subparsers
-
-
-   .. py:attribute:: subparser_wsi
-
-
-   .. py:attribute:: subparser_dataset
-
-
-   .. py:attribute:: group
-
-
    .. py:method:: parse_arguments() -> dict
 
 

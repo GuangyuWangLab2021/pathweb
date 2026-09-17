@@ -17,14 +17,6 @@ loki2.cl.utils
 Module Contents
 ---------------
 
-.. py:function:: setup_dummy_modules() -> None
-
-   Sets up dummy modules for 'loki2' and its submodules.
-
-   This is required to simulate the module structure that the torch model
-   expects when unpickling objects that reference e.g. 'loki2.data.dataclass.cell_graph'.
-
-
 .. py:function:: load_and_print_tensor(file_path: str) -> Any
 
    Load a PyTorch object from a given file path.

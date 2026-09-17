@@ -28,15 +28,23 @@ Module Contents
 
 
    .. py:attribute:: resolution
+      :value: 0.25
+
 
 
    .. py:attribute:: classifier
+      :value: None
+
 
 
    .. py:attribute:: gt
+      :value: False
+
 
 
    .. py:attribute:: binary
+      :value: False
+
 
 
    .. py:method:: check_network_output(predictions_: Dict[str, torch.Tensor]) -> None

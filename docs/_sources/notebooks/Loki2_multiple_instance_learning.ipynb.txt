@@ -16,11 +16,11 @@
     "## MIL Model\n",
     "\n",
     "Prepare training data:\n",
-    "- Prepare your data as prampt files by code in `../src/mil/data/data_prepare/prampt_generate` for stage task.\n",
-    "- Downsample cell embeddings by `../src/mil/data/data_prepare/prampt_downsample.py`.\n",
+    "- Generate the prampt files for the stage task with `../src/loki2/mil/prampt_generate/blca_stage_prampt.py`.\n",
+    "- Downsample cell embeddings with `../src/loki2/mil/prampt_downsample.py`.\n",
     "\n",
     "Run MIL to generate attention weights:\n",
-    "- Run stage task by `../src/mil/models/TCGA-Loki_MILCell_blca_stage_5fold.py`."
+    "- Run the stage task with `../src/loki2/mil/models/TCGA_Loki2_MILCell_blca_stage_5fold.py`."
    ]
   },
   {

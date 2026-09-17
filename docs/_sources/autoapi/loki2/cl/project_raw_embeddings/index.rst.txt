@@ -40,7 +40,7 @@ Module Contents
    :raises KeyError: If the file doesn't contain 'embedding' and 'cell_id' keys.
 
 
-.. py:function:: load_model(ckpt_path: pathlib.Path, device: torch.device) -> model_cl.ProjectionCL
+.. py:function:: load_model(ckpt_path: pathlib.Path, device: torch.device) -> loki2.cl.model_cl.ProjectionCL
 
    Load a ProjectionCL model from a checkpoint file.
 
